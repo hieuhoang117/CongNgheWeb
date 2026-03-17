@@ -3,150 +3,211 @@
   "WorkspaceRootPath": "D:\\CongNgheWeb\\Backend\\CNW\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{63E7EAF2-0217-46DE-A75B-CF5328C40D21}|DAL\\DAL.csproj|d:\\congngheweb\\backend\\cnw\\dal\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{63E7EAF2-0217-46DE-A75B-CF5328C40D21}|DAL\\DAL.csproj|solutionrelative:dal\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{63E7EAF2-0217-46DE-A75B-CF5328C40D21}|DAL\\DAL.csproj|d:\\congngheweb\\backend\\cnw\\dal\\helper\\collectionhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{63E7EAF2-0217-46DE-A75B-CF5328C40D21}|DAL\\DAL.csproj|solutionrelative:dal\\helper\\collectionhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C3F57A13-4107-4E86-B832-47789378F42D}|Models\\Models.csproj|d:\\congngheweb\\backend\\cnw\\models\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C3F57A13-4107-4E86-B832-47789378F42D}|Models\\Models.csproj|solutionrelative:models\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{63E7EAF2-0217-46DE-A75B-CF5328C40D21}|DAL\\DAL.csproj|d:\\congngheweb\\backend\\cnw\\dal\\helper\\appsettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{63E7EAF2-0217-46DE-A75B-CF5328C40D21}|DAL\\DAL.csproj|solutionrelative:dal\\helper\\appsettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CongNgheWeb\\Backend\\CNW\\API\\Models\\BtlwebContext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:API\\Models\\BtlwebContext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{63E7EAF2-0217-46DE-A75B-CF5328C40D21}|DAL\\DAL.csproj|d:\\congngheweb\\backend\\cnw\\dal\\dal_movie.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{63E7EAF2-0217-46DE-A75B-CF5328C40D21}|DAL\\DAL.csproj|solutionrelative:dal\\dal_movie.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C3F57A13-4107-4E86-B832-47789378F42D}|Models\\Models.csproj|d:\\congngheweb\\backend\\cnw\\models\\models.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{C3F57A13-4107-4E86-B832-47789378F42D}|Models\\Models.csproj|solutionrelative:models\\models.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+      "AbsoluteMoniker": "D:0:0:{C3F57A13-4107-4E86-B832-47789378F42D}|Models\\Models.csproj|d:\\congngheweb\\backend\\cnw\\models\\models\\review.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C3F57A13-4107-4E86-B832-47789378F42D}|Models\\Models.csproj|solutionrelative:models\\models\\review.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8FFD50B1-E500-4914-84B2-C135FAA2AC2C}|BLL\\BLL.csproj|d:\\congngheweb\\backend\\cnw\\bll\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8FFD50B1-E500-4914-84B2-C135FAA2AC2C}|BLL\\BLL.csproj|solutionrelative:bll\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C3F57A13-4107-4E86-B832-47789378F42D}|Models\\Models.csproj|d:\\congngheweb\\backend\\cnw\\models\\models\\seriesactor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C3F57A13-4107-4E86-B832-47789378F42D}|Models\\Models.csproj|solutionrelative:models\\models\\seriesactor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4419ED49-A48E-4206-B305-BBCE31DE942C}|API\\API.csproj|d:\\congngheweb\\backend\\cnw\\api\\controllers\\weatherforecastcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4419ED49-A48E-4206-B305-BBCE31DE942C}|API\\API.csproj|solutionrelative:api\\controllers\\weatherforecastcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C3F57A13-4107-4E86-B832-47789378F42D}|Models\\Models.csproj|d:\\congngheweb\\backend\\cnw\\models\\models\\movieactor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C3F57A13-4107-4E86-B832-47789378F42D}|Models\\Models.csproj|solutionrelative:models\\models\\movieactor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4419ED49-A48E-4206-B305-BBCE31DE942C}|API\\API.csproj|d:\\congngheweb\\backend\\cnw\\api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4419ED49-A48E-4206-B305-BBCE31DE942C}|API\\API.csproj|solutionrelative:api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C3F57A13-4107-4E86-B832-47789378F42D}|Models\\Models.csproj|d:\\congngheweb\\backend\\cnw\\models\\models\\episode.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C3F57A13-4107-4E86-B832-47789378F42D}|Models\\Models.csproj|solutionrelative:models\\models\\episode.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4419ED49-A48E-4206-B305-BBCE31DE942C}|API\\API.csproj|d:\\congngheweb\\backend\\cnw\\api\\api.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
-      "RelativeMoniker": "D:0:0:{4419ED49-A48E-4206-B305-BBCE31DE942C}|API\\API.csproj|solutionrelative:api\\api.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
+      "AbsoluteMoniker": "D:0:0:{C3F57A13-4107-4E86-B832-47789378F42D}|Models\\Models.csproj|d:\\congngheweb\\backend\\cnw\\models\\models\\actor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C3F57A13-4107-4E86-B832-47789378F42D}|Models\\Models.csproj|solutionrelative:models\\models\\actor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C3F57A13-4107-4E86-B832-47789378F42D}|Models\\Models.csproj|d:\\congngheweb\\backend\\cnw\\models\\models\\content.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C3F57A13-4107-4E86-B832-47789378F42D}|Models\\Models.csproj|solutionrelative:models\\models\\content.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C3F57A13-4107-4E86-B832-47789378F42D}|Models\\Models.csproj|d:\\congngheweb\\backend\\cnw\\models\\models\\director.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C3F57A13-4107-4E86-B832-47789378F42D}|Models\\Models.csproj|solutionrelative:models\\models\\director.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C3F57A13-4107-4E86-B832-47789378F42D}|Models\\Models.csproj|d:\\congngheweb\\backend\\cnw\\models\\models\\movie.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C3F57A13-4107-4E86-B832-47789378F42D}|Models\\Models.csproj|solutionrelative:models\\models\\movie.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
     {
-      "Orientation": 0,
-      "VerticalTabListWidth": 256,
+      "Orientation": 1,
+      "VerticalTabListWidth": 100,
       "DocumentGroups": [
         {
-          "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "DockedHeight": 91,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Models",
-              "DocumentMoniker": "D:\\CongNgheWeb\\Backend\\CNW\\Models\\Models.csproj",
-              "RelativeDocumentMoniker": "Models\\Models.csproj",
-              "ToolTip": "D:\\CongNgheWeb\\Backend\\CNW\\Models\\Models.csproj",
-              "RelativeToolTip": "Models\\Models.csproj",
+              "DocumentIndex": 0,
+              "Title": "CollectionHelper.cs",
+              "DocumentMoniker": "D:\\CongNgheWeb\\Backend\\CNW\\DAL\\Helper\\CollectionHelper.cs",
+              "RelativeDocumentMoniker": "DAL\\Helper\\CollectionHelper.cs",
+              "ToolTip": "D:\\CongNgheWeb\\Backend\\CNW\\DAL\\Helper\\CollectionHelper.cs",
+              "RelativeToolTip": "DAL\\Helper\\CollectionHelper.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2026-03-17T03:09:01.636Z",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-17T07:13:38.209Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Class1.cs",
-              "DocumentMoniker": "D:\\CongNgheWeb\\Backend\\CNW\\Models\\Class1.cs",
-              "RelativeDocumentMoniker": "Models\\Class1.cs",
-              "ToolTip": "D:\\CongNgheWeb\\Backend\\CNW\\Models\\Class1.cs",
-              "RelativeToolTip": "Models\\Class1.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAASAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-17T03:01:07.816Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Class1.cs",
-              "DocumentMoniker": "D:\\CongNgheWeb\\Backend\\CNW\\DAL\\Class1.cs",
-              "RelativeDocumentMoniker": "DAL\\Class1.cs",
-              "ToolTip": "D:\\CongNgheWeb\\Backend\\CNW\\DAL\\Class1.cs",
-              "RelativeToolTip": "DAL\\Class1.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-17T03:00:07.83Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Class1.cs",
-              "DocumentMoniker": "D:\\CongNgheWeb\\Backend\\CNW\\BLL\\Class1.cs",
-              "RelativeDocumentMoniker": "BLL\\Class1.cs",
-              "ToolTip": "D:\\CongNgheWeb\\Backend\\CNW\\BLL\\Class1.cs",
-              "RelativeToolTip": "BLL\\Class1.cs",
+              "Title": "AppSettings.cs",
+              "DocumentMoniker": "D:\\CongNgheWeb\\Backend\\CNW\\DAL\\Helper\\AppSettings.cs",
+              "RelativeDocumentMoniker": "DAL\\Helper\\AppSettings.cs",
+              "ToolTip": "D:\\CongNgheWeb\\Backend\\CNW\\DAL\\Helper\\AppSettings.cs",
+              "RelativeToolTip": "DAL\\Helper\\AppSettings.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-17T02:59:52.606Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "WeatherForecastController.cs",
-              "DocumentMoniker": "D:\\CongNgheWeb\\Backend\\CNW\\API\\Controllers\\WeatherForecastController.cs",
-              "RelativeDocumentMoniker": "API\\Controllers\\WeatherForecastController.cs",
-              "ToolTip": "D:\\CongNgheWeb\\Backend\\CNW\\API\\Controllers\\WeatherForecastController.cs",
-              "RelativeToolTip": "API\\Controllers\\WeatherForecastController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-17T02:55:31.561Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Program.cs",
-              "DocumentMoniker": "D:\\CongNgheWeb\\Backend\\CNW\\API\\Program.cs",
-              "RelativeDocumentMoniker": "API\\Program.cs",
-              "ToolTip": "D:\\CongNgheWeb\\Backend\\CNW\\API\\Program.cs",
-              "RelativeToolTip": "API\\Program.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-17T02:55:27.932Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "API.http",
-              "DocumentMoniker": "D:\\CongNgheWeb\\Backend\\CNW\\API\\API.http",
-              "RelativeDocumentMoniker": "API\\API.http",
-              "ToolTip": "D:\\CongNgheWeb\\Backend\\CNW\\API\\API.http",
-              "RelativeToolTip": "API\\API.http",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
-              "WhenOpened": "2026-03-17T02:55:23.645Z",
+              "WhenOpened": "2026-03-17T07:13:36.437Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "BtlwebContext.cs",
-              "DocumentMoniker": "D:\\CongNgheWeb\\Backend\\CNW\\API\\Models\\BtlwebContext.cs",
-              "RelativeDocumentMoniker": "API\\Models\\BtlwebContext.cs",
-              "ToolTip": "D:\\CongNgheWeb\\Backend\\CNW\\API\\Models\\BtlwebContext.cs",
-              "RelativeToolTip": "API\\Models\\BtlwebContext.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAkAAAA",
+              "Title": "DAL_Movie.cs",
+              "DocumentMoniker": "D:\\CongNgheWeb\\Backend\\CNW\\DAL\\DAL_Movie.cs",
+              "RelativeDocumentMoniker": "DAL\\DAL_Movie.cs",
+              "ToolTip": "D:\\CongNgheWeb\\Backend\\CNW\\DAL\\DAL_Movie.cs*",
+              "RelativeToolTip": "DAL\\DAL_Movie.cs*",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAANAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-17T02:54:59.149Z",
+              "WhenOpened": "2026-03-17T07:10:11.239Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Review.cs",
+              "DocumentMoniker": "D:\\CongNgheWeb\\Backend\\CNW\\Models\\Models\\Review.cs",
+              "RelativeDocumentMoniker": "Models\\Models\\Review.cs",
+              "ToolTip": "D:\\CongNgheWeb\\Backend\\CNW\\Models\\Models\\Review.cs",
+              "RelativeToolTip": "Models\\Models\\Review.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-17T06:57:25.579Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "SeriesActor.cs",
+              "DocumentMoniker": "D:\\CongNgheWeb\\Backend\\CNW\\Models\\Models\\SeriesActor.cs",
+              "RelativeDocumentMoniker": "Models\\Models\\SeriesActor.cs",
+              "ToolTip": "D:\\CongNgheWeb\\Backend\\CNW\\Models\\Models\\SeriesActor.cs",
+              "RelativeToolTip": "Models\\Models\\SeriesActor.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-17T06:57:24.679Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "MovieActor.cs",
+              "DocumentMoniker": "D:\\CongNgheWeb\\Backend\\CNW\\Models\\Models\\MovieActor.cs",
+              "RelativeDocumentMoniker": "Models\\Models\\MovieActor.cs",
+              "ToolTip": "D:\\CongNgheWeb\\Backend\\CNW\\Models\\Models\\MovieActor.cs",
+              "RelativeToolTip": "Models\\Models\\MovieActor.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-17T06:57:23.243Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Movie.cs",
+              "DocumentMoniker": "D:\\CongNgheWeb\\Backend\\CNW\\Models\\Models\\Movie.cs",
+              "RelativeDocumentMoniker": "Models\\Models\\Movie.cs",
+              "ToolTip": "D:\\CongNgheWeb\\Backend\\CNW\\Models\\Models\\Movie.cs",
+              "RelativeToolTip": "Models\\Models\\Movie.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-17T06:57:17.987Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Director.cs",
+              "DocumentMoniker": "D:\\CongNgheWeb\\Backend\\CNW\\Models\\Models\\Director.cs",
+              "RelativeDocumentMoniker": "Models\\Models\\Director.cs",
+              "ToolTip": "D:\\CongNgheWeb\\Backend\\CNW\\Models\\Models\\Director.cs",
+              "RelativeToolTip": "Models\\Models\\Director.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-17T06:57:17.232Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Actor.cs",
+              "DocumentMoniker": "D:\\CongNgheWeb\\Backend\\CNW\\Models\\Models\\Actor.cs",
+              "RelativeDocumentMoniker": "Models\\Models\\Actor.cs",
+              "ToolTip": "D:\\CongNgheWeb\\Backend\\CNW\\Models\\Models\\Actor.cs",
+              "RelativeToolTip": "Models\\Models\\Actor.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-17T06:57:16.118Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Episode.cs",
+              "DocumentMoniker": "D:\\CongNgheWeb\\Backend\\CNW\\Models\\Models\\Episode.cs",
+              "RelativeDocumentMoniker": "Models\\Models\\Episode.cs",
+              "ToolTip": "D:\\CongNgheWeb\\Backend\\CNW\\Models\\Models\\Episode.cs",
+              "RelativeToolTip": "Models\\Models\\Episode.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-17T06:56:29.143Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Content.cs",
+              "DocumentMoniker": "D:\\CongNgheWeb\\Backend\\CNW\\Models\\Models\\Content.cs",
+              "RelativeDocumentMoniker": "Models\\Models\\Content.cs",
+              "ToolTip": "D:\\CongNgheWeb\\Backend\\CNW\\Models\\Models\\Content.cs",
+              "RelativeToolTip": "Models\\Models\\Content.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-17T06:56:27.036Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedHeight": 21,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
             }
           ]
         }

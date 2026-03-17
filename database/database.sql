@@ -115,3 +115,131 @@ CREATE TABLE Review (
     FOREIGN KEY (UserID) REFERENCES Users(UserID),
     FOREIGN KEY (ContentID) REFERENCES Content(ContentID)
 );
+
+CREATE TRIGGER TRG_Movie_ID
+ON Movie
+INSTEAD OF INSERT
+AS
+BEGIN
+    DECLARE @NextID INT
+
+    SELECT @NextID = ISNULL(MAX(CAST(SUBSTRING(IDmovie,3,10) AS INT)),0) + 1 FROM Movie
+
+    INSERT INTO Movie(IDmovie, NameMovie, Category, ReleaseDate, Director, Duration, Country, Description, Status, ContentID)
+    SELECT 
+        'MV' + RIGHT('000' + CAST(@NextID AS VARCHAR),3),
+        NameMovie, Category, ReleaseDate, Director, Duration, Country, Description, Status, ContentID
+    FROM inserted
+END
+
+CREATE TRIGGER TRG_Actor_ID
+ON Actor
+INSTEAD OF INSERT
+AS
+BEGIN
+    DECLARE @NextID INT
+
+    SELECT @NextID = ISNULL(MAX(CAST(SUBSTRING(IDactor,3,10) AS INT)),0) + 1 FROM Actor
+
+    INSERT INTO Actor(IDactor, ActorName, BirthDate, Nationality)
+    SELECT 
+        'AC' + RIGHT('000' + CAST(@NextID AS VARCHAR),3),
+        ActorName, BirthDate, Nationality
+    FROM inserted
+END
+
+CREATE TRIGGER TRG_Director_ID
+ON Director
+INSTEAD OF INSERT
+AS
+BEGIN
+    DECLARE @NextID INT
+
+    SELECT @NextID = ISNULL(MAX(CAST(SUBSTRING(IDdirector,3,10) AS INT)),0) + 1 FROM Director
+
+    INSERT INTO Director(IDdirector, DirectorName, BirthDate, Nationality)
+    SELECT 
+        'DR' + RIGHT('000' + CAST(@NextID AS VARCHAR),3),
+        DirectorName, BirthDate, Nationality
+    FROM inserted
+END
+
+CREATE TRIGGER TRG_User_ID
+ON Users
+INSTEAD OF INSERT
+AS
+BEGIN
+    DECLARE @NextID INT
+
+    SELECT @NextID = ISNULL(MAX(CAST(SUBSTRING(UserID,3,10) AS INT)),0) + 1 FROM Users
+
+    INSERT INTO Users(UserID, FullName, Email, PasswordHash, Phone, Role, CreatedAt, Status)
+    SELECT 
+        'US' + RIGHT('000' + CAST(@NextID AS VARCHAR),3),
+        FullName, Email, PasswordHash, Phone, Role, GETDATE(), Status
+    FROM inserted
+END
+
+CREATE TRIGGER TRG_Series_ID
+ON Series
+INSTEAD OF INSERT
+AS
+BEGIN
+    DECLARE @NextID INT
+
+    SELECT @NextID = ISNULL(MAX(CAST(SUBSTRING(IDseries,3,10) AS INT)),0) + 1 FROM Series
+
+    INSERT INTO Series(IDseries, SeriesName, Description, ReleaseYear, Country, Status, ContentID)
+    SELECT 
+        'SR' + RIGHT('000' + CAST(@NextID AS VARCHAR),3),
+        SeriesName, Description, ReleaseYear, Country, Status, ContentID
+    FROM inserted
+END
+
+CREATE TRIGGER TRG_Episode_ID
+ON Episode
+INSTEAD OF INSERT
+AS
+BEGIN
+    DECLARE @NextID INT
+
+    SELECT @NextID = ISNULL(MAX(CAST(SUBSTRING(IDEpisode,3,10) AS INT)),0) + 1 FROM Episode
+
+    INSERT INTO Episode(IDEpisode, IDseries, SeasonNumber, EpisodeNumber, EpisodeName, Duration, ReleaseDate, ContentID)
+    SELECT 
+        'EP' + RIGHT('000' + CAST(@NextID AS VARCHAR),3),
+        IDseries, SeasonNumber, EpisodeNumber, EpisodeName, Duration, ReleaseDate, ContentID
+    FROM inserted
+END
+
+CREATE TRIGGER TRG_Content_ID
+ON Content
+INSTEAD OF INSERT
+AS
+BEGIN
+    DECLARE @NextID INT
+
+    SELECT @NextID = ISNULL(MAX(CAST(SUBSTRING(ContentID,3,10) AS INT)),0) + 1 FROM Content
+
+    INSERT INTO Content(ContentID, ContentName, ContentType)
+    SELECT 
+        'CT' + RIGHT('000' + CAST(@NextID AS VARCHAR),3),
+        ContentName, ContentType
+    FROM inserted
+END
+
+select * from Actor
+select * from Content
+select * from Director
+select * from DirectorActor
+select * from Episode/**/
+select * from Movie
+select * from MovieActor
+select * from MovieView/**/
+select * from Review/**/
+select * from Series/**/
+select * from SeriesActor/**/
+select * from SeriesDirector/**/
+select * from Users
+
+
