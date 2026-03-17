@@ -1,15 +1,16 @@
 {
   "name": "congngheweb",
   "version": "1.0.0",
-  "main": "dist/server.js",
+  "main": "dist/index.js",
   "scripts": {
-    "start": "ts-node src/server.ts",
-    "dev": "ts-node src/server.ts",
+    "start": "ts-node src/index.ts",
+    "dev": "ts-node src/indexn.ts",
     "build": "tsc"
   },
   "dependencies": {
     "@types/express": "^5.0.6",
     "@types/node": "^25.3.3",
+    "antd": "^6.3.3",
     "cors": "^2.8.6",
     "express": "^5.2.1",
     "react": "^19.2.4",
