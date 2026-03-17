@@ -241,5 +241,3 @@ select * from Series/**/
 select * from SeriesActor/**/
 select * from SeriesDirector/**/
 select * from Users
-
-

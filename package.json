@@ -1,10 +1,10 @@
 {
   "name": "congngheweb",
   "version": "1.0.0",
-  "main": "dist/index.js",
+  "main": "dist/App.js",
   "scripts": {
-    "start": "ts-node src/index.ts",
-    "dev": "ts-node src/indexn.ts",
+    "start": "ts-node src/App.tsx",
+    "dev": "ts-node src/index.ts",
     "build": "tsc"
   },
   "dependencies": {
