@@ -1,6 +1,0 @@
-@BTLCNWeb_HostAddress = http://localhost:5143
-
-GET {{BTLCNWeb_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
