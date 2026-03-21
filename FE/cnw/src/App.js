@@ -1,4 +1,7 @@
 import { useEffect, useState } from "react";
+import Header from "./component/header1";
+import Banner from "./component/banner1";
+import "antd/dist/reset.css";
 
 function App() {
   const [users, setUsers] = useState([]);
@@ -10,11 +13,9 @@ function App() {
   }, []);
 
   return (
-    <div>
-      <h1>Danh sách movie</h1>
-      {users.map(u => (
-        <p key={u.id}>{u.NameMovie}</p>
-      ))}
+    <div className="App">
+      {Header()}
+      {Banner()}
     </div>
   );
 }

@@ -1,0 +1,24 @@
+.header {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  z-index: 2;
+}
+
+.logo {
+  width: 120px;
+}
+
+.select-lang {
+  margin-right: 20px;
+  float: left;
+}
+.btn-login {
+  background: red;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+}
