@@ -1,6 +1,8 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Header from "./component/header1";
 import Banner from "./component/banner1";
+import AdminPage from "./AdminPage";
 import "antd/dist/reset.css";
 
 function App() {
@@ -13,10 +15,18 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
-      {Header()}
-      {Banner()}
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        
+
+        <Routes>
+          <Route path="/" element={<Header />} />
+          <Route path="/" element={<Banner />} />
+          <Route path="/admin" element={<AdminPage />} />
+        </Routes>
+
+      </div>
+    </BrowserRouter>
   );
 }
 

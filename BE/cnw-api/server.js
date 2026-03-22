@@ -42,15 +42,21 @@ app.post("/api/check-email", async (req, res) => {
   const { email } = req.body;
 
   const result = await sql.query`
-    SELECT * FROM Users WHERE Email = ${email}
+    SELECT Email, Role FROM Users WHERE Email = ${email}
   `;
 
   if (result.recordset.length > 0) {
-    res.json({ exists: true });
+    const user = result.recordset[0];
+
+    res.json({
+      exists: true,
+      role: user.Role   
+    });
   } else {
     res.json({ exists: false });
   }
 });
+
 app.listen(5000, () => {
     console.log("Server chạy http://localhost:5000");
 });

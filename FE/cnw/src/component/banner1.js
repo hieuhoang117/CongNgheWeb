@@ -1,9 +1,11 @@
 import "./banner.css";
 import { useState } from "react";
-import { message } from "antd";
+import { useNavigate } from "react-router-dom";
 
 const Banner = () => {
   const [email, setEmail] = useState("");
+
+  const navigate = useNavigate(); // ✅ đúng chỗ
 
   const handleClick = async () => {
     if (!email) {
@@ -11,7 +13,6 @@ const Banner = () => {
       return;
     }
 
-    // gọi API
     const res = await fetch("http://localhost:5000/api/check-email", {
       method: "POST",
       headers: {
@@ -22,11 +23,17 @@ const Banner = () => {
 
     const data = await res.json();
 
-    if (data.exists) {
-      alert("✅ Email đã tồn tại");
-    } else {
+    if (!data.exists) {
       alert("❌ Email chưa đăng ký");
+      return;
     }
+
+    if (data.role === "Admin") {
+      navigate("/admin"); // 👉 chuyển trang
+      return;
+    }
+
+    alert("✅ Email hợp lệ");
   };
 
   return (
