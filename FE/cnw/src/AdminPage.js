@@ -13,7 +13,7 @@ const AdminPage = () => {
       {/* MENU */}
       <Sider>
         <div style={{ color: "white", padding: 16 }}>
-          <img src={logo} alt="Logo" style={{ width: 120, height: 80 }} />
+          <img src={logo} alt="Logo" style={{ width: 150, height: 80 }} />
         </div>
         <Menu
           theme="dark"

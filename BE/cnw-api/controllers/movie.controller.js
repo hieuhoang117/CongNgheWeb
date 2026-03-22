@@ -6,12 +6,64 @@ export const getMovies = async (req, res) => {
 };
 
 export const addMovie = async (req, res) => {
-  const { NameMovie } = req.body;
+  try {
+    const {
+      NameMovie,
+      Category,
+      ReleaseDate,
+      Director,
+      Duration,
+      Country,
+      Description,
+      Poster,
+      Film
+    } = req.body;
 
-  await sql.query`
-    INSERT INTO Movie (NameMovie)
-    VALUES (${NameMovie})
-  `;
+    await sql.query`
+      INSERT INTO Movie 
+      (NameMovie, Category, ReleaseDate, Director, Duration, Country, Description, Poster, Film)
+      VALUES 
+      (${NameMovie}, ${Category}, ${ReleaseDate}, ${Director}, ${Duration}, ${Country}, ${Description}, ${Poster}, ${Film})
+    `;
 
-  res.json({ message: "Thêm thành công" });
+    res.json({ message: "Thêm phim thành công" });
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Lỗi server");
+  }
+};
+export const fixMovie = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const data = req.body;
+
+    await sql.query`
+      UPDATE Movie SET
+        NameMovie = ${data.NameMovie},
+        Category = ${data.Category},
+        ReleaseDate = ${data.ReleaseDate},
+        Director = ${data.Director},
+        Duration = ${data.Duration},
+        Country = ${data.Country},
+        Description = ${data.Description},
+        Poster = ${data.Poster},
+        Film = ${data.Film}
+      WHERE IDmovie = ${id}
+    `;
+
+    res.json({ message: "Cập nhật thành công" });
+  } catch (err) {
+    res.status(500).send("Lỗi server");
+  }
+};
+export const deleteMovie = async (req, res) => {
+  try {
+    await sql.query`
+      DELETE FROM Movie WHERE IDmovie = ${req.params.id}
+    `;
+    res.json({ message: "Xóa thành công" });
+  } catch (err) {
+    res.status(500).send("Lỗi server");
+  }
 };

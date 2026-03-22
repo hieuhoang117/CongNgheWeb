@@ -1,10 +1,231 @@
-
+import { Table, Button, Space, Modal, Form, Input, Popconfirm, Upload } from "antd";
+import { UploadOutlined } from "@ant-design/icons";
+import { useEffect, useState } from "react";
 
 const AM_movie = () => {
+  const [movies, setMovies] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editingMovie, setEditingMovie] = useState(null);
+  const [form] = Form.useForm();
+
+  // 👉 Load data từ backend
+  const fetchMovies = async () => {
+    try {
+      const res = await fetch("http://localhost:5000/api/movies");
+      const data = await res.json();
+      setMovies(data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  useEffect(() => {
+    fetchMovies();
+  }, []);
+
+  // 👉 Xóa phim
+  const handleDelete = async (id) => {
+    try {
+      await fetch(`http://localhost:5000/api/movies/${id}`, { method: "DELETE" });
+      fetchMovies();
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  // 👉 Mở modal sửa
+  const handleEdit = (record) => {
+    setEditingMovie(record);
+    form.setFieldsValue(record);
+    setIsModalOpen(true);
+  };
+
+  // 👉 Mở modal thêm
+  const handleAdd = () => {
+    setEditingMovie(null);
+    form.resetFields();
+    setIsModalOpen(true);
+  };
+
+  // 👉 Submit form
+  const handleOk = async () => {
+    try {
+      const values = await form.validateFields();
+
+      if (editingMovie) {
+        // UPDATE
+        await fetch(`http://localhost:5000/api/movies/${editingMovie.IDmovie}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(values),
+        });
+      } else {
+        // ADD
+        await fetch("http://localhost:5000/api/movies", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(values),
+        });
+      }
+
+      setIsModalOpen(false);
+      fetchMovies();
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  // 👉 Table columns
+  const columns = [
+    { title: "Tên phim", dataIndex: "NameMovie" },
+    { title: "Thể loại", dataIndex: "Category" },
+    { title: "Thời lượng", dataIndex: "Duration" },
+    { title: "Quốc gia", dataIndex: "Country" },
+    {
+      title: "Poster",
+      dataIndex: "Poster",
+      render: (url) => url && <img src={url} alt="" width={80} />,
+    },
+    {
+      title: "Action",
+      render: (record) => (
+        <Space>
+          <Button onClick={() => handleEdit(record)}>Sửa</Button>
+          <Popconfirm
+            title="Bạn chắc chắn xóa?"
+            onConfirm={() => handleDelete(record.IDmovie)}
+          >
+            <Button danger>Xóa</Button>
+          </Popconfirm>
+        </Space>
+      ),
+    },
+  ];
+
   return (
     <div>
-      <h1>Quản lý Phim</h1>
-      <p>Nội dung trang quản lý phim ở đây</p>
+      <h2>Quản lý phim</h2>
+
+      <Button type="primary" onClick={handleAdd} style={{ marginBottom: 16 }}>
+        + Thêm phim
+      </Button>
+
+      <Table columns={columns} dataSource={movies} rowKey="IDmovie" />
+
+      {/* Modal Form */}
+      <Modal
+        title={editingMovie ? "Sửa phim" : "Thêm phim"}
+        open={isModalOpen}
+        onOk={handleOk}
+        onCancel={() => setIsModalOpen(false)}
+        okText="Lưu"
+      >
+        <Form form={form} layout="vertical">
+          <Form.Item
+            name="NameMovie"
+            label="Tên phim"
+            rules={[{ required: true, message: "Vui lòng nhập tên phim" }]}
+          >
+            <Input />
+          </Form.Item>
+
+          <Form.Item
+            name="Category"
+            label="Thể loại"
+            rules={[{ required: true, message: "Vui lòng nhập thể loại" }]}
+          >
+            <Input />
+          </Form.Item>
+
+          <Form.Item
+            name="ReleaseDate"
+            label="Ngày phát hành"
+            rules={[{ required: true, message: "Vui lòng nhập ngày phát hành" }]}
+          >
+            <Input type="date" />
+          </Form.Item>
+
+          <Form.Item
+            name="Director"
+            label="Đạo diễn"
+            rules={[{ required: true, message: "Vui lòng nhập đạo diễn" }]}
+          >
+            <Input />
+          </Form.Item>
+
+          <Form.Item
+            name="Duration"
+            label="Thời lượng"
+            rules={[{ required: true, message: "Vui lòng nhập thời lượng" }]}
+          >
+            <Input />
+          </Form.Item>
+
+          <Form.Item
+            name="Country"
+            label="Quốc gia"
+            rules={[{ required: true, message: "Vui lòng nhập quốc gia" }]}
+          >
+            <Input />
+          </Form.Item>
+
+          <Form.Item
+            name="Description"
+            label="Mô tả"
+          >
+            <Input.TextArea rows={3} />
+          </Form.Item>
+
+          <Form.Item
+            name="Status"
+            label="Trạng thái"
+          >
+            <Input />
+          </Form.Item>
+
+          <Form.Item
+            name="ContentID"
+            label="Content ID"
+          >
+            <Input />
+          </Form.Item>
+
+          {/* Upload Poster */}
+          <Form.Item label="Poster">
+            <Upload
+              action="http://localhost:5000/api/upload"
+              listType="picture"
+              maxCount={1}
+              onChange={(info) => {
+                if (info.file.status === "done") {
+                  form.setFieldsValue({ Poster: info.file.response.url });
+                }
+              }}
+            >
+              <Button icon={<UploadOutlined />}>Upload ảnh</Button>
+            </Upload>
+          </Form.Item>
+
+          {/* Upload Film */}
+          <Form.Item label="Film">
+            <Upload
+              action="http://localhost:5000/api/upload"
+              maxCount={1}
+              onChange={(info) => {
+                if (info.file.status === "done") {
+                  form.setFieldsValue({ Film: info.file.response.url });
+                }
+              }}
+            >
+              <Button icon={<UploadOutlined />}>Upload video</Button>
+            </Upload>
+          </Form.Item>
+
+          {/* Hidden fields để submit */}
+          <Form.Item name="Poster" hidden><input /></Form.Item>
+          <Form.Item name="Film" hidden><input /></Form.Item>
+        </Form>
+      </Modal>
     </div>
   );
 };
