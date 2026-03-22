@@ -1,5 +1,6 @@
 import "./banner.css";
 import { useState } from "react";
+import Header from "./header1";
 import { useNavigate } from "react-router-dom";
 
 const Banner = () => {
@@ -38,6 +39,7 @@ const Banner = () => {
 
   return (
     <div className="banner">
+      <Header />
       <div className="content">
         <h1>Phim, series không giới hạn</h1>
         <p>Giá từ 74.000đ</p>

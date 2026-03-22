@@ -1,46 +1,12 @@
-import { Layout, Menu } from "antd";
-import {
-  UserOutlined,
-  VideoCameraOutlined,
-  UploadOutlined,
-} from "@ant-design/icons";
 
-const { Header, Sider, Content } = Layout;
 
-const AdminPage = () => {
+const AM_movie = () => {
   return (
-    <Layout style={{ minHeight: "100vh" }}>
-      
-      {/* Sidebar */}
-      <Sider>
-        <div style={{ color: "white", padding: 16 }}>ADMIN</div>
-        <Menu
-          theme="dark"
-          mode="inline"
-          defaultSelectedKeys={["1"]}
-          items={[
-            { key: "1", icon: <UserOutlined />, label: "Users" },
-            { key: "2", icon: <VideoCameraOutlined />, label: "Movies" },
-            { key: "3", icon: <UploadOutlined />, label: "Upload" },
-          ]}
-        />
-      </Sider>
-
-      {/* Main */}
-      <Layout>
-        <Header style={{ color: "#fff" }}>
-          Trang quản trị
-        </Header>
-
-        <Content style={{ margin: "16px" }}>
-          <div style={{ padding: 24, background: "#fff" }}>
-            Nội dung ở đây
-          </div>
-        </Content>
-      </Layout>
-
-    </Layout>
+    <div>
+      <h1>Quản lý Phim</h1>
+      <p>Nội dung trang quản lý phim ở đây</p>
+    </div>
   );
 };
 
-export default AdminPage;
+export default AM_movie;

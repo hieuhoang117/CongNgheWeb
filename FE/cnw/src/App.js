@@ -1,9 +1,10 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
-import Header from "./component/header1";
 import Banner from "./component/banner1";
 import AdminPage from "./AdminPage";
+import AM_movie from "./component/AM_movie";
 import "antd/dist/reset.css";
+import AM_User from "./component/AM_User";
 
 function App() {
   const [users, setUsers] = useState([]);
@@ -16,16 +17,18 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div className="App">
-        
+      <Routes>
 
-        <Routes>
-          <Route path="/" element={<Header />} />
-          <Route path="/" element={<Banner />} />
-          <Route path="/admin" element={<AdminPage />} />
-        </Routes>
+        {/* Trang chính */}
+        <Route path="/" element={<Banner />} />
 
-      </div>
+        {/* ADMIN layout */}
+        <Route path="/admin" element={<AdminPage />}>
+          <Route path="users" element={<AM_User />} />
+          <Route path="movies" element={<AM_movie />} />
+        </Route>
+
+      </Routes>
     </BrowserRouter>
   );
 }
