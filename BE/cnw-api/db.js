@@ -1,4 +1,4 @@
-const sql = require("mssql");
+import sql from "mssql";
 
 const config = {
     user: "sa",
@@ -11,7 +11,7 @@ const config = {
     }
 };
 
-async function connectDB() {
+export async function connectDB() {
     try {
         await sql.connect(config);
         console.log("Kết nối SQL Server thành công!");
@@ -20,4 +20,4 @@ async function connectDB() {
     }
 }
 
-module.exports = { sql, connectDB };
+export { sql };

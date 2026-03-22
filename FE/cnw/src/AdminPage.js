@@ -31,7 +31,7 @@ const AdminPage = () => {
       {/* CONTENT */}
       <Layout>
         <Header style={{ color: "#fff" }}>
-          Admin
+            <h1>Admin Dashboard</h1>
         </Header>
 
         <Content style={{ margin: "16px" }}>
