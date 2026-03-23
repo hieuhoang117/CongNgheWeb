@@ -10,7 +10,7 @@ const AdminPage = () => {
   return (
     <Layout style={{ minHeight: "100vh" }}>
       
-      {/* MENU */}
+      
       <Sider>
         <div style={{ color: "white", padding: 16 }}>
           <img src={logo} alt="Logo" style={{ width: 150, height: 80 }} />
@@ -19,7 +19,7 @@ const AdminPage = () => {
           theme="dark"
           mode="inline"
           onClick={(e) => {
-            navigate(e.key); // 👉 chuyển route
+            navigate(e.key); 
           }}
           items={[
             { key: "/admin/users", label: "Users" },
@@ -35,7 +35,7 @@ const AdminPage = () => {
         </Header>
 
         <Content style={{ margin: "16px" }}>
-          <Outlet /> {/* 👉 nội dung sẽ thay đổi ở đây */}
+          <Outlet /> 
         </Content>
       </Layout>
 

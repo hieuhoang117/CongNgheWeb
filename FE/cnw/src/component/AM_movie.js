@@ -81,11 +81,17 @@ const AM_movie = () => {
     { title: "Thể loại", dataIndex: "Category" },
     { title: "Thời lượng", dataIndex: "Duration" },
     { title: "Quốc gia", dataIndex: "Country" },
+    { title: "Đạo diễn", dataIndex: "Director" },
+    { title: "Ngày phát hành", dataIndex: "ReleaseDate" },
+    { title: "Mô tả", dataIndex: "Description" },
+    { title: "Content ID", dataIndex: "ContentID" },
     {
       title: "Poster",
       dataIndex: "Poster",
       render: (url) => url && <img src={url} alt="" width={80} />,
-    },
+    },{title : "Trạng thái",
+      render: (value) => (value === true ? "Đang chiếu" : "Ngưng Chiếu"),
+      dataIndex: "Status"},
     {
       title: "Action",
       render: (record) => (
@@ -112,7 +118,7 @@ const AM_movie = () => {
 
       <Table columns={columns} dataSource={movies} rowKey="IDmovie" />
 
-      {/* Modal Form */}
+      
       <Modal
         title={editingMovie ? "Sửa phim" : "Thêm phim"}
         open={isModalOpen}
@@ -190,7 +196,7 @@ const AM_movie = () => {
             <Input />
           </Form.Item>
 
-          {/* Upload Poster */}
+          
           <Form.Item label="Poster">
             <Upload
               action="http://localhost:5000/api/upload"
@@ -206,7 +212,6 @@ const AM_movie = () => {
             </Upload>
           </Form.Item>
 
-          {/* Upload Film */}
           <Form.Item label="Film">
             <Upload
               action="http://localhost:5000/api/upload"
