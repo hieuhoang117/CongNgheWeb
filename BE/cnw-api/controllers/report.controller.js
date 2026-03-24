@@ -2,10 +2,14 @@ import { sql } from "../db.js";
 
 export const getMostViewedMovies = async (req, res) => {
     try {
-        const result = await sql.query`SELECT m.NameMovie, COUNT(v.ID) AS Views
+        const result = await sql.query`SELECT 
+    m.IDmovie,
+    m.NameMovie, 
+    COUNT(v.ID) AS Views,
+    ISNULL(SUM(v.WatchTime), 0) AS TotalWatchTime
 FROM Movie m
 LEFT JOIN MovieView v ON m.IDmovie = v.IDmovie
-GROUP BY m.NameMovie
+GROUP BY m.IDmovie, m.NameMovie
 ORDER BY Views DESC`;
 
         res.json(result.recordset);

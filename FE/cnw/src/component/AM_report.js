@@ -1,4 +1,4 @@
-import { Card, Space, Table } from "antd";
+import { Card, Table, Button } from "antd";
 import { useEffect, useState } from "react";
 import { Column, Area, Bar } from "@ant-design/plots";
 
@@ -38,7 +38,10 @@ const AM_Report = () => {
   }, []);
   const handleUpdateStatus = async (bugID, currentStatus) => {
     try {
-      const newStatus = currentStatus === "Processing" ? "Fixed" : "Processing";
+      const newStatus =
+        currentStatus?.trim().toLowerCase() === "processing"
+          ? "Fixed"
+          : "Processing";
       await fetch(`http://localhost:5000/api/reports/bug-reports/${bugID}/fix`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -75,13 +78,7 @@ const AM_Report = () => {
   const topMovies = mostViewedMovies.slice(0, 10);
   const topUsers = mostActiveUsers.slice(0, 10);
   const signUpTrends = signUpTrendsData.slice(0, 10);
-  const topMoviesIn7Days = mostViewedMovies
-    .filter(movie => {
-      const diffDays = (new Date() - new Date(movie.CreatedAt)) / (1000 * 60 * 60 * 24);
-      return diffDays >= 0 && diffDays <= 7;
-    })
-    .sort((a, b) => b.Views - a.Views)
-    .slice(0, 10);
+
   const columns = [
     { title: "ID", dataIndex: "BugID" },
     { title: "ID người dùng", dataIndex: "UserID" },
@@ -95,12 +92,19 @@ const AM_Report = () => {
     {
       title: "Hành động",
       render: (text, record) => (
-        <button onClick={() => handleUpdateStatus(record.BugID, record.Status)}>
+        <Button type="primary" onClick={() => handleUpdateStatus(record.BugID, record.Status)}>
           {record.Status === "Processing" ? "Đánh dấu đã sửa" : "Đánh dấu đang xử lý"}
-        </button>
+        </Button>
       )
     }
   ];
+  const columnsMostViewed = [
+    { title: "ID", dataIndex: "IDmovie" },
+    { title: "Tên phim", dataIndex: "NameMovie" },
+    { title: "Lượt xem", dataIndex: "Views" },
+    { title: "Tổng thời gian xem (phút)", dataIndex: "TotalWatchTime" }
+  ];
+
   const contentList = {
     "most-viewed": (
       <div>
@@ -110,26 +114,7 @@ const AM_Report = () => {
           yField="Views"
         />
         <h1 style={{ textAlign: "center", marginTop: 20 }}>Phim mới nổi</h1>
-        <table style={{ width: "100%", marginTop: 20, borderCollapse: "collapse" }}>
-          <thead>
-            <tr>
-              <th style={{ border: "1px solid #ddd", padding: 8 }}>Tên phim</th>
-              <th style={{ border: "1px solid #ddd", padding: 8 }}>Lượt xem</th>
-            </tr>
-          </thead>
-          <tbody>
-            {topMoviesIn7Days.map((movie, index) => (
-              <tr key={index}>
-                <td style={{ border: "1px solid #ddd", padding: 8 }}>
-                  {movie.NameMovie}
-                </td>
-                <td style={{ border: "1px solid #ddd", padding: 8 }}>
-                  {movie.Views}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <Table columns={columnsMostViewed} dataSource={topMovies} rowKey="IDmovie" pagination={{ pageSize: 5 }} />
       </div>
     ),
     "most-active": (
