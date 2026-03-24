@@ -6,6 +6,7 @@ import AM_movie from "./component/AM_movie";
 import "antd/dist/reset.css";
 import AM_User from "./component/AM_User";
 import AM_Report from "./component/AM_report";
+import AM_series from "./component/AM_series";
 
 function App() {
   const [users, setUsers] = useState([]);
@@ -28,6 +29,7 @@ function App() {
           <Route path="users" element={<AM_User />} />
           <Route path="movies" element={<AM_movie />} />
           <Route path="reports" element={<AM_Report />} />
+          <Route path="series" element={<AM_series />} />
         </Route>
 
       </Routes>

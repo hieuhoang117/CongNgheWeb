@@ -3,6 +3,7 @@ import cors from "cors";
 import movieRoutes from "./routers/movie.route.js";
 import userRoutes from "./routers/user.route.js";
 import reportRoutes from "./routers/report.route.js";
+import series from "./routers/series.route.js";
 import { connectDB } from "./db.js";
 import multer from "multer";
 import path from "path";
@@ -38,6 +39,7 @@ app.use("/uploads", express.static("uploads"));
 app.use("/api/movies", movieRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/reports", reportRoutes);
+app.use("/api/series", series);
 
 
 app.listen(5000, () => {
