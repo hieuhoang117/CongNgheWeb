@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 const Banner = () => {
   const [email, setEmail] = useState("");
 
-  const navigate = useNavigate(); // ✅ đúng chỗ
+  const navigate = useNavigate(); 
 
   const handleClick = async () => {
     if (!email) {
@@ -30,11 +30,11 @@ const Banner = () => {
     }
 
     if (data.role === "Admin") {
-      navigate("/admin"); // 👉 chuyển trang
+      navigate("/admin"); 
       return;
     }
 
-    alert("✅ Email hợp lệ");
+    alert(" Email hợp lệ");
   };
 
   return (

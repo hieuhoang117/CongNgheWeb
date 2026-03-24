@@ -71,7 +71,6 @@ export const fixUser = async (req, res) => {
         PasswordHash = ${data.PasswordHash},
         Phone = ${data.Phone},
         Role = ${data.Role},
-        CreatedAt = ${data.CreatedAt},
         Status = ${data.Status}
       WHERE UserID = ${id}
     `;
@@ -83,10 +82,18 @@ export const fixUser = async (req, res) => {
   }
 };
 
-export default {
-  checkEmail,
-  getUsers,
-  addUser,
-  deleteUser,
-  fixUser
+export const getUserByEmail = async (req, res) => {
+  try {
+    const email = req.params.email;
+
+    const result = await sql.query`
+      SELECT * FROM Users 
+      WHERE Email LIKE '%' + ${email} + '%'
+    `;
+
+    res.json(result.recordset);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Lỗi server");
+  }
 };

@@ -11,12 +11,8 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// 👉 connect DB
 connectDB();
 
-/* ========= UPLOAD ========= */
-
-// 1. storage
 const storage = multer.diskStorage({
   destination: "uploads/",
   filename: (req, file, cb) => {

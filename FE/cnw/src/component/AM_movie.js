@@ -1,6 +1,7 @@
-import { Table, Button, Space, Modal, Form, Input, Popconfirm, Upload } from "antd";
+import { Table, Button, Space, Modal, Form, Input, Popconfirm, Upload, Select } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import { useEffect, useState } from "react";
+const { Option } = Select;
 
 const AM_movie = () => {
   const [movies, setMovies] = useState([]);
@@ -23,7 +24,7 @@ const AM_movie = () => {
     fetchMovies();
   }, []);
 
-  // 👉 Xóa phim
+ 
   const handleDelete = async (id) => {
     try {
       await fetch(`http://localhost:5000/api/movies/${id}`, { method: "DELETE" });
@@ -33,21 +34,37 @@ const AM_movie = () => {
     }
   };
 
-  // 👉 Mở modal sửa
+  
   const handleEdit = (record) => {
     setEditingMovie(record);
     form.setFieldsValue(record);
     setIsModalOpen(true);
   };
 
-  // 👉 Mở modal thêm
+  
   const handleAdd = () => {
     setEditingMovie(null);
     form.resetFields();
     setIsModalOpen(true);
   };
+  const handleFinmovie = async (name) => {
+  try {
+    if (!name) {
+      fetchMovies(); 
+      return;
+    }
 
-  // 👉 Submit form
+    const res = await fetch(
+      `http://localhost:5000/api/movies/name/${name}`
+    );
+    const data = await res.json();
+    setMovies(data);
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+ 
   const handleOk = async () => {
     try {
       const values = await form.validateFields();
@@ -75,23 +92,27 @@ const AM_movie = () => {
     }
   };
 
-  // 👉 Table columns
+
   const columns = [
     { title: "Tên phim", dataIndex: "NameMovie" },
     { title: "Thể loại", dataIndex: "Category" },
     { title: "Thời lượng", dataIndex: "Duration" },
     { title: "Quốc gia", dataIndex: "Country" },
     { title: "Đạo diễn", dataIndex: "Director" },
-    { title: "Ngày phát hành", dataIndex: "ReleaseDate" },
+    { title: "Ngày phát hành", dataIndex: "ReleaseDate",
+      render: (text)=>text? text.split("T")[0] : ""
+     },
     { title: "Mô tả", dataIndex: "Description" },
     { title: "Content ID", dataIndex: "ContentID" },
     {
       title: "Poster",
       dataIndex: "Poster",
       render: (url) => url && <img src={url} alt="" width={80} />,
-    },{title : "Trạng thái",
+    }, {
+      title: "Trạng thái",
       render: (value) => (value === true ? "Đang chiếu" : "Ngưng Chiếu"),
-      dataIndex: "Status"},
+      dataIndex: "Status"
+    },
     {
       title: "Action",
       render: (record) => (
@@ -115,10 +136,15 @@ const AM_movie = () => {
       <Button type="primary" onClick={handleAdd} style={{ marginBottom: 16 }}>
         + Thêm phim
       </Button>
+      <Input
+        style={{ marginBottom: 15 }}
+        placeholder="Tìm theo tên phim..."
+        onChange={(e) => handleFinmovie(e.target.value)}
+      />
 
-      <Table columns={columns} dataSource={movies} rowKey="IDmovie" />
+      <Table columns={columns} dataSource={movies} rowKey="IDmovie" pagination={{ pageSize: 5 }} />
 
-      
+
       <Modal
         title={editingMovie ? "Sửa phim" : "Thêm phim"}
         open={isModalOpen}
@@ -182,21 +208,14 @@ const AM_movie = () => {
             <Input.TextArea rows={3} />
           </Form.Item>
 
-          <Form.Item
-            name="Status"
-            label="Trạng thái"
-          >
-            <Input />
+          <Form.Item name="Status"
+            label="Trạng thái">
+            <Select>
+              <Option value={true}>Đang chiếu</Option>
+              <Option value={false}>Ngưng chiếu</Option>
+            </Select>
           </Form.Item>
 
-          <Form.Item
-            name="ContentID"
-            label="Content ID"
-          >
-            <Input />
-          </Form.Item>
-
-          
           <Form.Item label="Poster">
             <Upload
               action="http://localhost:5000/api/upload"
@@ -226,7 +245,6 @@ const AM_movie = () => {
             </Upload>
           </Form.Item>
 
-          {/* Hidden fields để submit */}
           <Form.Item name="Poster" hidden><input /></Form.Item>
           <Form.Item name="Film" hidden><input /></Form.Item>
         </Form>

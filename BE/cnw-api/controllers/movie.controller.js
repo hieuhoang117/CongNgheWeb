@@ -14,6 +14,8 @@ export const addMovie = async (req, res) => {
       Director,
       Duration,
       Country,
+      Status,
+      ContentID,
       Description,
       Poster,
       Film
@@ -21,9 +23,9 @@ export const addMovie = async (req, res) => {
 
     await sql.query`
       INSERT INTO Movie 
-      (NameMovie, Category, ReleaseDate, Director, Duration, Country, Description, Poster, Film)
+      (NameMovie, Category, ReleaseDate, Director, Duration, Country, Status, Description, Poster, Film)
       VALUES 
-      (${NameMovie}, ${Category}, ${ReleaseDate}, ${Director}, ${Duration}, ${Country}, ${Description}, ${Poster}, ${Film})
+      (${NameMovie}, ${Category}, ${ReleaseDate}, ${Director}, ${Duration}, ${Country}, ${Status}, ${Description}, ${Poster}, ${Film})
     `;
 
     res.json({ message: "Thêm phim thành công" });
@@ -46,6 +48,8 @@ export const fixMovie = async (req, res) => {
         Director = ${data.Director},
         Duration = ${data.Duration},
         Country = ${data.Country},
+        Status = ${data.Status},
+        ContentID = ${data.ContentID},
         Description = ${data.Description},
         Poster = ${data.Poster},
         Film = ${data.Film}
@@ -64,6 +68,21 @@ export const deleteMovie = async (req, res) => {
     `;
     res.json({ message: "Xóa thành công" });
   } catch (err) {
+    res.status(500).send("Lỗi server");
+  }
+};
+export const getMovieByName = async (req, res) => {
+  try {
+    const name = req.params.name;
+
+    const result = await sql.query`
+      SELECT * FROM Movie
+      WHERE NameMovie LIKE '%' + ${name} + '%'
+    `;
+
+    res.json(result.recordset);
+  } catch (err) {
+    console.error(err);
     res.status(500).send("Lỗi server");
   }
 };

@@ -5,6 +5,7 @@ import AdminPage from "./AdminPage";
 import AM_movie from "./component/AM_movie";
 import "antd/dist/reset.css";
 import AM_User from "./component/AM_User";
+import AM_Report from "./component/AM_report";
 
 function App() {
   const [users, setUsers] = useState([]);
@@ -19,13 +20,14 @@ function App() {
     <BrowserRouter>
       <Routes>
 
-        {/* Trang chính */}
+        
         <Route path="/" element={<Banner />} />
 
-        {/* ADMIN layout */}
+        
         <Route path="/admin" element={<AdminPage />}>
           <Route path="users" element={<AM_User />} />
           <Route path="movies" element={<AM_movie />} />
+          <Route path="reports" element={<AM_Report />} />
         </Route>
 
       </Routes>

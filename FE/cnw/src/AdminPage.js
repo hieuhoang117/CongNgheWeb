@@ -10,7 +10,6 @@ const AdminPage = () => {
   return (
     <Layout style={{ minHeight: "100vh" }}>
       
-      
       <Sider>
         <div style={{ color: "white", padding: 16 }}>
           <img src={logo} alt="Logo" style={{ width: 150, height: 80 }} />
@@ -22,16 +21,17 @@ const AdminPage = () => {
             navigate(e.key); 
           }}
           items={[
-            { key: "/admin/users", label: "Users" },
-            { key: "/admin/movies", label: "Movies" },
+            { key: "/admin/users", label: "Quản lý người dùng" },
+            { key: "/admin/movies", label: "Quản lý phim ngắn" },
+            { key: "/admin/reports", label: "Báo cáo- Thống kê" },
           ]}
         />
       </Sider>
 
-      {/* CONTENT */}
+      
       <Layout>
         <Header style={{ color: "#fff" }}>
-            <h1>Admin Dashboard</h1>
+            
         </Header>
 
         <Content style={{ margin: "16px" }}>

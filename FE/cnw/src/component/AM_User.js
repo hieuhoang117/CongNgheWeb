@@ -9,7 +9,7 @@ const AM_User = () => {
   const [editingUser, setEditingUser] = useState(null);
   const [form] = Form.useForm();
 
-  // 👉 Load data
+  
   const fetchuser = async () => {
     try {
       const res = await fetch("http://localhost:5000/api/users");
@@ -33,6 +33,23 @@ const AM_User = () => {
     } catch (err) {
       console.error(err);
     }
+  };
+
+  const handleFinUser = async (email) => {
+    try {
+    if (!email) {
+      fetchuser(); 
+      return;
+    }
+
+    const res = await fetch(
+      `http://localhost:5000/api/users/email/${(email)}`
+    );
+    const data = await res.json();
+    setUsers(data);
+  } catch (err) {
+    console.error(err);
+  }
   };
 
   const handleEdit = (record) => {
@@ -107,8 +124,13 @@ const AM_User = () => {
       <Button type="primary" onClick={handleAdd} style={{ marginBottom: 16 }}>
         + Thêm người dùng
       </Button>
+      <Input
+        style={{ marginBottom: 15 }}
+        placeholder="Tìm theo email..."
+        onChange={(e) => handleFinUser(e.target.value)}
+      />
 
-      <Table columns={columns} dataSource={users} rowKey="UserID" />
+      <Table columns={columns} dataSource={users} rowKey="UserID" pagination={{ pageSize: 5 }} />
 
       <Modal
         title={editingUser ? "Sửa người dùng" : "Thêm người dùng"}
@@ -135,7 +157,10 @@ const AM_User = () => {
           </Form.Item>
 
           <Form.Item name="Role" label="Vai trò" rules={[{ required: true }]}>
-            <Input />
+            <Select>
+              <Option value="User">Người dùng</Option>
+              <Option value="Admin">Quản trị viên</Option>
+            </Select>
           </Form.Item>
 
           <Form.Item name="Status" label="Trạng thái">
