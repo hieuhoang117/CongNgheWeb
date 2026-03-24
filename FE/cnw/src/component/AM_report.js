@@ -1,4 +1,4 @@
-import { Card } from "antd";
+import { Card, Space, Table } from "antd";
 import { useEffect, useState } from "react";
 import { Column, Area, Bar } from "@ant-design/plots";
 
@@ -36,6 +36,23 @@ const AM_Report = () => {
 
     fetchReports();
   }, []);
+  const handleUpdateStatus = async (bugID, currentStatus) => {
+    try {
+      const newStatus = currentStatus === "Processing" ? "Fixed" : "Processing";
+      await fetch(`http://localhost:5000/api/reports/bug-reports/${bugID}/fix`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ Status: newStatus })
+      });
+      setBugReports(prevReports =>
+        prevReports.map(report =>
+          report.BugID === bugID ? { ...report, Status: newStatus } : report
+        )
+      );
+    } catch (err) {
+      console.error("Error updating bug report status:", err);
+    }
+  };
 
   const tabList = [
     {
@@ -49,6 +66,10 @@ const AM_Report = () => {
     {
       key: "sign-up-trends",
       tab: "Xu hướng đăng ký"
+    },
+    {
+      key: "bug-reports",
+      tab: "Báo cáo lỗi"
     }
   ];
   const topMovies = mostViewedMovies.slice(0, 10);
@@ -67,11 +88,18 @@ const AM_Report = () => {
     { title: "ID nội dung", dataIndex: "ContentID" },
     { title: "Tiêu đề", dataIndex: "Title" },
     { title: "Mô tả", dataIndex: "Description" },
-    {title: "Loại lỗi", dataIndex: "BugType" },
+    { title: "Loại lỗi", dataIndex: "BugType" },
     { title: "Trạng thái", dataIndex: "Status" },
     { title: "Ngày tạo", dataIndex: "CreatedAt" },
-    { title: "Ngày cập nhật", dataIndex: "UpdatedAt" }
-    
+    { title: "Ngày cập nhật", dataIndex: "UpdatedAt" },
+    {
+      title: "Hành động",
+      render: (text, record) => (
+        <button onClick={() => handleUpdateStatus(record.BugID, record.Status)}>
+          {record.Status === "Processing" ? "Đánh dấu đã sửa" : "Đánh dấu đang xử lý"}
+        </button>
+      )
+    }
   ];
   const contentList = {
     "most-viewed": (
@@ -120,6 +148,9 @@ const AM_Report = () => {
         xField="Thang"
         yField="SoLuongUser"
       />
+    ),
+    "bug-reports": (
+      <Table columns={columns} dataSource={bugReports} rowKey="BugID" pagination={{ pageSize: 5 }} />
     )
   };
 
