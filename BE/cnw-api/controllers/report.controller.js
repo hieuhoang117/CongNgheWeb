@@ -43,3 +43,26 @@ ORDER BY Thang`;
         res.status(500).send("Lỗi server");
     }
 };
+export const GetBugReport = async (req, res) => {
+  try {
+    const result = await sql.query`
+      SELECT 
+        b.BugID,
+        b.Title,
+        b.Description,
+        b.BugType,
+        b.Status,
+        b.CreatedAt,
+        u.FullName
+      FROM BugReport b
+      JOIN Users u ON b.UserID = u.UserID
+      ORDER BY b.CreatedAt DESC
+    `;
+
+    res.status(200).json(result.recordset);
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Lỗi server");
+  }
+};

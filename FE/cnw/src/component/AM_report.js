@@ -1,30 +1,34 @@
 import { Card } from "antd";
 import { useEffect, useState } from "react";
-import { Column,Pie,Line } from "@ant-design/plots";
+import { Column, Area, Bar } from "@ant-design/plots";
 
 const AM_Report = () => {
   const [mostViewedMovies, setMostViewedMovies] = useState([]);
   const [mostActiveUsers, setMostActiveUsers] = useState([]);
+  const [bugReports, setBugReports] = useState([]);
   const [signUpTrendsData, setSignUpTrends] = useState([]);
   const [activeTabKey, setActiveTabKey] = useState("most-viewed");
 
   useEffect(() => {
     const fetchReports = async () => {
       try {
-        const [mostViewedRes, mostActiveRes, signUpTrendsRes] = await Promise.all([
+        const [mostViewedRes, mostActiveRes, signUpTrendsRes, bugReportsRes] = await Promise.all([
           fetch("http://localhost:5000/api/reports/most-viewed"),
           fetch("http://localhost:5000/api/reports/most-active"),
-          fetch("http://localhost:5000/api/reports/sign-up-trends")
+          fetch("http://localhost:5000/api/reports/sign-up-trends"),
+          fetch("http://localhost:5000/api/reports/bug-reports")
         ]);
 
         const mostViewedData = await mostViewedRes.json();
         const mostActiveData = await mostActiveRes.json();
         const signUpTrendsData = await signUpTrendsRes.json();
+        const bugReportsData = await bugReportsRes.json();
 
 
         setMostViewedMovies(mostViewedData);
         setMostActiveUsers(mostActiveData);
         setSignUpTrends(signUpTrendsData);
+        setBugReports(bugReportsData);
       } catch (err) {
         console.error(err);
       }
@@ -50,24 +54,68 @@ const AM_Report = () => {
   const topMovies = mostViewedMovies.slice(0, 10);
   const topUsers = mostActiveUsers.slice(0, 10);
   const signUpTrends = signUpTrendsData.slice(0, 10);
-
+  const topMoviesIn7Days = mostViewedMovies
+    .filter(movie => {
+      const diffDays = (new Date() - new Date(movie.CreatedAt)) / (1000 * 60 * 60 * 24);
+      return diffDays >= 0 && diffDays <= 7;
+    })
+    .sort((a, b) => b.Views - a.Views)
+    .slice(0, 10);
+  const columns = [
+    { title: "ID", dataIndex: "BugID" },
+    { title: "ID người dùng", dataIndex: "UserID" },
+    { title: "ID nội dung", dataIndex: "ContentID" },
+    { title: "Tiêu đề", dataIndex: "Title" },
+    { title: "Mô tả", dataIndex: "Description" },
+    {title: "Loại lỗi", dataIndex: "BugType" },
+    { title: "Trạng thái", dataIndex: "Status" },
+    { title: "Ngày tạo", dataIndex: "CreatedAt" },
+    { title: "Ngày cập nhật", dataIndex: "UpdatedAt" }
+    
+  ];
   const contentList = {
     "most-viewed": (
-      <Column
-        data={topMovies}
-        xField="NameMovie"
-        yField="Views"
-      />
+      <div>
+        <Bar
+          data={topMovies}
+          xField="NameMovie"
+          yField="Views"
+        />
+        <h1 style={{ textAlign: "center", marginTop: 20 }}>Phim mới nổi</h1>
+        <table style={{ width: "100%", marginTop: 20, borderCollapse: "collapse" }}>
+          <thead>
+            <tr>
+              <th style={{ border: "1px solid #ddd", padding: 8 }}>Tên phim</th>
+              <th style={{ border: "1px solid #ddd", padding: 8 }}>Lượt xem</th>
+            </tr>
+          </thead>
+          <tbody>
+            {topMoviesIn7Days.map((movie, index) => (
+              <tr key={index}>
+                <td style={{ border: "1px solid #ddd", padding: 8 }}>
+                  {movie.NameMovie}
+                </td>
+                <td style={{ border: "1px solid #ddd", padding: 8 }}>
+                  {movie.Views}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     ),
     "most-active": (
-      <Column
-        data={topUsers}
-        xField="FullName"
-        yField="Views"
-      />
+      <div>
+        <Column
+          data={topUsers}
+          xField="FullName"
+          yField="Views"
+        />
+        <h1 style={{ textAlign: "center", marginTop: 20 }}>Người dùng hoạt động nhiều nhất</h1>
+      </div>
     ),
     "sign-up-trends": (
-      <Line
+      <Area
         data={signUpTrends}
         xField="Thang"
         yField="SoLuongUser"
