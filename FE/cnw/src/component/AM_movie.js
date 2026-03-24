@@ -9,7 +9,7 @@ const AM_movie = () => {
   const [editingMovie, setEditingMovie] = useState(null);
   const [form] = Form.useForm();
 
-  // 👉 Load data từ backend
+  
   const fetchMovies = async () => {
     try {
       const res = await fetch("http://localhost:5000/api/movies");
