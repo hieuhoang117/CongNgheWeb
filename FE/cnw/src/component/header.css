@@ -6,6 +6,7 @@
   display: flex;
   justify-content: space-between;
   z-index: 2;
+  background-color: transparent;
 }
 
 .logo {
@@ -13,8 +14,9 @@
 }
 
 .select-lang {
-  margin-right: 20px;
+  margin-right: 20px; 
   float: left;
+  background-color: transparent;
 }
 .btn-login {
   background: red;

@@ -27,7 +27,7 @@ const upload = multer({ storage });
 
 
 app.post("/api/upload", upload.single("file"), (req, res) => {
-  const url = `http://localhost:5000/uploads/${req.file.filename}`;
+  const url = `http://192.168.1.21:5000/uploads/${req.file.filename}`;
   res.json({ url });
 });
 
@@ -42,6 +42,6 @@ app.use("/api/reports", reportRoutes);
 app.use("/api/series", series);
 
 
-app.listen(5000, () => {
+app.listen(5000, '0.0.0.0', () => {
   console.log("Server chạy http://localhost:5000");
 });
