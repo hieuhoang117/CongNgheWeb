@@ -108,10 +108,11 @@ const AM_series = () => {
         { title: "Thời lượng", dataIndex: "Duration" },
         { title: "Ngày phát hành", dataIndex: "ReleaseDate" },
         {
-            title: "Link phim", dataIndex: "film",
-            render: (record) => (
+            title: "Link phim",
+            dataIndex: "film",
+            render: (value) => (
                 <Button onClick={() => {
-                    setCurrentVideo(record.film);
+                    setCurrentVideo(value);
                     setIsVideoModalOpen(true);
                 }}>
                     Xem
@@ -403,15 +404,18 @@ const AM_series = () => {
                     >
                         <Upload
                             action="http://localhost:5000/api/upload"
-                            listType="picture"
+                            listType="text"
+                            accept="video/mp4"
                             maxCount={1}
                             onChange={(info) => {
                                 if (info.file.status === "done") {
-                                    formSeries.setFieldsValue({ poster: info.file.response.url });
+                                    formEpisode.setFieldsValue({
+                                        film: info.file.response.url
+                                    });
                                 }
                             }}
                         >
-                            <Button icon={<UploadOutlined />}>Upload ảnh</Button>
+                            <Button icon={<UploadOutlined />}>Upload video</Button>
                         </Upload>
                     </Form.Item>
                 </Form>
@@ -422,13 +426,9 @@ const AM_series = () => {
                 footer={null}
                 width={800}
             >
-                <iframe
-                    width="100%"
-                    height="400"
-                    src={currentVideo}
-                    title="video"
-                    allowFullScreen
-                />
+                <video width="100%" height="400" controls>
+                    <source src={currentVideo} type="video/mp4" />
+                </video>
             </Modal>
         </div>
 
