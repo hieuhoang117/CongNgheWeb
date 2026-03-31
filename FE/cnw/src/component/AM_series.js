@@ -12,6 +12,8 @@ const AM_series = () => {
     const [editingSeries, setEditingSeries] = useState(null);
     const [editingEpisode, setEditingEpisode] = useState(null);
     const [isEpisodeModalOpen, setIsEpisodeModalOpen] = useState(false);
+    const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
+    const [currentVideo, setCurrentVideo] = useState("");
 
     const [formSeries] = Form.useForm();
     const [formEpisode] = Form.useForm();
@@ -105,7 +107,17 @@ const AM_series = () => {
         { title: "Số tập", dataIndex: "EpisodeNumber" },
         { title: "Thời lượng", dataIndex: "Duration" },
         { title: "Ngày phát hành", dataIndex: "ReleaseDate" },
-        { title: "Link phim", dataIndex: "film" },
+        {
+            title: "Link phim", dataIndex: "film",
+            render: (record) => (
+                <Button onClick={() => {
+                    setCurrentVideo(record.film);
+                    setIsVideoModalOpen(true);
+                }}>
+                    Xem
+                </Button>
+            )
+        },
         {
             title: "Action", render: (record) => (
                 <Space>
@@ -389,9 +401,34 @@ const AM_series = () => {
                         label="Link phim"
                         rules={[{ required: true, message: "Vui lòng nhập link phim" }]}
                     >
-                        <Input />
+                        <Upload
+                            action="http://localhost:5000/api/upload"
+                            listType="picture"
+                            maxCount={1}
+                            onChange={(info) => {
+                                if (info.file.status === "done") {
+                                    formSeries.setFieldsValue({ poster: info.file.response.url });
+                                }
+                            }}
+                        >
+                            <Button icon={<UploadOutlined />}>Upload ảnh</Button>
+                        </Upload>
                     </Form.Item>
                 </Form>
+            </Modal>
+            <Modal
+                open={isVideoModalOpen}
+                onCancel={() => setIsVideoModalOpen(false)}
+                footer={null}
+                width={800}
+            >
+                <iframe
+                    width="100%"
+                    height="400"
+                    src={currentVideo}
+                    title="video"
+                    allowFullScreen
+                />
             </Modal>
         </div>
 
