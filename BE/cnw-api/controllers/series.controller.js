@@ -43,13 +43,69 @@ export const getEpisodesBySeriesId = async (req, res) => {
         res.status(500).send("Lỗi server");
     }
 };
+export const updateSeries = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const data = req.body;
+
+    await sql.query`
+      UPDATE Series
+      SET 
+        SeriesName = ${data.SeriesName},
+        Description = ${data.Description},
+        ReleaseYear = ${data.ReleaseYear},
+        Country = ${data.Country},
+        Status = ${data.Status},
+        ContentID = ${data.ContentID},
+        poster = ${data.poster}
+      WHERE IDseries = ${id}
+    `;
+
+    res.send("Update thành công");
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Lỗi server");
+  }
+};
+export const finseries = async (req, res) => {
+    try {
+        const name = req.params.name;
+        const result = await sql.query`
+            SELECT 
+                IDseries, 
+                SeriesName,
+                Description,
+                ReleaseYear,  
+                Country,
+                Status,
+                ContentID,
+                poster
+            FROM Series
+            WHERE SeriesName LIKE ${"%" + name + "%"}
+        `;
+        res.json(result.recordset);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Lỗi server");
+    }   
+};
 export const addSeries = async (req, res) => {
   try {
     const data = req.body;
+
     await sql.query`
-      INSERT INTO Series (IDseries, SeriesName, Description, ReleaseYear, Country, Status, ContentID, poster)
-      VALUES (${data.IDseries}, ${data.SeriesName}, ${data.Description}, ${data.ReleaseYear}, ${data.Country}, ${data.Status}, ${data.ContentID}, ${data.poster})
+      INSERT INTO Series (SeriesName, Description,ContentID, ReleaseYear, Country, Status, poster)
+      VALUES (
+        ${data.SeriesName},
+        ${data.Description},
+        ${data.ContentID},
+        ${data.ReleaseYear},
+        ${data.Country},
+        ${data.Status},
+        ${data.poster}
+      )
     `;
+
     res.status(201).send("Series added successfully");
   } catch (err) {
     console.error(err);

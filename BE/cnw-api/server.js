@@ -27,7 +27,7 @@ const upload = multer({ storage });
 
 
 app.post("/api/upload", upload.single("file"), (req, res) => {
-  const url = `http://192.168.1.21:5000/uploads/${req.file.filename}`;
+  const url = `http://localhost:5000/uploads/${req.file.filename}`;
   res.json({ url });
 });
 

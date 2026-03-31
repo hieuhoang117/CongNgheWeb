@@ -9,7 +9,7 @@ const AM_movie = () => {
   const [editingMovie, setEditingMovie] = useState(null);
   const [form] = Form.useForm();
 
-  
+
   const fetchMovies = async () => {
     try {
       const res = await fetch("http://localhost:5000/api/movies");
@@ -24,7 +24,7 @@ const AM_movie = () => {
     fetchMovies();
   }, []);
 
- 
+
   const handleDelete = async (id) => {
     try {
       await fetch(`http://localhost:5000/api/movies/${id}`, { method: "DELETE" });
@@ -34,37 +34,37 @@ const AM_movie = () => {
     }
   };
 
-  
+
   const handleEdit = (record) => {
     setEditingMovie(record);
     form.setFieldsValue(record);
     setIsModalOpen(true);
   };
 
-  
+
   const handleAdd = () => {
     setEditingMovie(null);
     form.resetFields();
     setIsModalOpen(true);
   };
   const handleFinmovie = async (name) => {
-  try {
-    if (!name) {
-      fetchMovies(); 
-      return;
+    try {
+      if (!name) {
+        fetchMovies();
+        return;
+      }
+
+      const res = await fetch(
+        `http://localhost:5000/api/movies/name/${name}`
+      );
+      const data = await res.json();
+      setMovies(data);
+    } catch (err) {
+      console.error(err);
     }
+  };
 
-    const res = await fetch(
-      `http://localhost:5000/api/movies/name/${name}`
-    );
-    const data = await res.json();
-    setMovies(data);
-  } catch (err) {
-    console.error(err);
-  }
-};
 
- 
   const handleOk = async () => {
     try {
       const values = await form.validateFields();
@@ -99,9 +99,10 @@ const AM_movie = () => {
     { title: "Thời lượng", dataIndex: "Duration" },
     { title: "Quốc gia", dataIndex: "Country" },
     { title: "Đạo diễn", dataIndex: "Director" },
-    { title: "Ngày phát hành", dataIndex: "ReleaseDate",
-      render: (text)=>text? text.split("T")[0] : ""
-     },
+    {
+      title: "Ngày phát hành", dataIndex: "ReleaseDate",
+      render: (text) => text ? text.split("T")[0] : ""
+    },
     { title: "Mô tả", dataIndex: "Description" },
     { title: "Content ID", dataIndex: "ContentID" },
     {
