@@ -1,7 +1,7 @@
 import { Table, Button, Input, Space, Form, Select, Modal, DatePicker, Upload } from "antd";
-import dayjs from "dayjs";
 import { useEffect, useState } from "react";
 import { UploadOutlined } from "@ant-design/icons";
+import dayjs from "dayjs";
 
 const AM_series = () => {
     const [series, setSeries] = useState([]);
@@ -10,6 +10,8 @@ const AM_series = () => {
     const [selectedSeriesId, setSelectedSeriesId] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [editingSeries, setEditingSeries] = useState(null);
+    const [editingEpisode, setEditingEpisode] = useState(null);
+    const [isEpisodeModalOpen, setIsEpisodeModalOpen] = useState(false);
 
     const [formSeries] = Form.useForm();
     const [formEpisode] = Form.useForm();
@@ -107,22 +109,55 @@ const AM_series = () => {
         {
             title: "Action", render: (record) => (
                 <Space>
-                    <Button onClick={() => console.log("Edit", record)}>
+
+
+                    <Button onClick={() => {
+                        setEditingEpisode(record);
+
+                        formEpisode.setFieldsValue({
+                            ...record,
+                            EpisodeNumber: Number(record.EpisodeNumber),
+                            SeasonNumber: Number(record.SeasonNumber),
+                            Duration: Number(record.Duration),
+                            ReleaseDate: record.ReleaseDate ? dayjs(record.ReleaseDate) : null
+                        });
+
+                        setIsEpisodeModalOpen(true);
+                    }}>
                         Sửa
                     </Button>
-                    <Button danger onClick={() => console.log("Delete", record)}>Xóa</Button>
+                    <Button danger onClick={() => handleDeleteepisode(record.IDEpisode)}>
+                        Xóa
+                    </Button>
                 </Space>
             )
         }
     ];
-    const handleAddSeries = () => {
-        formSeries.validateFields().then(values => {
-            console.log("Form values:", values);
-            formSeries.resetFields();
-        }).catch(info => {
-            console.log("Validate Failed:", info);
-        });
-    }
+    const handleDeleteepisode = async (id) => {
+        try {
+            await fetch(`http://localhost:5000/api/series/episodes/${id}`, { method: "DELETE" });
+            handleepisodefromseries(selectedSeriesId);
+        } catch (err) {
+            console.error(err);
+        }
+    };
+    const handleFinEpisode = async (name) => {
+        try {
+            if (!name) {
+                handleepisodefromseries(selectedSeriesId);
+                return;
+            }
+
+            const res = await fetch(
+                `http://localhost:5000/api/series/episodes/find/${selectedSeriesId}/${name}`
+            );
+
+            const data = await res.json();
+            setEpisodes(data);
+        } catch (err) {
+            console.error(err);
+        }
+    };
     const handleDeleteSeries = async (id) => {
         try {
             await fetch(`http://localhost:5000/api/series/${id}`, { method: "DELETE" });
@@ -159,7 +194,29 @@ const AM_series = () => {
             console.log(err);
         }
     };
-
+    const handleokepisode = async () => {
+        try {
+            const values = await formEpisode.validateFields();
+            if (editingEpisode) {
+                await fetch(`http://localhost:5000/api/series/episodes/${editingEpisode.IDEpisode}`, {
+                    method: "PUT",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(values)
+                });
+            } else {
+                await fetch("http://localhost:5000/api/series/episodes", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ ...values, IDseries: selectedSeriesId })
+                });
+            }
+            setIsEpisodeModalOpen(false);
+            formEpisode.resetFields();
+            handleepisodefromseries(selectedSeriesId);
+        } catch (err) {
+            console.log(err);
+        }
+    };
     return (
         <div>
             <h2>Danh sách series</h2>
@@ -172,7 +229,7 @@ const AM_series = () => {
                 }}>
                 Thêm series
             </Button>
-            <Input placeholder="Tìm kiếm theo tên series" style={{ marginBottom: 16, width: 300 }} 
+            <Input placeholder="Tìm kiếm theo tên series" style={{ marginBottom: 16, width: 300 }}
                 onChange={(e) => handleFinserie(e.target.value)}
             />
             <Table dataSource={series} onRow={(record) => ({
@@ -190,12 +247,12 @@ const AM_series = () => {
                         return;
                     }
                     formEpisode.resetFields();
+                    setIsEpisodeModalOpen(true);
                 }}
-                style={{ marginBottom: 16 }}
             >
                 Thêm tập phim
             </Button>
-            <Input placeholder="Tìm kiếm theo tên tập phim" style={{ marginBottom: 16, width: 300 }} />
+            <Input onChange={(e) => handleFinEpisode(e.target.value)} placeholder="Tìm kiếm theo tên tập phim" style={{ marginBottom: 16, width: 300 }} />
             <Table dataSource={episodes} columns={columnsepisodes} rowKey="IDEpisode" pagination={{ pageSize: 5 }} />
             <Modal
                 title={editingSeries ? "Sửa series" : "Thêm series"}
@@ -271,7 +328,59 @@ const AM_series = () => {
                     <Form.Item name="poster" hidden><input /></Form.Item>
                 </Form>
             </Modal>
+            <Modal
+                title={editingEpisode ? "Sửa tập phim" : "Thêm tập phim"}
+                open={isEpisodeModalOpen}
+                onOk={handleokepisode}
+                onCancel={() => setIsEpisodeModalOpen(false)}
+                okText="Lưu"
+            >
+                <Form form={formEpisode} layout="vertical">
+                    <Form.Item
+                        name="EpisodeName"
+                        label="Tên tập phim"
+                        rules={[{ required: true, message: "Vui lòng nhập tên tập phim" }]}
+                    >
+                        <Input />
+                    </Form.Item>
 
+                    <Form.Item
+                        name="SeasonNumber"
+                        label="Mùa"
+                        rules={[{ required: true, message: "Vui lòng nhập mùa" }]}
+                    >
+                        <Input type="number" />
+                    </Form.Item>
+                    <Form.Item
+                        name="EpisodeNumber"
+                        label="Số tập"
+                        rules={[{ required: true, message: "Vui lòng nhập số tập" }]}
+                    >
+                        <Input type="number" />
+                    </Form.Item>
+                    <Form.Item
+                        name="Duration"
+                        label="Thời lượng (phút)"
+                        rules={[{ required: true, message: "Vui lòng nhập thời lượng" }]}
+                    >
+                        <Input type="number" />
+                    </Form.Item>
+                    <Form.Item
+                        name="ReleaseDate"
+                        label="Ngày phát hành"
+                        rules={[{ required: true, message: "Vui lòng nhập ngày phát hành" }]}
+                    >
+                        <DatePicker style={{ width: "100%" }} />
+                    </Form.Item>
+                    <Form.Item
+                        name="film"
+                        label="Link phim"
+                        rules={[{ required: true, message: "Vui lòng nhập link phim" }]}
+                    >
+                        <Input />
+                    </Form.Item>
+                </Form>
+            </Modal>
         </div>
 
     );
