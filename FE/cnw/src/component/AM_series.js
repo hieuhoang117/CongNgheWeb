@@ -197,19 +197,31 @@ const AM_series = () => {
     const handleokepisode = async () => {
         try {
             const values = await formEpisode.validateFields();
+
+            const payload = {
+                ...values,
+                IDseries: editingEpisode
+                    ? editingEpisode.IDseries
+                    : selectedSeriesId,
+                ReleaseDate: values.ReleaseDate
+                    ? values.ReleaseDate.format("YYYY-MM-DD")
+                    : null
+            };
+
             if (editingEpisode) {
                 await fetch(`http://localhost:5000/api/series/episodes/${editingEpisode.IDEpisode}`, {
                     method: "PUT",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(values)
+                    body: JSON.stringify(payload)
                 });
             } else {
                 await fetch("http://localhost:5000/api/series/episodes", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ ...values, IDseries: selectedSeriesId })
+                    body: JSON.stringify(payload)
                 });
             }
+
             setIsEpisodeModalOpen(false);
             formEpisode.resetFields();
             handleepisodefromseries(selectedSeriesId);
