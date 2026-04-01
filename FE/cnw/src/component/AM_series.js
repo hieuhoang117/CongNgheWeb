@@ -424,11 +424,18 @@ const AM_series = () => {
                 open={isVideoModalOpen}
                 onCancel={() => setIsVideoModalOpen(false)}
                 footer={null}
-                width={800}
+                width={600} // giảm lại
             >
-                <video width="100%" height="400" controls>
-                    <source src={currentVideo} type="video/mp4" />
-                </video>
+                <div style={{ display: "flex", justifyContent: "center" }}>
+                    <video
+                        key={currentVideo}
+                        width="100%"
+                        style={{ maxHeight: "400px", objectFit: "contain" }}
+                        controls
+                    >
+                        <source src={currentVideo} type="video/mp4" />
+                    </video>
+                </div>
             </Modal>
         </div>
 
