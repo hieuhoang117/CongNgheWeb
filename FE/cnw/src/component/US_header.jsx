@@ -1,0 +1,54 @@
+import logo from "../logo.png";
+import { Link } from "react-router-dom";
+import { Input, Button, Badge, Dropdown, Avatar, Space } from "antd";
+import { UserOutlined, BellOutlined } from "@ant-design/icons";
+import "./US_header.css";
+
+const items = [
+    { key: "1", label: "Người dùng 1" },
+    { key: "2", label: "Người dùng 2" },
+    { key: "3", label: "Quản lý hồ sơ" },
+    { key: "4", label: "Trợ giúp" },
+    { key: "5", label: "Đăng xuất" },
+];
+const USHeader = () => {
+    return (
+        <div className="header">
+            <img src={logo} alt="logo" className="logo" />
+            <div className="menu">
+                <Link to="/user" className="Link">Trang chủ</Link>
+                <Link to="/user" className="Link">Series</Link>
+                <Link to="/user" className="Link">Phim</Link>
+                <Link to="/user" className="Link">Mới và phổ biến</Link>
+                <Link to="/user" className="Link">Danh sách của tôi</Link>
+                <Link to="/user" className="Link">Duyệt theo ngôn ngữ</Link>
+            </div>
+            <div className="account">
+                <Space size="middle">
+
+                    <Input
+                        placeholder="Tìm kiếm..."
+                        style={{ width: 200 }}
+                    />
+
+                    <Badge count={0}>
+                        <Button
+                            type="text"
+                            icon={<BellOutlined />}
+                            style={{ color: "white", fontSize: 20 }}
+                        />
+                    </Badge>
+
+                    <Dropdown menu={{ items }}>
+                        <Avatar icon={<UserOutlined />} style={{ cursor: "pointer" }} />
+                    </Dropdown>
+
+                </Space>
+            </div>
+
+
+        </div>
+    );
+};
+
+export default USHeader;

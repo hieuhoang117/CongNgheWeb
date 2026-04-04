@@ -33,6 +33,10 @@ const Banner = () => {
       navigate("/admin"); 
       return;
     }
+    if (data.role === "User") {
+      navigate("/user"); 
+      return;
+    }
 
     alert(" Email hợp lệ");
   };

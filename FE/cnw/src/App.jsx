@@ -7,6 +7,7 @@ import "antd/dist/reset.css";
 import AMUser from "./component/AM_User";
 import AMReport from "./component/AM_report";
 import AMMseries from "./component/AM_series";
+import UserPage from "./Userpage";
 
 function App() {
   const [users, setUsers] = useState([]);
@@ -20,11 +21,9 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-
         
         <Route path="/" element={<Banner />} />
 
-        
         <Route path="/admin" element={<AdminPage />}>
           <Route path="users" element={<AMUser />} />
           <Route path="movies" element={<AMMmovie />} />
@@ -32,6 +31,7 @@ function App() {
           <Route path="series" element={<AMMseries />} />
         </Route>
 
+        <Route path="/user" element={<UserPage />} />
       </Routes>
     </BrowserRouter>
   );

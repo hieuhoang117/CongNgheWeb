@@ -1,0 +1,38 @@
+.footer {
+  background-color: #111;
+  color: #999;
+  padding: 40px 60px;
+  font-size: 14px;
+  
+}
+
+.social-icons {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.social-icons i {
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.footer-links {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.footer-links p {
+  margin: 8px 0;
+  cursor: pointer;
+}
+
+.footer-links p:hover {
+  text-decoration: underline;
+}
+
+.copyright {
+  margin-top: 30px;
+  font-size: 13px;
+}
