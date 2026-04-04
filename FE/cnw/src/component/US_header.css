@@ -5,7 +5,7 @@
 .Link:hover{
     color: red;
 }
-.header {
+.header_user {
   position: fixed;
   top: 0;
   left: 0;

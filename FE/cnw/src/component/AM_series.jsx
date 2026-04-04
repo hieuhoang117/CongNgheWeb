@@ -110,14 +110,20 @@ const AM_series = () => {
         {
             title: "Link phim",
             dataIndex: "film",
-            render: (value) => (
-                <Button onClick={() => {
-                    setCurrentVideo(value);
-                    setIsVideoModalOpen(true);
-                }}>
-                    Xem
-                </Button>
-            )
+            render: (value) => {
+                if (!value) {
+                    return <span style={{ color: "gray" }}>Không có</span>;
+                }
+
+                return (
+                    <Button onClick={() => {
+                        setCurrentVideo(value);
+                        setIsVideoModalOpen(true);
+                    }}>
+                        Xem
+                    </Button>
+                );
+            }
         },
         {
             title: "Action", render: (record) => (
@@ -424,7 +430,7 @@ const AM_series = () => {
                 open={isVideoModalOpen}
                 onCancel={() => setIsVideoModalOpen(false)}
                 footer={null}
-                width={600} 
+                width={600}
             >
                 <div style={{ display: "flex", justifyContent: "center" }}>
                     <video

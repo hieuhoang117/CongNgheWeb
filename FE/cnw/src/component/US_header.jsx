@@ -13,7 +13,7 @@ const items = [
 ];
 const USHeader = () => {
     return (
-        <div className="header">
+        <div className="header_user">
             <img src={logo} alt="logo" className="logo" />
             <div className="menu">
                 <Link to="/user" className="Link">Trang chủ</Link>

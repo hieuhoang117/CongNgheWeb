@@ -1,12 +1,12 @@
-.header {
-  position: absolute;
+.header_login {
+  position: relative;
   top: 0;
   width: 100%;
   padding: 20px 40px;
   display: flex;
   justify-content: space-between;
   z-index: 2;
-  background-color: transparent;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .logo {
