@@ -424,7 +424,7 @@ const AM_series = () => {
                 open={isVideoModalOpen}
                 onCancel={() => setIsVideoModalOpen(false)}
                 footer={null}
-                width={600} // giảm lại
+                width={600} 
             >
                 <div style={{ display: "flex", justifyContent: "center" }}>
                     <video

@@ -2,11 +2,11 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Banner from "./component/banner1";
 import AdminPage from "./AdminPage";
-import AM_movie from "./component/AM_movie";
+import AMMmovie from "./component/AM_movie";
 import "antd/dist/reset.css";
-import AM_User from "./component/AM_User";
-import AM_Report from "./component/AM_report";
-import AM_series from "./component/AM_series";
+import AMUser from "./component/AM_User";
+import AMReport from "./component/AM_report";
+import AMMseries from "./component/AM_series";
 
 function App() {
   const [users, setUsers] = useState([]);
@@ -26,10 +26,10 @@ function App() {
 
         
         <Route path="/admin" element={<AdminPage />}>
-          <Route path="users" element={<AM_User />} />
-          <Route path="movies" element={<AM_movie />} />
-          <Route path="reports" element={<AM_Report />} />
-          <Route path="series" element={<AM_series />} />
+          <Route path="users" element={<AMUser />} />
+          <Route path="movies" element={<AMMmovie />} />
+          <Route path="reports" element={<AMReport />} />
+          <Route path="series" element={<AMMseries />} />
         </Route>
 
       </Routes>
