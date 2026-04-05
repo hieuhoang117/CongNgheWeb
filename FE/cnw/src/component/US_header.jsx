@@ -16,12 +16,12 @@ const USHeader = () => {
         <div className="header_user">
             <img src={logo} alt="logo" className="logo" />
             <div className="menu">
-                <Link to="/user" className="Link">Trang chủ</Link>
-                <Link to="/user" className="Link">Series</Link>
-                <Link to="/user" className="Link">Phim</Link>
-                <Link to="/user" className="Link">Mới và phổ biến</Link>
-                <Link to="/user" className="Link">Danh sách của tôi</Link>
-                <Link to="/user" className="Link">Duyệt theo ngôn ngữ</Link>
+                <Link to="/user/slide" className="Link">Trang chủ</Link>
+                <Link to="/user/slide" className="Link">Series</Link>
+                <Link to="/user/slide" className="Link">Phim</Link>
+                <Link to="/user/movie/MV002" className="Link">Mới và phổ biến</Link>
+                <Link to="/user/slide" className="Link">Danh sách của tôi</Link>
+                <Link to="/user/slide" className="Link">Duyệt theo ngôn ngữ</Link>
             </div>
             <div className="account">
                 <Space size="middle">
