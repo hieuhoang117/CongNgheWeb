@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./Movie_Iterm.css";
 
 const MovieItem = ({ movie }) => {
   const [hovered, setHovered] = useState(false);
