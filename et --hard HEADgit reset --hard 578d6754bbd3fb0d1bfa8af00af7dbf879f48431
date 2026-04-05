@@ -1,0 +1,209 @@
+[33mcommit 578d6754bbd3fb0d1bfa8af00af7dbf879f48431[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: hieuhoang117 <hieuhoangminh2403@gmail.com>
+Date:   Sun Apr 5 21:34:50 2026 +0700
+
+    movie_row
+
+[33mcommit 92da3fe265f36f161c6922a9f4e4349059a5b552[m
+Author: hieuhoang117 <hieuhoangminh2403@gmail.com>
+Date:   Sun Apr 5 16:28:26 2026 +0700
+
+    main_slide
+
+[33mcommit 06089e594e91716595dbda9f59d4d04ca303d3f5[m
+Author: hieuhoang117 <hieuhoangminh2403@gmail.com>
+Date:   Sun Apr 5 00:19:54 2026 +0700
+
+    refactor: update component class names for consistency and improve rendering logic
+
+[33mcommit 787829d6ddc904df2c9eed55eaa2153ab4d4b01a[m
+Author: hieuhoang117 <hieuhoangminh2403@gmail.com>
+Date:   Sat Apr 4 23:37:04 2026 +0700
+
+    header,footer
+
+[33mcommit ab9480589330290bcc8e810081172fe7fcaf9d2f[m
+Author: hieuhoang117 <hieuhoangminh2403@gmail.com>
+Date:   Sat Apr 4 21:37:45 2026 +0700
+
+    reform
+
+[33mcommit 9dd37b7b4b381a7ac781a84776bd779282c3cb9f[m
+Author: hieuhoang117 <hieuhoangminh2403@gmail.com>
+Date:   Wed Apr 1 22:50:38 2026 +0700
+
+    load_video
+
+[33mcommit b586c0ce5ac818ac660b48a4babe860034207584[m
+Author: hieuhoang117 <hieuhoangminh2403@gmail.com>
+Date:   Tue Mar 31 17:03:12 2026 +0700
+
+    demo_video
+
+[33mcommit 908700d738dbb0d39f0021feb548fbf39d0342b8[m
+Author: hieuhoang117 <hieuhoangminh2403@gmail.com>
+Date:   Tue Mar 31 16:49:57 2026 +0700
+
+    fix bug episode
+
+[33mcommit 1ebe148743c3efebc97964bc4f3c73b71421cfe2[m
+Author: hieuhoang117 <hieuhoangminh2403@gmail.com>
+Date:   Tue Mar 31 16:43:27 2026 +0700
+
+    Episode_done
+
+[33mcommit 58bc102d84fdfdbdb744f27fb8b0a7e4b01f944c[m
+Author: hieuhoang117 <hieuhoangminh2403@gmail.com>
+Date:   Tue Mar 31 16:26:04 2026 +0700
+
+    AM_series_Episode
+
+[33mcommit d5bd06ad718931f87a592e69df4d483d86cef3c0[m
+Author: hieuhoang117 <hieuhoangminh2403@gmail.com>
+Date:   Tue Mar 31 09:57:41 2026 +0700
+
+    AM_series
+
+[33mcommit fd3b424344ded3a31a7d74e6fca174a549e194f8[m
+Author: hieuhoang117 <hieuhoangminh2403@gmail.com>
+Date:   Mon Mar 30 15:40:22 2026 +0700
+
+    fixed sever
+
+[33mcommit 2c294f60dd296640a8147df9453be74b48af0cb3[m
+Author: hieuhoang117 <hieuhoangminh2403@gmail.com>
+Date:   Tue Mar 24 16:48:53 2026 +0700
+
+    AM_series
+
+[33mcommit eb4c729b43bd4ba263d365c4c1e8811fed23d33c[m
+Author: hieuhoang117 <hieuhoangminh2403@gmail.com>
+Date:   Tue Mar 24 14:52:58 2026 +0700
+
+    watchhour
+
+[33mcommit e6947c0c356045823bd0e2e8ad6d9301609a839c[m
+Author: hieuhoang117 <hieuhoangminh2403@gmail.com>
+Date:   Tue Mar 24 14:17:55 2026 +0700
+
+    bugreport
+
+[33mcommit 9c35121bf518ee1f5f392bf7fa312c64577cd78e[m
+Author: hieuhoang117 <hieuhoangminh2403@gmail.com>
+Date:   Tue Mar 24 10:49:49 2026 +0700
+
+    report_2
+
+[33mcommit f3de7b341e70b111787b60a6be3a54d457839c56[m
+Author: hieuhoang117 <hieuhoangminh2403@gmail.com>
+Date:   Tue Mar 24 09:57:14 2026 +0700
+
+    datbase
+
+[33mcommit 5bcca8fd89adb4a5e7b911f0a1a38f62f8fad76a[m
+Author: hieuhoang117 <hieuhoangminh2403@gmail.com>
+Date:   Tue Mar 24 09:52:17 2026 +0700
+
+    AM_repost_1
+
+[33mcommit d1f4800a3bb7c1b50df57a19507cabb217d63554[m
+Author: hieuhoang117 <hieuhoangminh2403@gmail.com>
+Date:   Tue Mar 24 08:34:59 2026 +0700
+
+    reform
+
+[33mcommit d48131f10f840a05c23155b67f91e86e56cca73d[m
+Author: hieuhoang117 <hieuhoangminh2403@gmail.com>
+Date:   Mon Mar 23 15:04:48 2026 +0700
+
+    reform admin
+
+[33mcommit 94ae3d3456d25a5460d2bb6d34a9716f520be843[m
+Author: hieuhoang117 <hieuhoangminh2403@gmail.com>
+Date:   Mon Mar 23 13:58:56 2026 +0700
+
+    validate
+
+[33mcommit 7388039ad3c867c4891da01d8886bbbd4771d1fa[m
+Author: hieuhoang117 <hieuhoangminh2403@gmail.com>
+Date:   Sun Mar 22 16:35:05 2026 +0700
+
+    movie_1
+
+[33mcommit 7be6c3fbe31c165839d300718f14a9e314a65c05[m
+Author: hieuhoang117 <hieuhoangminh2403@gmail.com>
+Date:   Sun Mar 22 15:19:53 2026 +0700
+
+    reform BE
+
+[33mcommit 737d8b70444ed42d044aad3c42444ae7135b886b[m
+Author: hieuhoang117 <hieuhoangminh2403@gmail.com>
+Date:   Sun Mar 22 14:22:15 2026 +0700
+
+    Refactor AdminPage layout and routing; add AM_User and AM_movie components
+
+[33mcommit 99776bf77cabcf37379616504210e54c7f9374d0[m
+Author: hieuhoang117 <hieuhoangminh2403@gmail.com>
+Date:   Sun Mar 22 13:51:55 2026 +0700
+
+    Admin_layout
+
+[33mcommit 07722fe35098df3e528292b9fc10199ef1c7c747[m
+Author: hieuhoang117 <hieuhoangminh2403@gmail.com>
+Date:   Sat Mar 21 23:47:20 2026 +0700
+
+    login_1
+
+[33mcommit afb45a6309029746dd1cafd8925332bfa2521e76[m
+Author: hieuhoang117 <hieuhoangminh2403@gmail.com>
+Date:   Sat Mar 21 16:52:34 2026 +0700
+
+    SQL conect: done
+
+[33mcommit 334b93a6f88590d26d10c082e17109bb4b6cc270[m
+Author: hieuhoang117 <hieuhoangminh2403@gmail.com>
+Date:   Sat Mar 21 15:59:48 2026 +0700
+
+    refesh
+
+[33mcommit 4ccf668bc7631aa0343ff279c19660a22da6ec1e[m
+Author: hieuhoang117 <hieuhoangminh2403@gmail.com>
+Date:   Tue Mar 17 16:44:36 2026 +0700
+
+    antdesgintest
+
+[33mcommit ef4f73e67d553b411bb699ddb32bb21750ffade2[m
+Author: hieuhoang117 <hieuhoangminh2403@gmail.com>
+Date:   Tue Mar 17 14:23:48 2026 +0700
+
+    validate
+
+[33mcommit 7affbc7d87097f4e7530cd8d9446c2f071da78ce[m
+Author: hieuhoang117 <hieuhoangminh2403@gmail.com>
+Date:   Tue Mar 17 10:19:47 2026 +0700
+
+    OK
+
+[33mcommit 3f93aa69f3db85476e63ec3b4f78abae4948ce4c[m
+Author: hieuhoang117 <hieuhoangminh2403@gmail.com>
+Date:   Tue Mar 10 14:16:43 2026 +0700
+
+    testbackend
+
+[33mcommit 12cdb02a85d9966749daf0896dff4c257d8d0d80[m
+Author: hieuhoang117 <hieuhoangminh2403@gmail.com>
+Date:   Fri Mar 6 08:46:40 2026 +0700
+
+    test1
+
+[33mcommit a0082139421328e2d2f326943c494e37ef4a797d[m
+Author: hieuhoang117 <hieuhoangminh2403@gmail.com>
+Date:   Tue Mar 3 16:14:01 2026 +0700
+
+    Second
+
+[33mcommit d508b2881c4cc09b8c32c799a604d3194fd49402[m
+Author: hieuhoang117 <hieuhoangminh2403@gmail.com>
+Date:   Tue Mar 3 14:34:43 2026 +0700
+
+    first

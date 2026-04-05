@@ -37,7 +37,7 @@ const MovieDetail = () => {
         {movie.Description}
       </p>
 
-      {/* Nút xem phim */}
+      
       <button
         style={{
           marginTop: "20px",

@@ -1,0 +1,30 @@
+.movie-card {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+
+  background: rgba(0,0,0,0.85);
+  color: white;
+
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none; 
+
+  transition: 0.3s;
+  border-radius: 1px solid white;
+}
+
+.movie-item:hover .movie-card {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.button {
+  background: red;
+  color: white;
+  width: 150px;
+  height: 40px;
+  padding: 10px 20px;
+  margin-top: 10px;
+}

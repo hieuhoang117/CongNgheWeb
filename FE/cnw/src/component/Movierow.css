@@ -27,6 +27,7 @@
 .scroll-btn:hover {
   background: rgba(0,0,0,0.8);
     color: white;
+    height: 100%;
 }
 .movie-list {
   scrollbar-width: none;
@@ -39,4 +40,27 @@
 }
 .movie-list::-webkit-scrollbar {
   display: none;
+}
+.movie-list {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  overflow-y: visible; /* 👈 THÊM CÁI NÀY */
+}
+
+.movie-item {
+  min-width: 200px;
+  flex-shrink: 0;
+}
+.movie-item:hover {
+  transform: scale(1.2);
+  z-index: 50;
+  transition: 0.3s;
+}
+.movie-list {
+  overflow-y: visible;
+}
+
+.row-wrapper {
+  overflow: visible;
 }
