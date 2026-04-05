@@ -10,6 +10,7 @@ import AMMseries from "./component/AM_series";
 import UserPage from "./MainUser";
 import MovieSlide from "./component/US_slide";
 import MovieDetail from "./component/Movie_detail";
+import Menumain from "./component/Menu_main";
 
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
         </Route>
 
         <Route path="/user" element={<UserPage />}>
+          <Route path="menu_main" element={<Menumain />} />
           <Route path="slide" element={<MovieSlide />} />
           <Route path="movie/:id" element={<MovieDetail />} />
         </Route>

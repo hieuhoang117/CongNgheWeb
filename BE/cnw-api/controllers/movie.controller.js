@@ -86,3 +86,35 @@ export const getMovieByName = async (req, res) => {
     res.status(500).send("Lỗi server");
   }
 };
+export const getMovieSeriesByCategory = async (req, res) => {
+  try {
+    const category = req.params.category;
+
+    const movies = await sql.query`
+      SELECT 
+        IDmovie,
+        NameMovie,
+        Poster AS MoviePoster,
+        Category
+      FROM Movie
+      WHERE Category = ${category}
+    `;
+
+    const series = await sql.query`
+      SELECT 
+        IDseries,
+        SeriesName,
+        poster AS SeriesPoster
+      FROM Series
+    `;
+
+    res.json({
+      movies: movies.recordset,
+      series: series.recordset
+    });
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Lỗi server");
+  }
+};

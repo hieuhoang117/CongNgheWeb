@@ -1,0 +1,42 @@
+.row-wrapper {
+  position: relative;
+}
+
+.scroll-btn {
+  position: absolute;
+  top: 40%;
+  transform: translateY(-50%);
+  z-index: 10;
+  background: transparent;
+  border: none;
+  color: transparent;
+  font-size: 24px;
+  padding: 10px;
+  cursor: pointer;
+  height: 70%;
+}
+
+.scroll-btn.left {
+  left: 0;
+}
+
+.scroll-btn.right {
+  right: 0;
+}
+
+.scroll-btn:hover {
+  background: rgba(0,0,0,0.8);
+    color: white;
+}
+.movie-list {
+  scrollbar-width: none;
+}
+.h2 {
+  color: #e5e5e5;
+  font-size: 22px;
+  margin-left: 20px;
+  float: left;
+}
+.movie-list::-webkit-scrollbar {
+  display: none;
+}

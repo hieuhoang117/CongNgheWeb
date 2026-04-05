@@ -1,10 +1,13 @@
-.Link{
-    text-decoration: none;
-    color: white;
+.Link {
+  text-decoration: none;
+  color: white;
+  transition: color 0.3s ease;
 }
-.Link:hover{
-    color: red;
+
+.Link:hover {
+  color: #e50914;
 }
+
 .header_user {
   position: fixed;
   top: 0;
@@ -14,19 +17,24 @@
   display: flex;
   align-items: center;
   z-index: 1000;
-  background-color: transparent;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
+  transition: background-color 0.3s ease;
 }
+
 .header_user.scrolled {
-  background-color: black;
+  background-color: #141414;
 }
+
 .menu {
   display: flex;
-  gap: 20px;
+  gap: 25px;
   margin-left: 30px;
 }
+
 .logo {
   margin-right: 10px;
 }
+
 .account {
   margin-left: auto;
   display: flex;

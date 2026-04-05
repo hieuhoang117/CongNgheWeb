@@ -2,7 +2,9 @@ import logo from "../logo.png";
 import { Link } from "react-router-dom";
 import { Input, Button, Badge, Dropdown, Avatar, Space } from "antd";
 import { UserOutlined, BellOutlined } from "@ant-design/icons";
+import { useEffect, useState } from "react";
 import "./US_header.css";
+
 
 const items = [
     { key: "1", label: "Người dùng 1" },
@@ -12,11 +14,21 @@ const items = [
     { key: "5", label: "Đăng xuất" },
 ];
 const USHeader = () => {
+    const [isScrolled, setIsScrolled] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            setIsScrolled(window.scrollY > 50);
+        };
+
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
     return (
-        <div className="header_user">
+        <div className={`header_user ${isScrolled ? "scrolled" : ""}`}>
             <img src={logo} alt="logo" className="logo" />
             <div className="menu">
-                <Link to="/user/slide" className="Link">Trang chủ</Link>
+                <Link to="/user/menu_main" className="Link">Trang chủ</Link>
                 <Link to="/user/slide" className="Link">Series</Link>
                 <Link to="/user/slide" className="Link">Phim</Link>
                 <Link to="/user/movie/MV002" className="Link">Mới và phổ biến</Link>

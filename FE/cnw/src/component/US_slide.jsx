@@ -31,6 +31,9 @@ const MovieSlide = () => {
             <div>
               <h1>{movie.NameMovie}</h1>
               <p>{movie.Description}</p>
+              <button style={{backgroundColor: "red", color: "white", padding: "10px 20px", fontSize: "16px" }}>
+                Xem ngay
+              </button>
             </div>
           </div>
         </div>
