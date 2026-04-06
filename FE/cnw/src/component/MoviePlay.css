@@ -1,0 +1,66 @@
+.mp-player {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background: black;
+  overflow: hidden;
+  margin-top: 50px;
+}
+
+/* Video */
+.mp-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Nút back */
+.mp-back {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: 30px;
+  color: white;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 10;
+}
+
+/* Control bar */
+.mp-controls {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 20px;
+  background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+  opacity: 0;
+  transition: 0.3s;
+}
+
+.mp-controls.show {
+  opacity: 1;
+}
+
+/* Progress bar */
+.mp-progress {
+  height: 4px;
+  background: gray;
+  margin-bottom: 10px;
+}
+
+/* Buttons */
+.mp-buttons button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 20px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+/* Title */
+.mp-title {
+  margin-top: 10px;
+  color: white;
+}

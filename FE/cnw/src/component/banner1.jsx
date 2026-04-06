@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 const Banner = () => {
   const [email, setEmail] = useState("");
 
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   const handleClick = async () => {
     if (!email) {
@@ -30,11 +30,11 @@ const Banner = () => {
     }
 
     if (data.role === "Admin") {
-      navigate("/admin"); 
+      navigate("/admin");
       return;
     }
     if (data.role === "User") {
-      navigate("/user"); 
+      navigate("/user");
       return;
     }
 
@@ -42,23 +42,25 @@ const Banner = () => {
   };
 
   return (
-    <div className="banner">
+    <div className="bn-banner">
       <Header />
-      <div className="content">
+
+      <div className="bn-content">
         <h1>Phim, series không giới hạn</h1>
         <p>Giá từ 74.000đ</p>
         <p>
           Bạn đã sẵn sàng xem chưa? Nhập email để tạo hoặc kích hoạt lại tư cách thành viên của bạn.
         </p>
 
-        <div className="form">
+        <div className="bn-form">
           <input
+            className="bn-input"
             placeholder="Địa chỉ email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
 
-          <button className="btn-start" onClick={handleClick}>
+          <button className="bn-btn-start" onClick={handleClick}>
             Bắt đầu &gt;
           </button>
         </div>

@@ -1,4 +1,4 @@
-.banner {
+.bn-banner {
   height: 100vh;
   background-image: url("../bg.png");
   background-size: cover;
@@ -6,35 +6,36 @@
   z-index: 1;
 }
 
-.banner::after {
+.bn-banner::after {
   content: "";
   position: absolute;
   inset: 0;
   background: rgba(0,0,0,0.6);
 }
-.form input {
+
+.bn-form input {
   color: black;
 }
-.content {
+
+.bn-content {
   position: relative;
   z-index: 2;
   color: white;
   text-align: center;
   top: 40%;
-  
 }
 
-.form {
+.bn-form {
   margin-top: 20px;
 }
 
-input {
+.bn-input {
   padding: 10px;
   width: 300px;
   color: black;
 }
 
-.btn-start {
+.bn-btn-start {
   background: red;
   color: white;
   width: 150px;
