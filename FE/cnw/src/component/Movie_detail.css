@@ -1,0 +1,90 @@
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal-content {
+  width: 70%;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: #141414;
+  border-radius: 12px;
+  color: white;
+}
+
+/* banner */
+.banner {
+  height: 450px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  padding: 40px;
+}
+
+/* overlay đẹp */
+.banner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,0.9),
+    rgba(0,0,0,0.3),
+    transparent
+  );
+}
+
+.banner-content {
+  position: relative;
+  z-index: 2;
+}
+
+/* buttons */
+.btn-group {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.play-btn {
+  background: white;
+  color: black;
+  padding: 12px 28px;
+  border: none;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.play-btn:hover {
+  background: #e6e6e6;
+}
+
+.info-btn {
+  background: rgba(109,109,110,0.7);
+  color: white;
+  padding: 12px 28px;
+  border: none;
+  border-radius: 4px;
+}
+
+.info-btn:hover {
+  background: rgba(109,109,110,1);
+}
+
+/* info */
+.info {
+  padding: 20px;
+}
+
+.meta span {
+  margin-right: 15px;
+  color: #aaa;
+}

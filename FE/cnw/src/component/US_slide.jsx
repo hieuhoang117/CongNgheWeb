@@ -1,5 +1,6 @@
 import { Carousel } from "antd";
 import { useEffect, useState } from "react";
+import "./US_slide.css";
 
 const MovieSlide = () => {
   const [movies, setMovies] = useState([]);
@@ -8,7 +9,7 @@ const MovieSlide = () => {
     fetch("http://localhost:5000/api/movies")
       .then(res => res.json())
       .then(data => {
-        // giả sử phim mới là 5 phim đầu
+        
         setMovies(data.slice(0, 5));
       });
   }, []);
@@ -17,22 +18,16 @@ const MovieSlide = () => {
     <Carousel autoplay>
       {movies.map((movie) => (
         <div key={movie.IDmovie}>
-          <div
-            style={{
-              height: "400px",
-              backgroundImage: `url(${movie.Poster})`,
-              backgroundSize: "cover",
-              color: "white",
-              display: "flex",
-              alignItems: "center",
-              padding: "20px",
-            }}
+          <div className="descrip"
+          style={{ backgroundImage: `url(${movie.Poster})` }}
           >
             <div>
               <h1>{movie.NameMovie}</h1>
               <p>{movie.Description}</p>
-              <button style={{backgroundColor: "red", color: "white", padding: "10px 20px", fontSize: "16px" }}>
-                Xem ngay
+              <button className="btn-play"
+              onClick={() => window.location.href = `/user/movie/${movie.IDmovie}`}
+              >
+                ▶ Phát
               </button>
             </div>
           </div>

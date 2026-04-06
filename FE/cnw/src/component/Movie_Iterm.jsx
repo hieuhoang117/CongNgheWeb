@@ -1,8 +1,10 @@
 import { useState } from "react";
 import "./Movie_Iterm.css";
+import { useNavigate } from "react-router-dom";
 
 const MovieItem = ({ movie }) => {
   const [hovered, setHovered] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <div
@@ -26,8 +28,12 @@ const MovieItem = ({ movie }) => {
           </p>
 
           <div className="actions">
-            <button>▶</button>
-            <button>ℹ</button>
+            <button onClick={() => navigate(`/user/movie/${movie.IDmovie}/play`)}>
+              ▶
+            </button>
+            <button onClick={() => navigate(`/user/movie/${movie.IDmovie}`)}>
+              ℹ
+            </button>
           </div>
         </div>
       )}

@@ -121,3 +121,18 @@ export const getMovieSeriesByCategory = async (req, res) => {
     res.status(500).send("Lỗi server");
   }
 };
+export const getMovieById = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const result = await sql.query`
+      SELECT * FROM Movie WHERE IDmovie = ${id}
+    `;  
+    if (result.recordset.length === 0) {
+      return res.status(404).json({ message: "Phim không tồn tại" });
+    }   
+    res.json(result.recordset[0]);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Lỗi server");
+  }
+};

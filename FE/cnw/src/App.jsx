@@ -11,6 +11,8 @@ import UserPage from "./MainUser";
 import MovieSlide from "./component/US_slide";
 import MovieDetail from "./component/Movie_detail";
 import Menumain from "./component/Menu_main";
+import Moviedetail from "./component/Movie_detail";
+import MoviePlay from "./component/MoviePlay";
 
 
 function App() {
@@ -39,6 +41,8 @@ function App() {
           <Route path="menu_main" element={<Menumain />} />
           <Route path="slide" element={<MovieSlide />} />
           <Route path="movie/:id" element={<MovieDetail />} />
+          <Route path="movie/:id" element={<Moviedetail />} />
+          <Route path="movie/:id/play" element={<MoviePlay />} />
         </Route>
 
 

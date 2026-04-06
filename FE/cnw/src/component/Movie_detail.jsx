@@ -1,55 +1,56 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import "./Movie_detail.css";
 
 const MovieDetail = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [movie, setMovie] = useState(null);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/movies/name/avengers`)
+    fetch(`http://localhost:5000/api/movies/id/${id}`)
       .then(res => res.json())
-      .then(data => setMovie(data));
+      .then(data => {
+        setMovie(data.movie || data[0] || data);
+      });
   }, [id]);
 
-  if (!movie) return <h2 style={{ color: "white" }}>Loading...</h2>;
+  if (!movie) return <div style={{color:"white"}}>Loading...</div>;
 
   return (
-    <div
-      style={{
-        color: "white",
-        padding: "40px",
-        backgroundImage: `
-          linear-gradient(to right, rgba(0,0,0,0.8), transparent),
-          url(${movie.Poster})
-        `,
-        backgroundSize: "cover",
-        minHeight: "100vh"
-      }}
-    >
-      <h1>{movie.NameMovie}</h1>
+    <div className="modal-overlay" onClick={() => navigate(-1)}>
+      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
 
-      <p><b>Thể loại:</b> {movie.Category}</p>
-      <p><b>Đạo diễn:</b> {movie.Director}</p>
-      <p><b>Thời lượng:</b> {movie.Duration} phút</p>
-      <p><b>Quốc gia:</b> {movie.Country}</p>
+        <div
+          className="banner"
+          style={{
+            backgroundImage: `url(${movie.Backdrop || movie.Poster})`
+          }}
+        >
+          <div className="banner-content">
+            <h1>{movie.NameMovie}</h1>
 
-      <p style={{ maxWidth: "600px" }}>
-        {movie.Description}
-      </p>
+            <div className="btn-group">
+              <button className="play-btn" onClick={() => navigate(`/user/movie/${movie.IDmovie}/play`)}>
+                ▶ Phát
+              </button>
+            </div>
+          </div>
+        </div>
 
-      
-      <button
-        style={{
-          marginTop: "20px",
-          padding: "10px 20px",
-          background: "red",
-          color: "white",
-          border: "none",
-          cursor: "pointer"
-        }}
-      >
-        ▶ Xem phim
-      </button>
+        <div className="info">
+          <p>{movie.Description}</p>
+
+          <div className="meta">
+            <span>{movie.Year}</span>
+            <span>{movie.Duration} phút</span>
+            <span>{movie.Category}</span>
+            <span>{movie.Country}</span>
+            <span>{movie.Director}</span>
+          </div>
+        </div>
+
+      </div>
     </div>
   );
 };
