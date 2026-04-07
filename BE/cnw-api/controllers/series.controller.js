@@ -206,4 +206,66 @@ export const findEpisode = async (req, res) => {
     console.error(err);
     res.status(500).send("Lỗi server");
   }
-}; 
+};
+export const getseriesByid = async (req, res) => {
+  try {
+    const seriesId = req.params.seriesId;
+
+    const result = await sql.query`
+      SELECT  
+        s.IDseries,
+        s.SeriesName,
+        s.Description,
+        s.ReleaseYear,
+        s.Country,
+        s.Status,
+        s.ContentID,
+        s.poster,
+        e.IDEpisode,
+        e.EpisodeName,  
+        e.EpisodeNumber,
+        e.SeasonNumber,
+        e.Duration,
+        e.film,
+        e.ReleaseDate
+      FROM Series s
+      LEFT JOIN Episode e ON e.IDseries = s.IDseries
+      WHERE s.IDseries = ${seriesId}
+    `;
+
+    const rows = result.recordset;
+
+    if (rows.length === 0) {
+      return res.json({ series: null, episodes: [] });
+    }
+
+    const series = {
+      IDseries: rows[0].IDseries,
+      SeriesName: rows[0].SeriesName,
+      Description: rows[0].Description,
+      ReleaseYear: rows[0].ReleaseYear,
+      Country: rows[0].Country,
+      Status: rows[0].Status,
+      ContentID: rows[0].ContentID,
+      poster: rows[0].poster,
+    };
+
+    const episodes = rows
+      .filter(row => row.IDEpisode) // tránh null
+      .map(row => ({
+        IDEpisode: row.IDEpisode,
+        EpisodeName: row.EpisodeName,
+        EpisodeNumber: row.EpisodeNumber,
+        SeasonNumber: row.SeasonNumber,
+        Duration: row.Duration,
+        film: row.film,
+        ReleaseDate: row.ReleaseDate,
+      }));
+
+    res.json({ series, episodes });
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Lỗi server");
+  }
+};

@@ -32,7 +32,6 @@ const AdminPage = () => {
       
       <Layout>
         <Header style={{ color: "#fff" }}>
-            
         </Header>
 
         <Content style={{ margin: "16px" }}>

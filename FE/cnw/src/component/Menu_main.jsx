@@ -16,8 +16,7 @@ const Menu_main = () => {
         const data = await res.json();
 
         console.log("DATA:", data);
-
-        // ✅ lấy đúng dữ liệu
+        
         setMovies(data.movies || []);
         setSeries(data.series || []);
 
@@ -43,6 +42,26 @@ const Menu_main = () => {
         <p style={{ color: "white", padding: 20 }}>Đang tải series...</p>
       ) : (
         <MovieRow title="Trending Series" movies={series} />
+      )}
+      {movies.length === 0 ? (
+        <p style={{ color: "white", padding: 20 }}>Đang tải phim...</p>
+      ) : (
+        <MovieRow title="Có thể bạn sẽ thích" movies={movies} />
+      )}
+      {series.length === 0 ? (
+        <p style={{ color: "white", padding: 20 }}>Đang tải series...</p>
+      ) : (
+        <MovieRow title="Tốt nhất của chúng tôi" movies={series} />
+      )}
+      {movies.length === 0 ? (
+        <p style={{ color: "white", padding: 20 }}>Đang tải phim...</p>
+      ) : (
+        <MovieRow title="Bắt đầu hứng thú mới" movies={movies} />
+      )}
+      {series.length === 0 ? (
+        <p style={{ color: "white", padding: 20 }}>Đang tải series...</p>
+      ) : (
+        <MovieRow title="Series nổi bật" movies={series} />
       )}
     </div>
   );

@@ -43,7 +43,7 @@ const USHeader = () => {
                         style={{ width: 200 }}
                     />
 
-                    <Badge count={0}>
+                    <Badge count={7}>
                         <Button
                             type="text"
                             icon={<BellOutlined />}

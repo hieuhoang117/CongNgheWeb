@@ -19,6 +19,7 @@ const MovieRow = ({ title, movies }) => {
             <h2>{title}</h2>
 
             <div className="row-wrapper">
+                
 
                 <button className="scroll-btn left" onClick={scrollLeft}>
                     <LeftOutlined />

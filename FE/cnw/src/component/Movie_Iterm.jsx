@@ -6,6 +6,9 @@ const MovieItem = ({ movie }) => {
   const [hovered, setHovered] = useState(false);
   const navigate = useNavigate();
 
+
+  const isSeries = !!movie.IDseries;
+
   return (
     <div
       className={`movie-item ${hovered ? "active" : ""}`}
@@ -13,7 +16,7 @@ const MovieItem = ({ movie }) => {
       onMouseLeave={() => setHovered(false)}
     >
       <img
-        src={movie.MoviePoster || movie.SeriesPoster}
+        src={movie.MoviePoster || movie.SeriesPoster || movie.poster}
         alt={movie.NameMovie || movie.SeriesName}
       />
 
@@ -24,14 +27,30 @@ const MovieItem = ({ movie }) => {
           <p>
             {movie.movieDescription ||
               movie.seriesDescription ||
+              movie.Description ||
               "Không có mô tả"}
           </p>
 
           <div className="actions">
-            <button onClick={() => navigate(`/user/movie/${movie.IDmovie}/play`)}>
+           
+            <button
+              onClick={() =>
+                isSeries
+                  ? navigate(`/user/series/${movie.IDseries}/play`)
+                  : navigate(`/user/movie/${movie.IDmovie}/play`)
+              }
+            >
               ▶
             </button>
-            <button onClick={() => navigate(`/user/movie/${movie.IDmovie}`)}>
+
+            
+            <button
+              onClick={() =>
+                isSeries
+                  ? navigate(`/user/series/${movie.IDseries}`)
+                  : navigate(`/user/movie/${movie.IDmovie}`)
+              }
+            >
               ℹ
             </button>
           </div>

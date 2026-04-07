@@ -100,6 +100,10 @@ const AM_User = () => {
     { title: "Điện thoại", dataIndex: "Phone" },
     { title: "Vai trò", dataIndex: "Role" },
     {title : "Mật khẩu", dataIndex: "PasswordHash"},
+    {title:"Trang thái",
+      render: (value) => (value === true ? "Hoạt động" : "Ngưng hoạt động"),
+      dataIndex:"Status",
+    },
     {title : "Ngày tạo", dataIndex: "CreatedAt"},
     {
       title: "Hành động",
