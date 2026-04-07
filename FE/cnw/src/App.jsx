@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useEffect, useState } from "react";
 import Banner from "./component/banner1";
 import AdminPage from "./AdminPage";
 import AMMmovie from "./component/AM_movie";
@@ -16,13 +15,7 @@ import MoviePlay from "./component/MoviePlay";
 
 
 function App() {
-  const [users, setUsers] = useState([]);
-
-  useEffect(() => {
-    fetch("http://localhost:5000/api/movie")
-      .then(res => res.json())
-      .then(data => setUsers(data));
-  }, []);
+  
 
   return (
     <BrowserRouter>
