@@ -5,10 +5,18 @@ const USFooter = () => {
     return (
         <footer className="footer">
             <div className="social-icons">
-                <FaFacebookF />
-                <FaInstagram />
-                <FaTwitter />
-                <FaYoutube />
+                <a href="https://www.facebook.com/Netflix" target="_blank" rel="noopener noreferrer">
+                    <FaFacebookF />
+                </a>
+                <a href="https://www.instagram.com/Netflix" target="_blank" rel="noopener noreferrer">
+                    <FaInstagram />
+                </a>
+                <a href="https://twitter.com/Netflix" target="_blank" rel="noopener noreferrer">
+                    <FaTwitter />
+                </a>
+                <a href="https://www.youtube.com/@Netflix" target="_blank" rel="noopener noreferrer">
+                    <FaYoutube />
+                </a>
             </div>
 
             <div className="footer-links">

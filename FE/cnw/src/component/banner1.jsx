@@ -14,7 +14,7 @@ const Banner = () => {
       return;
     }
 
-    const res = await fetch("http://localhost:5000/api/users/check-email", {
+    const res = await fetch("http://10.96.124.57:5000/api/users/check-email", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

@@ -15,8 +15,6 @@ import MoviePlay from "./component/MoviePlay";
 
 
 function App() {
-  
-
   return (
     <BrowserRouter>
       <Routes>
