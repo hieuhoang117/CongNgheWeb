@@ -1,0 +1,197 @@
+/* ===== PLAYER ===== */
+.netflix-player {
+    position: fixed;
+    top: 50px;              /* đẩy xuống dưới navbar */
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 50px);
+    background: black;
+    z-index: 1;
+}
+
+/* VIDEO */
+.netflix-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ===== NÚT BACK ===== */
+.nf-back {
+    position: fixed;
+    top: 70px;              /* 50px navbar + 20px padding */
+    left: 20px;
+    z-index: 10000;
+    background: rgba(0,0,0,0.6);
+    border: none;
+    color: white;
+    font-size: 24px;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background 0.2s;
+}
+
+.nf-back:hover {
+    background: rgba(255,255,255,0.2);
+}
+
+/* ===== NÚT MỞ DANH SÁCH ===== */
+.nf-list-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 10000;
+    background: rgba(0,0,0,0.7);
+    border: none;
+    color: white;
+    font-size: 22px;
+    padding: 10px 14px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background 0.2s;
+}
+
+.nf-list-btn:hover {
+    background: rgba(255,255,255,0.2);
+}
+
+/* ===== CLICK NGOÀI ĐỂ ĐÓNG ===== */
+.nf-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 9997;
+}
+
+/* ===== SIDEBAR ===== */
+.nf-sidebar {
+    position: fixed;
+    right: 0;
+    top: 50px;              /* bắt đầu dưới navbar */
+    width: 420px;
+    height: calc(100vh - 50px);
+    background: rgba(20,20,20,0.98);
+    color: white;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    overflow-y: auto;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+}
+
+.nf-sidebar.show {
+    transform: translateX(0);
+}
+
+/* ===== HEADER ===== */
+.nf-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 20px;
+    font-weight: 500;
+    padding: 18px 20px 14px;
+    border-bottom: 1px solid #2a2a2a;
+    position: sticky;
+    top: 0;
+    background: rgba(20,20,20,0.98);
+    z-index: 2;
+}
+
+.nf-back-list {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 22px;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0;
+}
+
+/* ===== ITEM ===== */
+.nf-item {
+    padding: 14px 20px;
+    border-bottom: 1px solid #2a2a2a;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.nf-item:hover {
+    background: rgba(255,255,255,0.05);
+}
+
+.nf-item.active {
+    background: rgba(255,255,255,0.08);
+}
+
+/* ===== TOP ===== */
+.nf-top {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nf-index {
+    width: 20px;
+    color: #aaa;
+    font-size: 14px;
+    flex-shrink: 0;
+}
+
+.nf-top h4 {
+    flex: 1;
+    font-size: 14px;
+    font-weight: 500;
+    margin: 0;
+    color: white;
+}
+
+/* ===== PROGRESS ===== */
+.nf-progress {
+    width: 90px;
+    height: 3px;
+    background: #444;
+    border-radius: 2px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.nf-bar {
+    height: 100%;
+    width: 0%;
+    background: #e50914;
+    transition: width 0.3s;
+    border-radius: 2px;
+}
+
+.nf-bar.playing {
+    width: 40%;
+}
+
+.nf-bar.watched {
+    width: 100%;
+}
+
+/* ===== DETAIL ===== */
+.nf-detail {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.nf-detail img {
+    width: 116px;
+    height: 66px;
+    object-fit: cover;
+    border-radius: 4px;
+    flex-shrink: 0;
+    background: #333;
+}
+
+.nf-detail p {
+    font-size: 13px;
+    color: #aaa;
+    margin: 0;
+    line-height: 1.5;
+}

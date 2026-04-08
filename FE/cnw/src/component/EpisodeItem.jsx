@@ -7,7 +7,7 @@ const EpisodeItem = ({ ep, onClick }) => {
    
       <div className="episode-thumb">
         <img
-          src={ep.thumbnail || ep.poster || "https://via.placeholder.com/150"}
+          src={ep.ThumbnailURL || ep.poster || "https://via.placeholder.com/150"}
           alt={ep.EpisodeName}
         />
       </div>
@@ -18,10 +18,10 @@ const EpisodeItem = ({ ep, onClick }) => {
           Tập {ep.EpisodeNumber}: {ep.EpisodeName}
         </h4>
 
-        <p>{ep.Description || "Không có mô tả"}</p>
+        <p>{ep.EpisodeDescription || "Không có mô tả"}</p>
 
         <div className="episode-meta">
-          <span>{ep.Duration} phút</span>
+          <span>{ep.Duration} phút</span><br />
           <span>
             {ep.ReleaseDate
               ? new Date(ep.ReleaseDate).toLocaleDateString()

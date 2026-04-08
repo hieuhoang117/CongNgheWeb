@@ -11,7 +11,7 @@ const SeriesDetail = () => {
     const [episodes, setEpisodes] = useState([]);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/api/series/episodes/find/${id}`)
+        fetch(`http://localhost:5000/api/series/series/${id}`)
             .then(res => res.json())
             .then(data => {
                 setSeries(data.series);
@@ -40,7 +40,7 @@ const SeriesDetail = () => {
                             <button
                                 className="play-btn"
                                 onClick={() =>
-                                    navigate(`/user/series/${series.IDseries}/play`)
+                                    navigate(`/user/watch/${episodes[0]?.IDEpisode}`)
                                 }
                             >
                                 ▶ Phát

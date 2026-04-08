@@ -31,7 +31,7 @@ const AM_series = () => {
             if (!seriesId) {
                 return;
             }
-            const res = await fetch(`http://localhost:5000/api/series/episodes/${seriesId}`);
+            const res = await fetch(`http://localhost:5000/api/series/episodes/series/${seriesId}`);
             const data = await res.json();
             setEpisodes(data);
         } catch (error) {
@@ -103,6 +103,8 @@ const AM_series = () => {
     const columnsepisodes = [
         { title: "ID", dataIndex: "IDEpisode" },
         { title: "Tên tập", dataIndex: "EpisodeName" },
+        { title: "Mô tả", dataIndex: "EpisodeDescription" },
+        {title: "Thumbnail", dataIndex: "ThumbnailURL", render: (url) => url && <img src={url} alt="" width={80} />},
         { title: "Mùa", dataIndex: "SeasonNumber" },
         { title: "Số tập", dataIndex: "EpisodeNumber" },
         { title: "Thời lượng", dataIndex: "Duration" },
@@ -383,6 +385,27 @@ const AM_series = () => {
                         <Input type="number" />
                     </Form.Item>
                     <Form.Item
+                        name="EpisodeDescription"
+                        label="Mô tả tập phim"
+                        rules={[{ required: true, message: "Vui lòng nhập mô tả tập phim" }]}
+                    >
+                        <Input />
+                    </Form.Item>
+                    <Form.Item label="Thumbnail">
+                        <Upload
+                            action="http://localhost:5000/api/upload"
+                            listType="picture"
+                            maxCount={1}
+                            onChange={(info) => {
+                                if (info.file.status === "done") {
+                                    formEpisode.setFieldsValue({ ThumbnailURL: info.file.response.url });
+                                }
+                            }}
+                        >
+                            <Button icon={<UploadOutlined />}>Upload ảnh</Button>
+                        </Upload>
+                    </Form.Item>
+                    <Form.Item
                         name="EpisodeNumber"
                         label="Số tập"
                         rules={[{ required: true, message: "Vui lòng nhập số tập" }]}
@@ -424,6 +447,7 @@ const AM_series = () => {
                             <Button icon={<UploadOutlined />}>Upload video</Button>
                         </Upload>
                     </Form.Item>
+                    <Form.Item name="ThumbnailURL" hidden><input /></Form.Item>
                 </Form>
             </Modal>
             <Modal

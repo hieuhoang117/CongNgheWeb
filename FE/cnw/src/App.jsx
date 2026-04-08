@@ -13,6 +13,7 @@ import Menumain from "./component/Menu_main";
 import Moviedetail from "./component/Movie_detail";
 import MoviePlay from "./component/MoviePlay";
 import SeriesDetail from "./component/Series_Detail";
+import EpisodePlay from "./component/EpisodePlay";  
 
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
           <Route path="movie/:id" element={<Moviedetail />} />
           <Route path="movie/:id/play" element={<MoviePlay />} />
           <Route path="series/:id" element={<SeriesDetail />} />
+          <Route path="watch/:id" element={<EpisodePlay />} />
         </Route>
 
 

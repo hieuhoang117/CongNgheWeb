@@ -25,18 +25,21 @@ export const getEpisodesBySeriesId = async (req, res) => {
   try {
     const seriesId = req.params.id;
     const result = await sql.query`
-  SELECT 
-    e.IDEpisode,
-    e.IDseries,
-    e.EpisodeName,
-    e.EpisodeNumber,
-    e.SeasonNumber,
-    e.Duration,
-    e.film,
-    s.poster,
-    e.ReleaseDate
-    FROM Episode e lEFT JOIN Series s ON e.IDseries = s.IDseries
-    WHERE s.IDseries = ${seriesId}`;
+      SELECT 
+        e.IDEpisode,
+        e.IDseries,
+        e.EpisodeName,
+        e.EpisodeNumber,
+        e.SeasonNumber,
+        e.Duration,
+        e.film,
+        e.ThumbnailURL,
+        e.EpisodeDescription,
+        s.poster,
+        e.ReleaseDate
+      FROM Episode e LEFT JOIN Series s ON e.IDseries = s.IDseries
+      WHERE s.IDseries = ${seriesId}
+    `;
     res.json(result.recordset);
   } catch (err) {
     console.error(err);
@@ -128,7 +131,11 @@ export const addEpisode = async (req, res) => {
   try {
     const data = req.body;
     await sql.query`
-      INSERT INTO Episode (EpisodeName, EpisodeNumber, SeasonNumber, ContentID, Duration, IDseries, film, ReleaseDate)
+      INSERT INTO Episode (
+        EpisodeName, EpisodeNumber, SeasonNumber,
+        ContentID, Duration, IDseries, film, ReleaseDate,
+        ThumbnailURL, EpisodeDescription
+      )
       VALUES (
         ${data.EpisodeName},
         ${data.EpisodeNumber},
@@ -137,7 +144,9 @@ export const addEpisode = async (req, res) => {
         ${data.Duration},
         ${data.IDseries},
         ${data.film},
-        ${data.ReleaseDate}
+        ${data.ReleaseDate},
+        ${data.ThumbnailURL},
+        ${data.EpisodeDescription}
       )
     `;
     res.status(201).send("Episode added successfully");
@@ -172,7 +181,9 @@ export const updateEpisode = async (req, res) => {
         Duration = ${data.Duration},
         IDseries = ${data.IDseries},
         film = ${data.film},
-        ReleaseDate = ${data.ReleaseDate}
+        ReleaseDate = ${data.ReleaseDate},
+        ThumbnailURL = ${data.ThumbnailURL},
+        EpisodeDescription = ${data.EpisodeDescription}
       WHERE IDEpisode = ${id}
     `;
     res.send("Episode updated successfully");
@@ -195,6 +206,8 @@ export const findEpisode = async (req, res) => {
         Duration,
         IDseries,
         film, 
+        ThumbnailURL,
+        EpisodeDescription,
         ReleaseDate
       FROM Episode
       WHERE EpisodeName LIKE ${"%" + name + "%"}
@@ -227,6 +240,8 @@ export const getseriesByid = async (req, res) => {
         e.SeasonNumber,
         e.Duration,
         e.film,
+        e.ThumbnailURL,
+        e.EpisodeDescription,
         e.ReleaseDate
       FROM Series s
       LEFT JOIN Episode e ON e.IDseries = s.IDseries
@@ -251,7 +266,7 @@ export const getseriesByid = async (req, res) => {
     };
 
     const episodes = rows
-      .filter(row => row.IDEpisode) // tránh null
+      .filter(row => row.IDEpisode)
       .map(row => ({
         IDEpisode: row.IDEpisode,
         EpisodeName: row.EpisodeName,
@@ -259,11 +274,43 @@ export const getseriesByid = async (req, res) => {
         SeasonNumber: row.SeasonNumber,
         Duration: row.Duration,
         film: row.film,
+        ThumbnailURL: row.ThumbnailURL,
+        EpisodeDescription: row.EpisodeDescription,
         ReleaseDate: row.ReleaseDate,
       }));
 
     res.json({ series, episodes });
 
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Lỗi server");
+  }
+};
+export const getEpisodeById = async (req, res) => {
+  try {
+    const id = req.params.id;
+
+    const result = await sql.query`
+      SELECT 
+        IDEpisode,
+        IDseries,
+        EpisodeName,
+        EpisodeNumber,
+        SeasonNumber,
+        Duration,
+        film,
+        ThumbnailURL,
+        EpisodeDescription,
+        ReleaseDate
+      FROM Episode
+      WHERE IDEpisode = ${id}
+    `;
+
+    if (result.recordset.length === 0) {
+      return res.status(404).json({ message: "Episode not found" });
+    }
+
+    res.json(result.recordset[0]);
   } catch (err) {
     console.error(err);
     res.status(500).send("Lỗi server");
