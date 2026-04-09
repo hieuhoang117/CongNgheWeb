@@ -52,6 +52,7 @@ const EpisodePlay = () => {
             });
         }
     }, [showList]);
+    const [solandoi, setSolandoi] = useState(1);
 
     if (!episode) return <div style={{ color: "white", padding: 20 }}>Loading...</div>;
 
@@ -69,7 +70,7 @@ const EpisodePlay = () => {
             />
 
             {/* BACK */}
-            <button className="nf-back" onClick={() => navigate(-1)}>←</button>
+            <button className="nf-back" onClick={() => navigate(-solandoi)}>←</button>
 
             {/* OPEN LIST */}
             <button className="nf-list-btn" onClick={() => setShowList(!showList)}>
@@ -106,6 +107,7 @@ const EpisodePlay = () => {
                                     videoRef.current?.pause();
                                     navigate(`/user/watch/${ep.IDEpisode}`);
                                     setShowList(false);
+                                    setSolandoi(prev => prev + 1);
                                 }}
                             />
                         </div>
