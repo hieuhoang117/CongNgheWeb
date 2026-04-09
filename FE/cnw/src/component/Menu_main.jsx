@@ -1,7 +1,9 @@
 import MovieSlide from "./US_slide";
 import { useState, useEffect } from "react";
 import MovieRow from "./Movierow";
+import MovieTop from "./Movie_Top.jsx";
 import "./Menu_main.css";
+
 
 const Menu_main = () => {
   const [movies, setMovies] = useState([]);
@@ -122,6 +124,23 @@ const Menu_main = () => {
         <p style={{ color: "white", padding: 20 }}>Đang tải...</p>
       ) : (
         <MovieRow title="Series lãng mạn" movies={seriesromance} />
+      )}
+      {movies.length === 0 ? (
+        <p style={{ color: "white", padding: 20 }}>Đang tải...</p>
+      ) : (
+        <div className="top10-row">
+          <h2>Top phim xem nhiều nhất</h2>
+
+          <div className="top10-list">
+            {movies.slice(0, 10).map((movie, index) => (
+              <MovieTop
+                key={movie.IDmovie}
+                movie={movie}
+                index={index}
+              />
+            ))}
+          </div>
+        </div>
       )}
 
     </div>

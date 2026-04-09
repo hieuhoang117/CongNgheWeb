@@ -1,0 +1,45 @@
+/* ===== TOP 10 ===== */
+.top10-row {
+  margin-top: 40px;
+  padding: 0 40px;
+}
+
+.top10-row h2 {
+  color: white;
+  margin-bottom: 20px;
+}
+
+/* ===== DANH SÁCH ===== */
+.top10-list {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+}
+
+/* ===== ITEM ===== */
+.movie-top {
+  position: relative;
+  min-width: 180px;
+  flex-shrink: 0;
+}
+
+/* ===== SỐ ===== */
+.top-number {
+  position: absolute;
+  left: -20px;
+  bottom: -10px;
+  font-size: 120px;
+  font-weight: 900;
+  z-index: 1;
+
+  -webkit-text-stroke: 2px white;
+  color: transparent;
+}
+.top10-list::-webkit-scrollbar {
+  display: none;
+}
+
+.top10-list {
+  -ms-overflow-style: none;  
+  scrollbar-width: none;     
+}

@@ -36,7 +36,7 @@ const MovieItem = ({ movie }) => {
             <button
               onClick={() =>
                 isSeries
-                  ? navigate(`/user/series/${movie.IDseries}/play`)
+                  ? navigate(`/user/series/${movie.IDseries}`)
                   : navigate(`/user/movie/${movie.IDmovie}/play`)
               }
             >
