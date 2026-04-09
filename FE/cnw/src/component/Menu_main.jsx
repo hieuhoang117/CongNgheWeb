@@ -6,19 +6,56 @@ import "./Menu_main.css";
 const Menu_main = () => {
   const [movies, setMovies] = useState([]);
   const [series, setSeries] = useState([]);
+  const [horror, setHorror] = useState([]);
+  const [serieshorror, setSeriesHorror] = useState([]);
+  const [romance, setRomance] = useState([]);
+  const [seriesromance, setSeriesRomance] = useState([]);
+  const [scifi, setScifi] = useState([]);
+  const [seriesscifi, setSeriesScifi] = useState([]);
+  const [comedy, setComedy] = useState([]);
+  const [seriescomedy, setSeriesComedy] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const category = "Action";
+        const category = ["Action", "Comedy", "Horror", "Romance", "Sci-fi"];
 
-        const res = await fetch(`http://localhost:5000/api/movies/category/${category}`);
-        const data = await res.json();
+        const promises = category.map(async (cat) => {
+          const res = await fetch(`http://localhost:5000/api/movies/category/${cat}`);
+          const data = await res.json();
+          return { category: cat, data };
+        });
 
-        console.log("DATA:", data);
-        
-        setMovies(data.movies || []);
-        setSeries(data.series || []);
+        const results = await Promise.all(promises);
+
+        results.forEach(({ category, data }) => {
+          switch (category) {
+            case "Action":
+              setMovies(data.movies || []);
+              setSeries(data.series || []);
+              break;
+            case "Comedy":
+              setComedy(data.movies || []);
+              setSeriesComedy(data.series || []);
+              break;
+            case "Horror":
+              setHorror(data.movies || []);
+              setSeriesHorror(data.series || []);
+              break;
+            case "Romance":
+              setRomance(data.movies || []);
+              setSeriesRomance(data.series || []);
+              break;
+            case "Sci-fi":
+              setScifi(data.movies || []);
+              setSeriesScifi(data.series || []);
+              break;
+
+            default:
+              console.warn("Unknown category:", category);
+              break;
+          }
+        });
 
       } catch (err) {
         console.error(err);
@@ -33,36 +70,60 @@ const Menu_main = () => {
       <MovieSlide />
 
       {movies.length === 0 ? (
-        <p style={{ color: "white", padding: 20 }}>Đang tải phim...</p>
+        <p style={{ color: "white", padding: 20 }}>Đang tải...</p>
       ) : (
-        <MovieRow title="Trending Movies" movies={movies} />
+        <MovieRow title="Nếu bạn thích phim cảm giác mạnh" movies={movies} />
+      )}
+      {series.length === 0 ? (
+        <p style={{ color: "white", padding: 20 }}>Đang tải...</p>
+      ) : (
+        <MovieRow title="Nếu bạn thích series cảm giác mạnh" movies={series} />
       )}
 
-      {series.length === 0 ? (
-        <p style={{ color: "white", padding: 20 }}>Đang tải series...</p>
+      {horror.length === 0 ? (
+        <p style={{ color: "white", padding: 20 }}>Đang tải...</p>
       ) : (
-        <MovieRow title="Trending Series" movies={series} />
+        <MovieRow title="Sự rùng rợn" movies={horror} />
       )}
-      {movies.length === 0 ? (
-        <p style={{ color: "white", padding: 20 }}>Đang tải phim...</p>
+      {serieshorror.length === 0 ? (
+        <p style={{ color: "white", padding: 20 }}>Đang tải...</p>
       ) : (
-        <MovieRow title="Có thể bạn sẽ thích" movies={movies} />
+        <MovieRow title="Series rùng rợn" movies={serieshorror} />
       )}
-      {series.length === 0 ? (
-        <p style={{ color: "white", padding: 20 }}>Đang tải series...</p>
+
+      {scifi.length === 0 ? (
+        <p style={{ color: "white", padding: 20 }}>Đang tải...</p>
       ) : (
-        <MovieRow title="Tốt nhất của chúng tôi" movies={series} />
+        <MovieRow title="Khoa học viễn tưởng" movies={scifi} />
       )}
-      {movies.length === 0 ? (
-        <p style={{ color: "white", padding: 20 }}>Đang tải phim...</p>
+      {seriesscifi.length === 0 ? (
+        <p style={{ color: "white", padding: 20 }}>Đang tải...</p>
       ) : (
-        <MovieRow title="Bắt đầu hứng thú mới" movies={movies} />
+        <MovieRow title="Series khoa học viễn tưởng" movies={seriesscifi} />
       )}
-      {series.length === 0 ? (
-        <p style={{ color: "white", padding: 20 }}>Đang tải series...</p>
+
+      {comedy.length === 0 ? (
+        <p style={{ color: "white", padding: 20 }}>Đang tải..</p>
       ) : (
-        <MovieRow title="Series nổi bật" movies={series} />
+        <MovieRow title="Hài hước" movies={comedy} />
       )}
+      {seriescomedy.length === 0 ? (
+        <p style={{ color: "white", padding: 20 }}>Đang tải...</p>
+      ) : (
+        <MovieRow title="Series hài hước" movies={seriescomedy} />
+      )}
+
+      {romance.length === 0 ? (
+        <p style={{ color: "white", padding: 20 }}>Đang tải...</p>
+      ) : (
+        <MovieRow title="Lãng mạn" movies={romance} />
+      )}
+      {seriesromance.length === 0 ? (
+        <p style={{ color: "white", padding: 20 }}>Đang tải...</p>
+      ) : (
+        <MovieRow title="Series lãng mạn" movies={seriesromance} />
+      )}
+
     </div>
   );
 };

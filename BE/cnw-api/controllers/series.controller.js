@@ -9,6 +9,7 @@ export const getSeries = async (req, res) => {
                 Description,
                 ReleaseYear,
                 Country,
+                Category,
                 Status,
                 ContentID,
                 poster
@@ -57,6 +58,7 @@ export const updateSeries = async (req, res) => {
         SeriesName = ${data.SeriesName},
         Description = ${data.Description},
         ReleaseYear = ${data.ReleaseYear},
+        Category = ${data.Category},
         Country = ${data.Country},
         Status = ${data.Status},
         ContentID = ${data.ContentID},
@@ -82,7 +84,8 @@ export const finseries = async (req, res) => {
                 Country,
                 Status,
                 ContentID,
-                poster
+                poster,
+                Category
             FROM Series
             WHERE SeriesName LIKE ${"%" + name + "%"}
         `;
@@ -97,7 +100,7 @@ export const addSeries = async (req, res) => {
     const data = req.body;
 
     await sql.query`
-      INSERT INTO Series (SeriesName, Description,ContentID, ReleaseYear, Country, Status, poster)
+      INSERT INTO Series (SeriesName, Description,ContentID, ReleaseYear, Country, Status, poster, Category)
       VALUES (
         ${data.SeriesName},
         ${data.Description},
@@ -105,7 +108,8 @@ export const addSeries = async (req, res) => {
         ${data.ReleaseYear},
         ${data.Country},
         ${data.Status},
-        ${data.poster}
+        ${data.poster},
+        ${data.Category}
       )
     `;
 
@@ -231,6 +235,7 @@ export const getseriesByid = async (req, res) => {
         s.Description,
         s.ReleaseYear,
         s.Country,
+        s.Category,
         s.Status,
         s.ContentID,
         s.poster,
@@ -259,6 +264,7 @@ export const getseriesByid = async (req, res) => {
       SeriesName: rows[0].SeriesName,
       Description: rows[0].Description,
       ReleaseYear: rows[0].ReleaseYear,
+      Category: rows[0].Category,
       Country: rows[0].Country,
       Status: rows[0].Status,
       ContentID: rows[0].ContentID,

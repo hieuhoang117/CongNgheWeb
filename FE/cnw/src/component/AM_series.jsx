@@ -70,6 +70,7 @@ const AM_series = () => {
             dataIndex: "Status",
             render: (text) => (text ? "Đang chiếu" : "Ngưng")
         },
+        { title: "Thể loại", dataIndex: "Category" },
         { title: "Content ID", dataIndex: "ContentID" },
         {
             title: "Poster",
@@ -104,7 +105,7 @@ const AM_series = () => {
         { title: "ID", dataIndex: "IDEpisode" },
         { title: "Tên tập", dataIndex: "EpisodeName" },
         { title: "Mô tả", dataIndex: "EpisodeDescription" },
-        {title: "Thumbnail", dataIndex: "ThumbnailURL", render: (url) => url && <img src={url} alt="" width={80} />},
+        { title: "Thumbnail", dataIndex: "ThumbnailURL", render: (url) => url && <img src={url} alt="" width={80} /> },
         { title: "Mùa", dataIndex: "SeasonNumber" },
         { title: "Số tập", dataIndex: "EpisodeNumber" },
         { title: "Thời lượng", dataIndex: "Duration" },
@@ -342,6 +343,15 @@ const AM_series = () => {
                             <Option value={false}>Ngưng chiếu</Option>
                         </Select>
                     </Form.Item>
+                    <Form.Item
+                        name="Category"
+                        label="Thể loại"
+                        rules={[{ required: true, message: "Vui lòng nhập thể loại" }]}
+                    >
+                        <Input />
+                    </Form.Item>
+                    
+                        
 
                     <Form.Item label="Poster">
                         <Upload

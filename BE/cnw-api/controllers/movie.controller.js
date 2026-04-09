@@ -109,6 +109,7 @@ export const getMovieSeriesByCategory = async (req, res) => {
         Description as seriesDescription,
         Category
       FROM Series
+      WHERE Category = ${category}
     `;
 
     res.json({
