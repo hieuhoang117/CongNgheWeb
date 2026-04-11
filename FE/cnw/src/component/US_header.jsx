@@ -13,8 +13,23 @@ const items = [
     { key: "4", label: "Trợ giúp" },
     { key: "5", label: "Đăng xuất" },
 ];
+
 const USHeader = () => {
     const [isScrolled, setIsScrolled] = useState(false);
+    const [notifix, setNotifix] = useState([]);
+    const fetchNotifix = async () => {
+        try {
+            const res = await fetch("http://localhost:5000/api/notifix/active");
+            const data = await res.json();
+            setNotifix(data || []);
+        } catch (err) {
+            console.error(err);
+        }
+    };
+    useEffect(() => {
+        fetchNotifix();
+    }, []);
+
 
     useEffect(() => {
         const handleScroll = () => {
@@ -43,7 +58,7 @@ const USHeader = () => {
                         style={{ width: 200 }}
                     />
 
-                    <Badge count={7}>
+                    <Badge count={notifix.length} offset={[0, 10]}>
                         <Button
                             type="text"
                             icon={<BellOutlined />}

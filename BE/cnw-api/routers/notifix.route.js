@@ -1,10 +1,12 @@
 import express from "express";
-import{getNotifix, createNotifix, updateNotifix, deleteNotifix,searchNotifix} from "../controllers/notifix.controller.js";
+import{getNotifix, createNotifix, updateNotifix, deleteNotifix,searchNotifix,getNotificationByCreateAndActive,getcontentNotifix} from "../controllers/notifix.controller.js";
 
 const router = express.Router();
 
 router.get("/", getNotifix);
 router.get("/name/:name", searchNotifix);
+router.get("/active", getNotificationByCreateAndActive);
+router.get("/content", getcontentNotifix);
 router.post("/", createNotifix);
 router.put("/:id", updateNotifix);
 router.delete("/:id", deleteNotifix);

@@ -8,6 +8,7 @@ const AM_notifix = () => {
     const [notifix, setNotifix] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [editingNotifix, setEditingNotifix] = useState(null);
+    const [contents, setContents] = useState([]);
     const [form] = Form.useForm();
 
     const fetchNotifix = async () => {
@@ -38,6 +39,16 @@ const AM_notifix = () => {
         form.resetFields();
         setIsModalOpen(true);
     };
+    const fetchContent = async () => {
+        const res = await fetch("http://localhost:5000/api/notifix/content");
+        const data = await res.json();
+        setContents(data);
+    };
+
+    useEffect(() => {
+        fetchNotifix();
+        fetchContent(); // thêm dòng này
+    }, []);
 
     const handleFind = async (title) => {
         if (!title) return fetchNotifix();
@@ -98,7 +109,10 @@ const AM_notifix = () => {
             dataIndex: "IsActive",
             render: (val) => (val ? "✔️ Bật" : "❌ Tắt"),
         },
-
+        { title: "Liên kết nội dung", dataIndex: "ContentID", 
+            render: (id) => {const content = contents.find(c => c.ContentID === id);
+            return content ? `${content.ContentName} (${content.ContentType})` : "Không có";} 
+        },
         {
             title: "Action",
             render: (record) => (
@@ -170,6 +184,15 @@ const AM_notifix = () => {
                         <Select>
                             <Option value={true}>Bật</Option>
                             <Option value={false}>Tắt</Option>
+                        </Select>
+                    </Form.Item>
+                    <Form.Item name="ContentID" label="Liên kết nội dung">
+                        <Select placeholder="Chọn phim / series">
+                            {contents.map((c) => (
+                                <Option key={c.ContentID} value={c.ContentID}>
+                                    {c.ContentName} ({c.ContentType})
+                                </Option>
+                            ))}
                         </Select>
                     </Form.Item>
 

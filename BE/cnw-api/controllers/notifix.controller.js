@@ -1,39 +1,53 @@
+import e from "cors";
 import { sql } from "../db.js";
 
 export const getNotifix = async (req, res) => {
-  try {
-    const result = await sql.query`
+    try {
+        const result = await sql.query`
         SELECT * FROM Notification
     `;
 
-    res.json(result.recordset); 
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Internal Server Error" });
-  }
-};
-export const createNotifix = async (req, res) => {
-  try {
-    const { Title, Message, ImageURL, ExpiredAt, IsActive, ContentID } = req.body;
-
-    if (!Title || !Message) {
-      return res.status(400).json({ error: "Thiếu dữ liệu" });
+        res.json(result.recordset);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Internal Server Error" });
     }
+};
+export const getNotificationByCreateAndActive = async (req, res) => {
+    try {
+        const result = await sql.query`
+        SELECT * FROM Notification
+        WHERE IsActive = 1 AND ExpiredAt > GETDATE()
+    `;
+        res.json(result.recordset);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+};
 
-    const active = IsActive ?? true;
-    const expired = ExpiredAt ? new Date(ExpiredAt) : null;
-    const content = ContentID || null;
+export const createNotifix = async (req, res) => {
+    try {
+        const { Title, Message, ImageURL, ExpiredAt, IsActive, ContentID } = req.body;
 
-    await sql.query`
+        if (!Title || !Message) {
+            return res.status(400).json({ error: "Thiếu dữ liệu" });
+        }
+
+        const active = IsActive ?? true;
+        const expired = ExpiredAt ? new Date(ExpiredAt) : null;
+        const content = ContentID || null;
+
+        await sql.query`
       INSERT INTO Notification (Title, Message, ImageURL, ExpiredAt, IsActive, ContentID)
       VALUES (${Title}, ${Message}, ${ImageURL}, ${expired}, ${active}, ${content})
     `;
 
-    res.json({ message: "Tạo thông báo thành công" });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Internal Server Error" });
-  }
+        res.json({ message: "Tạo thông báo thành công" });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
 };
 export const updateNotifix = async (req, res) => {
     try {
@@ -83,17 +97,30 @@ export const deleteNotifix = async (req, res) => {
     }
 };
 export const searchNotifix = async (req, res) => {
-  const title = req.params.name;
+    const title = req.params.name;
 
-  try {
-    const result = await sql.query`
+    try {
+        const result = await sql.query`
       SELECT * FROM Notification
       WHERE Title LIKE ${'%' + title + '%'}
     `;
 
-    res.json(result.recordset);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Internal Server Error" });
-  }
+        res.json(result.recordset);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+};
+export const getcontentNotifix = async (req, res) => {
+    try {
+        const result = await sql.query`
+            SELECT ContentID, ContentName, ContentType
+            FROM Content
+            WHERE ContentType IN ('Movie', 'Series')
+        `;
+        res.json(result.recordset);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
 };
