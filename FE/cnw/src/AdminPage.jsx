@@ -24,7 +24,8 @@ const AdminPage = () => {
             { key: "/admin/users", label: "Quản lý người dùng" },
             { key: "/admin/movies", label: "Quản lý phim ngắn" },
             { key: "/admin/reports", label: "Báo cáo- Thống kê" },
-            { key: "/admin/series", label: "Quản lý phim bộ" }
+            { key: "/admin/series", label: "Quản lý phim bộ" },
+            { key: "/admin/notifix", label: "Quản lý thông báo" }
           ]}
         />
       </Sider>

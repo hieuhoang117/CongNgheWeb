@@ -16,6 +16,7 @@ import SeriesDetail from "./component/Series_Detail";
 import EpisodePlay from "./component/EpisodePlay";  
 import Menuseries from "./component/Menu_series";
 import Menumocie from "./component/Menu_movie";
+import AMnotifix from "./component/AM_notifi";
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
           <Route path="movies" element={<AMMmovie />} />
           <Route path="reports" element={<AMReport />} />
           <Route path="series" element={<AMMseries />} />
+          <Route path="notifix" element={<AMnotifix />} />
         </Route>
 
         <Route path="/user" element={<UserPage />}>
