@@ -328,14 +328,6 @@ const AM_series = () => {
                         <Input />
                     </Form.Item>
 
-                    <Form.Item
-                        name="ContentID"
-                        label="Mã nội dung"
-                        rules={[{ required: true, message: "Vui lòng nhập mã nội dung" }]}
-                    >
-                        <Input />
-                    </Form.Item>
-
                     <Form.Item name="Status"
                         label="Trạng thái">
                         <Select>

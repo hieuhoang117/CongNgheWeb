@@ -61,7 +61,6 @@ export const updateSeries = async (req, res) => {
         Category = ${data.Category},
         Country = ${data.Country},
         Status = ${data.Status},
-        ContentID = ${data.ContentID},
         poster = ${data.poster}
       WHERE IDseries = ${id}
     `;
@@ -100,11 +99,13 @@ export const addSeries = async (req, res) => {
     const data = req.body;
 
     await sql.query`
-      INSERT INTO Series (SeriesName, Description,ContentID, ReleaseYear, Country, Status, poster, Category)
+      INSERT INTO Series (
+        SeriesName, Description, ReleaseYear,
+        Country, Status, poster, Category
+      )
       VALUES (
         ${data.SeriesName},
         ${data.Description},
-        ${data.ContentID},
         ${data.ReleaseYear},
         ${data.Country},
         ${data.Status},

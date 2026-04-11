@@ -49,7 +49,6 @@ export const fixMovie = async (req, res) => {
         Duration = ${data.Duration},
         Country = ${data.Country},
         Status = ${data.Status},
-        ContentID = ${data.ContentID},
         Description = ${data.Description},
         Poster = ${data.Poster},
         Film = ${data.Film}

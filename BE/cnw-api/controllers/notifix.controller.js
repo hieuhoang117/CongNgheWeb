@@ -114,7 +114,7 @@ export const searchNotifix = async (req, res) => {
 export const getcontentNotifix = async (req, res) => {
     try {
         const result = await sql.query`
-            SELECT ContentID, ContentName, ContentType
+            SELECT ContentID, ContentName, ContentType,
             FROM Content
             WHERE ContentType IN ('Movie', 'Series')
         `;

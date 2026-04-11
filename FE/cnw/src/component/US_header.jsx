@@ -1,8 +1,10 @@
 import logo from "../logo.png";
-import { Link } from "react-router-dom";
-import { Input, Button, Badge, Dropdown, Avatar, Space } from "antd";
+import { Link,useNavigate } from "react-router-dom";
+import { Input, Badge, Dropdown, Avatar, Space } from "antd";
 import { UserOutlined, BellOutlined } from "@ant-design/icons";
-import { useEffect, useState } from "react";
+import NotificationItem from "./NotificationIterm";
+import { useEffect, useState} from "react";
+
 import "./US_header.css";
 
 
@@ -13,10 +15,10 @@ const items = [
     { key: "4", label: "Trợ giúp" },
     { key: "5", label: "Đăng xuất" },
 ];
-
 const USHeader = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [notifix, setNotifix] = useState([]);
+    const navigate = useNavigate();
     const fetchNotifix = async () => {
         try {
             const res = await fetch("http://localhost:5000/api/notifix/active");
@@ -30,7 +32,9 @@ const USHeader = () => {
         fetchNotifix();
     }, []);
 
-
+    const handleClickNoti = (n) => {
+        navigate(`/user/series/SR001`);
+    };
     useEffect(() => {
         const handleScroll = () => {
             setIsScrolled(window.scrollY > 50);
@@ -59,11 +63,28 @@ const USHeader = () => {
                     />
 
                     <Badge count={notifix.length} offset={[0, 10]}>
-                        <Button
-                            type="text"
-                            icon={<BellOutlined />}
-                            style={{ color: "white", fontSize: 20 }}
-                        />
+                        <Dropdown
+                            dropdownRender={() => (
+                                <div className="notification-dropdown">
+                                    {notifix.length === 0 ? (
+                                        <p style={{ padding: 20 }}>Không có thông báo nào</p>
+                                    ) : (
+                                        notifix.map((n) => (
+                                            <NotificationItem
+                                                key={n.NotificationID}
+                                                notification={n}
+                                                onClick={handleClickNoti}
+                                            />
+                                        ))
+                                    )}
+                                </div>
+                            )}
+                            trigger={["click"]}
+                        >
+                            <button className="notification-button" style={{ background: "none", border: "none", padding: 0, color: "white" }}>
+                                <BellOutlined style={{ fontSize: 20, cursor: "pointer" }} />
+                            </button>
+                        </Dropdown>
                     </Badge>
 
                     <Dropdown menu={{ items }}>
