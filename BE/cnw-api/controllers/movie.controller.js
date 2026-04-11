@@ -137,3 +137,37 @@ export const getMovieById = async (req, res) => {
     res.status(500).send("Lỗi server");
   }
 };
+export const getTopMovie = async (req, res) => {
+  try {
+    const result = await sql.query`
+      SELECT TOP 5 
+          m.IDmovie,
+          m.NameMovie,
+          m.Category,
+          m.ReleaseDate,
+          m.Director,
+          m.Duration,
+          m.Country,
+          m.Description,
+          m.Status,
+          m.ContentID,
+          m.Poster,
+          m.Film,
+          ISNULL(v.TotalViews, 0) AS TotalViews
+      FROM Movie m
+      LEFT JOIN (
+          SELECT 
+              IDmovie,
+              COUNT(*) AS TotalViews
+          FROM MovieView
+          GROUP BY IDmovie
+      ) v ON m.IDmovie = v.IDmovie
+      ORDER BY TotalViews DESC
+    `;
+
+    res.json(result.recordset);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Lỗi server");
+  }
+};

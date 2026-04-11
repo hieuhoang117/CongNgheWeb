@@ -16,7 +16,7 @@ const MovieItem = ({ movie }) => {
       onMouseLeave={() => setHovered(false)}
     >
       <img
-        src={movie.MoviePoster || movie.SeriesPoster || movie.poster}
+        src={movie.MoviePoster||movie.Poster || movie.SeriesPoster || movie.poster}
         alt={movie.NameMovie || movie.SeriesName}
       />
 

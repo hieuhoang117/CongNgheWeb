@@ -29,7 +29,7 @@ const USHeader = () => {
             <img src={logo} alt="logo" className="logo" />
             <div className="menu">
                 <Link to="/user/menu_main" className="Link">Trang chủ</Link>
-                <Link to="/user/slide" className="Link">Series</Link>
+                <Link to="/user/menu_series" className="Link">Series</Link>
                 <Link to="/user/slide" className="Link">Phim</Link>
                 <Link to="/user/movie/MV002" className="Link">Mới và phổ biến</Link>
                 <Link to="/user/slide" className="Link">Danh sách của tôi</Link>

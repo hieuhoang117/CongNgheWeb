@@ -322,3 +322,37 @@ export const getEpisodeById = async (req, res) => {
     res.status(500).send("Lỗi server");
   }
 };
+export const getTopSeries = async (req, res) => {
+  try {
+    const result = await sql.query`
+      SELECT TOP 5 
+          s.IDseries, 
+          s.SeriesName,
+          s.Description,
+          s.Country,
+          s.ReleaseYear,
+          s.poster,
+          s.Category,
+          s.Status,
+          COUNT(ev.ID) AS TotalViews
+      FROM Series s
+      JOIN Episode e ON s.IDseries = e.IDseries
+      JOIN EpisodeView ev ON e.IDEpisode = ev.IDEpisode
+      GROUP BY 
+          s.IDseries, 
+          s.SeriesName,
+          s.Description,
+          s.Country,
+          s.ReleaseYear,
+          s.poster,
+          s.Category,
+          s.Status
+      ORDER BY TotalViews DESC
+    `;
+
+    res.json(result.recordset);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Lỗi server");
+  }
+};

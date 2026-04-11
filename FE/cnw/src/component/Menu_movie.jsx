@@ -5,7 +5,7 @@ import MovieTop from "./Movie_Top.jsx";
 import "./Menu_main.css";
 
 
-const Menu_main = () => {
+const Menu_movie = () => {
   const [movies, setMovies] = useState([]);
   const [series, setSeries] = useState([]);
   const [horror, setHorror] = useState([]);
@@ -162,4 +162,4 @@ const Menu_main = () => {
   );
 };
 
-export default Menu_main;
+export default Menu_movie;
