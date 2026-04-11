@@ -17,6 +17,8 @@ const Menu_main = () => {
   const [comedy, setComedy] = useState([]);
   const [seriescomedy, setSeriesComedy] = useState([]);
   const [topSeries, setTopSeries] = useState([]);
+  const [topMovies, setTopMovies] = useState([]);
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -71,7 +73,17 @@ const Menu_main = () => {
     try {
       const res = await fetch("http://localhost:5000/api/movies/top");
         const data = await res.json();
-        setTopSeries(data);
+        setTopMovies(data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const fetchTopSeries = async () => {
+    try {
+      const res = await fetch("http://localhost:5000/api/series/top");
+        const data = await res.json();
+        setTopSeries(data || []);
     } catch (err) {
       console.error(err);
     }
@@ -79,6 +91,7 @@ const Menu_main = () => {
 
   useEffect(() => {
     fetchTopMovies();
+    fetchTopSeries();
   }, []);
 
 
@@ -129,6 +142,22 @@ const Menu_main = () => {
       ) : (
         <MovieRow title="Series hài hước" movies={seriescomedy} />
       )}
+      {topSeries.length === 0 ? (
+        <p style={{ color: "white", padding: 20 }}>Đang tải...</p>
+      ) : (
+        <div className="top10-row">
+          <h2>Top series xem nhiều nhất</h2>
+          <div className="top10-list">
+            {topSeries.slice(0, 10).map((series, index) => (
+              <MovieTop
+                key={series.IDseries}
+                movie={series}
+                index={index}
+              />
+            ))}
+          </div>
+        </div>
+      )}
 
       {romance.length === 0 ? (
         <p style={{ color: "white", padding: 20 }}>Đang tải...</p>
@@ -140,14 +169,14 @@ const Menu_main = () => {
       ) : (
         <MovieRow title="Series lãng mạn" movies={seriesromance} />
       )}
-      {topSeries.length === 0 ? (
+      {topMovies.length === 0 ? (
         <p style={{ color: "white", padding: 20 }}>Đang tải...</p>
       ) : (
         <div className="top10-row">
           <h2>Top phim xem nhiều nhất</h2>
 
           <div className="top10-list">
-            {topSeries.slice(0, 10).map((movie, index) => (
+            {topMovies.slice(0, 10).map((movie, index) => (
               <MovieTop
                 key={movie.IDmovie}
                 movie={movie}
