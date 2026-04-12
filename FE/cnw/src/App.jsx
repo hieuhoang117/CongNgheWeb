@@ -17,6 +17,7 @@ import Menuseries from "./component/Menu_series";
 import Menumocie from "./component/Menu_movie";
 import AMnotifix from "./component/AM_notifi";
 import MovieGenre from "./component/Movie_genre";
+import SeriesGenre from "./component/Series_genre";
 
 
 function App() {
@@ -44,6 +45,7 @@ function App() {
           <Route path="menu_series" element={<Menuseries />} />
           <Route path="menu_movie" element={<Menumocie />} />
           <Route path="movie_genre/:Category" element={<MovieGenre />} />
+          <Route path="series_genre/:Category" element={<SeriesGenre />} />
         </Route>
 
 

@@ -3,7 +3,8 @@ import { useState, useEffect } from "react";
 import MovieRow from "./Movierow";
 import MovieTop from "./Movie_Top.jsx";
 import "./Menu_main.css";
-import { Dropdown} from "antd";
+import { Dropdown } from "antd";
+import { useNavigate } from "react-router-dom";
 
 
 const Menu_series = () => {
@@ -13,6 +14,7 @@ const Menu_series = () => {
   const [seriesscifi, setSeriesScifi] = useState([]);
   const [seriescomedy, setSeriesComedy] = useState([]);
   const [topSeries, setTopSeries] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -61,28 +63,35 @@ const Menu_series = () => {
   const fetchTopSeries = async () => {
     try {
       const res = await fetch("http://localhost:5000/api/series/top");
-        const data = await res.json();
-        setTopSeries(data || []);
+      const data = await res.json();
+      setTopSeries(data || []);
     } catch (err) {
       console.error(err);
     }
-    };
-    useEffect(() => {
-        fetchTopSeries();
-    }, []);
-     const categories = [
-    { key: "1", label: "Hành động" },
-    { key: "2", label: "Lãng mạn" },
-    { key: "3", label: "Kinh dị" },
-    { key: "4", label: "Khoa học viễn tưởng" },
-    { key: "5", label: "Hài hước" },
+  };
+  useEffect(() => {
+    fetchTopSeries();
+  }, []);
+  const categories = [
+    { key: "Action", label: "Hành động" },
+    { key: "Romance", label: "Lãng mạn" },
+    { key: "Horror", label: "Kinh dị" },
+    { key: "Sci-fi", label: "Khoa học viễn tưởng" },
+    { key: "Comedy", label: "Hài hước" },
   ];
+  const menuProps = {
+    items: categories,
+    onClick: (e) => {
+      const category = e.key;
+      navigate(`/user/series_genre/${category}`);
+    },
+  };
 
 
   return (
     <div className="menu-main">
-      <MovieSlide movies={topSeries}/>
-      <Dropdown menu={{ items: categories }} trigger={["click"]}>
+      <MovieSlide movies={topSeries} />
+      <Dropdown menu={menuProps} trigger={["click"]}>
         <div className="category-btn">
           Danh mục
           <span className="arrow">▼</span>
