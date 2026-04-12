@@ -10,13 +10,13 @@ import UserPage from "./MainUser";
 import MovieSlide from "./component/US_slide";
 import MovieDetail from "./component/Movie_detail";
 import Menumain from "./component/Menu_main";
-import Moviedetail from "./component/Movie_detail";
 import MoviePlay from "./component/MoviePlay";
 import SeriesDetail from "./component/Series_Detail";
 import EpisodePlay from "./component/EpisodePlay";  
 import Menuseries from "./component/Menu_series";
 import Menumocie from "./component/Menu_movie";
 import AMnotifix from "./component/AM_notifi";
+import MovieGenre from "./component/Movie_genre";
 
 
 function App() {
@@ -38,12 +38,12 @@ function App() {
           <Route path="menu_main" element={<Menumain />} />
           <Route path="slide" element={<MovieSlide />} />
           <Route path="movie/:id" element={<MovieDetail />} />
-          <Route path="movie/:id" element={<Moviedetail />} />
           <Route path="movie/:id/play" element={<MoviePlay />} />
           <Route path="series/:id" element={<SeriesDetail />} />
           <Route path="watch/:id" element={<EpisodePlay />} />
           <Route path="menu_series" element={<Menuseries />} />
           <Route path="menu_movie" element={<Menumocie />} />
+          <Route path="movie_genre/:Category" element={<MovieGenre />} />
         </Route>
 
 

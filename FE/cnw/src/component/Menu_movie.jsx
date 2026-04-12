@@ -4,6 +4,7 @@ import MovieRow from "./Movierow";
 import MovieTop from "./Movie_Top.jsx";
 import "./Menu_main.css";
 import { Dropdown } from "antd";
+import { useNavigate } from "react-router-dom";
 
 
 const Menu_movie = () => {
@@ -13,6 +14,7 @@ const Menu_movie = () => {
   const [scifi, setScifi] = useState([]);
   const [comedy, setComedy] = useState([]);
   const [topSeries, setTopSeries] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -73,18 +75,24 @@ const Menu_movie = () => {
     fetchTopMovies();
   }, []);
   const categories = [
-    { key: "1", label: "Hành động" },
-    { key: "2", label: "Lãng mạn" },
-    { key: "3", label: "Kinh dị" },
-    { key: "4", label: "Khoa học viễn tưởng" },
-    { key: "5", label: "Hài hước" },
+    { key: "Action", label: "Hành động" },
+    { key: "Romance", label: "Lãng mạn" },
+    { key: "Horror", label: "Kinh dị" },
+    { key: "Sci-fi", label: "Khoa học viễn tưởng" },
+    { key: "Comedy", label: "Hài hước" },
   ];
-
+  const menuProps = {
+    items: categories,
+    onClick: (e) => {
+      const category = e.key;
+      navigate(`/user/movie_genre/${category}`);
+    },
+  };
 
   return (
     <div className="menu-main">
       <MovieSlide movies={topSeries} />
-      <Dropdown menu={{ items: categories }} trigger={["click"]}>
+      <Dropdown menu={menuProps} trigger={["click"]}>
         <div className="category-btn">
           Danh mục
           <span className="arrow">▼</span>
