@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import MovieRow from "./Movierow";
 import MovieTop from "./Movie_Top.jsx";
 import "./Menu_main.css";
+import { Dropdown } from "antd";
 
 
 const Menu_movie = () => {
@@ -61,8 +62,8 @@ const Menu_movie = () => {
   const fetchTopMovies = async () => {
     try {
       const res = await fetch("http://localhost:5000/api/movies/top");
-        const data = await res.json();
-        setTopSeries(data);
+      const data = await res.json();
+      setTopSeries(data);
     } catch (err) {
       console.error(err);
     }
@@ -71,11 +72,24 @@ const Menu_movie = () => {
   useEffect(() => {
     fetchTopMovies();
   }, []);
+  const categories = [
+    { key: "1", label: "Hành động" },
+    { key: "2", label: "Lãng mạn" },
+    { key: "3", label: "Kinh dị" },
+    { key: "4", label: "Khoa học viễn tưởng" },
+    { key: "5", label: "Hài hước" },
+  ];
 
 
   return (
     <div className="menu-main">
-      <MovieSlide movies={topSeries}/>
+      <MovieSlide movies={topSeries} />
+      <Dropdown menu={{ items: categories }} trigger={["click"]}>
+        <div className="category-btn">
+          Danh mục
+          <span className="arrow">▼</span>
+        </div>
+      </Dropdown>
 
       {movies.length === 0 ? (
         <p style={{ color: "white", padding: 20 }}>Đang tải...</p>
