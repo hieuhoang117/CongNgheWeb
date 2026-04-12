@@ -1,9 +1,9 @@
 import logo from "../logo.png";
-import { Link,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Input, Badge, Dropdown, Avatar, Space } from "antd";
 import { UserOutlined, BellOutlined } from "@ant-design/icons";
 import NotificationItem from "./NotificationIterm";
-import { useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 
 import "./US_header.css";
 
@@ -32,8 +32,19 @@ const USHeader = () => {
         fetchNotifix();
     }, []);
 
-    const handleClickNoti = (n) => {
-        navigate(`/user/series/SR001`);
+    const handleClickNoti = async (n) => {
+        try {
+            const res = await fetch(`http://localhost:5000/api/notifix/content/${n.ContentID}`);
+            const data = await res.json();
+
+            if (data.ContentType === "Movie") {
+                navigate(`/user/movie/${data.IDmovie}`);
+            } else if (data.ContentType === "Series") {
+                navigate(`/user/series/${data.IDseries}`);
+            }
+        } catch (err) {
+            console.error(err);
+        }
     };
     useEffect(() => {
         const handleScroll = () => {
@@ -73,7 +84,7 @@ const USHeader = () => {
                                             <NotificationItem
                                                 key={n.NotificationID}
                                                 notification={n}
-                                                onClick={handleClickNoti}
+                                                onClick={() => handleClickNoti(n)}
                                             />
                                         ))
                                     )}

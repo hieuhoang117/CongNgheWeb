@@ -114,11 +114,38 @@ export const searchNotifix = async (req, res) => {
 export const getcontentNotifix = async (req, res) => {
     try {
         const result = await sql.query`
-            SELECT ContentID, ContentName, ContentType,
+            SELECT ContentID, ContentName, ContentType
             FROM Content
             WHERE ContentType IN ('Movie', 'Series')
         `;
         res.json(result.recordset);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+};
+export const movieseriesfromNotifix = async (req, res) => {
+    const contentID = req.params.id;
+
+    try {
+        const result = await sql.query`
+            SELECT 
+                c.ContentID,
+                c.ContentName,
+                c.ContentType,
+                m.IDmovie,
+                s.IDseries
+            FROM Content c
+            LEFT JOIN Movie m ON c.ContentID = m.ContentID
+            LEFT JOIN Series s ON c.ContentID = s.ContentID
+            WHERE c.ContentID = ${contentID}
+        `;
+
+        if (result.recordset.length === 0) {
+            return res.status(404).json({ message: "Không tìm thấy nội dung" });
+        }
+
+        res.json(result.recordset[0]);
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: "Internal Server Error" });
