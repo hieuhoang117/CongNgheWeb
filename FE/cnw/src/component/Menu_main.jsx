@@ -18,6 +18,7 @@ const Menu_main = () => {
   const [seriescomedy, setSeriesComedy] = useState([]);
   const [topSeries, setTopSeries] = useState([]);
   const [topMovies, setTopMovies] = useState([]);
+  const [featured, setFeatured] = useState([]);
 
 
   useEffect(() => {
@@ -69,6 +70,15 @@ const Menu_main = () => {
 
     fetchData();
   }, []);
+  const fetchFeatured = async () => {
+  try {
+    const res = await fetch("http://localhost:5000/api/movies/top");
+    const data = await res.json();
+    setFeatured(data.slice(0, 5));
+  } catch (err) {
+    console.error(err);
+  }
+};
   const fetchTopMovies = async () => {
     try {
       const res = await fetch("http://localhost:5000/api/movies/top");
@@ -90,6 +100,7 @@ const Menu_main = () => {
   };
 
   useEffect(() => {
+    fetchFeatured();
     fetchTopMovies();
     fetchTopSeries();
   }, []);
@@ -97,7 +108,7 @@ const Menu_main = () => {
 
   return (
     <div className="menu-main">
-      <MovieSlide />
+      <MovieSlide movies={featured} />
 
       {movies.length === 0 ? (
         <p style={{ color: "white", padding: 20 }}>Đang tải...</p>

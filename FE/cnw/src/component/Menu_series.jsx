@@ -72,7 +72,7 @@ const Menu_series = () => {
 
   return (
     <div className="menu-main">
-      <MovieSlide />
+      <MovieSlide movies={topSeries}/>
       {series.length === 0 ? (
         <p style={{ color: "white", padding: 20 }}>Đang tải...</p>
       ) : (
