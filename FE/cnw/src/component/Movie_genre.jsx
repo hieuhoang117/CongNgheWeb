@@ -29,11 +29,16 @@ const Movie_genre = () => {
     };
 
     return (
-        <div className="movie-genre" >
-            <h1>Phim: Phim {categoryMap[Category] || Category}</h1>
-            <div className="movie-list">
+        <div className="movie-genre">
+            <h1 className="genre-title">
+                Phim <span>{categoryMap[Category] || Category}</span>
+            </h1>
+
+            <div className="movie-list_genre">
                 {movies.map((movie) => (
-                    <MovieItem key={movie.IDmovie} movie={movie} />
+                    <div className="movie-card-wrapper" key={movie.IDmovie}>
+                        <MovieItem movie={movie} />
+                    </div>
                 ))}
             </div>
         </div>
