@@ -5,12 +5,13 @@ import { useNavigate } from "react-router-dom";
 
 const Banner = () => {
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
 
   const handleClick = async () => {
-    if (!email) {
-      alert("Vui lòng nhập email!");
+    if (!email || !password) {
+      alert("Vui lòng nhập đầy đủ!");
       return;
     }
 
@@ -19,26 +20,23 @@ const Banner = () => {
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ email })
+      body: JSON.stringify({ email, password })
     });
 
     const data = await res.json();
 
     if (!data.exists) {
-      alert("❌ Email chưa đăng ký");
+      alert("❌ Sai email hoặc mật khẩu");
       return;
     }
+
+    localStorage.setItem("token", data.token);
 
     if (data.role === "Admin") {
       navigate("/admin");
-      return;
+    } else {
+      navigate("/user/menu_main");
     }
-    if (data.role === "User") {
-      navigate("/user");
-      return;
-    }
-
-    alert(" Email hợp lệ");
   };
 
   return (
@@ -58,6 +56,14 @@ const Banner = () => {
             placeholder="Địa chỉ email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+          />
+
+          <input
+            type="password"
+            className="bn-input"
+            placeholder="Mật khẩu"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
 
           <button className="bn-btn-start" onClick={handleClick}>

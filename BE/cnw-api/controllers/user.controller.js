@@ -2,21 +2,29 @@ import e from "cors";
 import { sql } from "../db.js";
 
 export const checkEmail = async (req, res) => {
-  const { email } = req.body;
+  try {
+    const { email, password } = req.body;
 
-  const result = await sql.query`
-    SELECT Email, Role FROM Users WHERE Email = ${email}
-  `;
+    const result = await sql.query`
+      SELECT Email, Role 
+      FROM Users 
+      WHERE Email = ${email} AND PasswordHash = ${password}
+    `;
 
-  if (result.recordset.length > 0) {
-    const user = result.recordset[0];
+    if (result.recordset.length > 0) {
+      const user = result.recordset[0];
 
-    res.json({
-      exists: true,
-      role: user.Role,
-    });
-  } else {
-    res.json({ exists: false });
+      return res.json({
+        exists: true,
+        role: user.Role,
+      });
+    } else {
+      return res.json({ exists: false });
+    }
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ exists: false, message: "Lỗi server" });
   }
 };
 export const getUsers = async (req, res) => {
