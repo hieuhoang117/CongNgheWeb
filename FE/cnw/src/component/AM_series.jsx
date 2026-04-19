@@ -63,7 +63,10 @@ const AM_series = () => {
         { title: "ID", dataIndex: "IDseries" },
         { title: "Tên series", dataIndex: "SeriesName" },
         { title: "Mô tả", dataIndex: "Description" },
-        { title: "Năm phát hành", dataIndex: "ReleaseYear" },
+        {
+            title: "Năm phát hành", dataIndex: "ReleaseYear",
+            render: (text) => text ? text.split("T")[0] : ""
+        },
         { title: "Quốc gia", dataIndex: "Country" },
         {
             title: "Trạng thái",
@@ -109,7 +112,10 @@ const AM_series = () => {
         { title: "Mùa", dataIndex: "SeasonNumber" },
         { title: "Số tập", dataIndex: "EpisodeNumber" },
         { title: "Thời lượng", dataIndex: "Duration" },
-        { title: "Ngày phát hành", dataIndex: "ReleaseDate" },
+        {
+            title: "Ngày phát hành", dataIndex: "ReleaseDate",
+            render: (text) => text ? text.split("T")[0] : ""
+        },
         {
             title: "Link phim",
             dataIndex: "film",
@@ -342,8 +348,8 @@ const AM_series = () => {
                     >
                         <Input />
                     </Form.Item>
-                    
-                        
+
+
 
                     <Form.Item label="Poster">
                         <Upload
