@@ -126,10 +126,10 @@ export const getMovieById = async (req, res) => {
     const id = req.params.id;
     const result = await sql.query`
       SELECT * FROM Movie WHERE IDmovie = ${id}
-    `;  
+    `;
     if (result.recordset.length === 0) {
       return res.status(404).json({ message: "Phim không tồn tại" });
-    }   
+    }
     res.json(result.recordset[0]);
   } catch (err) {
     console.error(err);
@@ -162,6 +162,60 @@ export const getTopMovie = async (req, res) => {
           GROUP BY IDmovie
       ) v ON m.IDmovie = v.IDmovie
       ORDER BY TotalViews DESC
+    `;
+
+    res.json(result.recordset);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Lỗi server");
+  }
+};
+export const getNewMovie = async (req, res) => {
+  try {
+    const result = await sql.query`
+      SELECT TOP 20 *
+      FROM (
+        -- 🎬 MOVIE
+        SELECT 
+          IDmovie,
+          NULL AS IDseries,
+          NameMovie,
+          NULL AS SeriesName,
+          Category,
+          ReleaseDate,
+          Director,
+          Duration,
+          Country,
+          Description,
+          Status,
+          Poster,
+          Film,
+          'Movie' AS Type
+        FROM Movie
+        WHERE ReleaseDate BETWEEN DATEADD(DAY, -30, GETDATE()) AND GETDATE()
+
+        UNION ALL
+
+        -- 📺 SERIES
+        SELECT 
+          NULL AS IDmovie,
+          IDseries,
+          NULL AS NameMovie,
+          SeriesName,
+          Category,
+          ReleaseYear AS ReleaseDate,
+          NULL AS Director,
+          NULL AS Duration,
+          Country,
+          Description,
+          Status,
+          poster AS Poster,
+          NULL AS Film,
+          'Series' AS Type
+        FROM Series
+        WHERE ReleaseYear BETWEEN DATEADD(DAY, -30, GETDATE()) AND GETDATE()
+      ) AS NewContent
+      ORDER BY ReleaseDate DESC
     `;
 
     res.json(result.recordset);
