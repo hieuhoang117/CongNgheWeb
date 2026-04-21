@@ -70,7 +70,7 @@ const AM_movie = () => {
       const values = await form.validateFields();
 
       if (editingMovie) {
-        // UPDATE
+        
         await fetch(`http://localhost:5000/api/movies/${editingMovie.IDmovie}`, {
           method: "PUT",
           headers: { "Content-Type": "application/json" },

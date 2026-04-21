@@ -18,6 +18,7 @@ import Menumocie from "./component/Menu_movie";
 import AMnotifix from "./component/AM_notifi";
 import MovieGenre from "./component/Movie_genre";
 import SeriesGenre from "./component/Series_genre";
+import newanhot from "./component/Menu_NewAndHot";
 
 
 function App() {
@@ -46,6 +47,7 @@ function App() {
           <Route path="menu_movie" element={<Menumocie />} />
           <Route path="movie_genre/:Category" element={<MovieGenre />} />
           <Route path="series_genre/:Category" element={<SeriesGenre />} />
+          <Route path="new_and_hot" element={<newanhot />} />
         </Route>
 
 
