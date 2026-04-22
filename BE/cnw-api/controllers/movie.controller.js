@@ -278,3 +278,35 @@ ORDER BY ReleaseDate ASC
     res.status(500).send("Lỗi server");
   }
 };
+export const addMovieView = async (req, res) => {
+  try {
+    const { userId, movieId, watchTime = 0 } = req.body;
+
+    const check = await sql.query`
+      SELECT * FROM MovieView
+      WHERE UserID = ${userId} AND IDmovie = ${movieId}
+    `;
+
+    if (check.recordset.length > 0) {
+      
+      await sql.query`
+        UPDATE MovieView
+        SET ViewDate = GETDATE(),
+            WatchTime = ${watchTime}
+        WHERE UserID = ${userId} AND IDmovie = ${movieId}
+      `;
+    } else {
+    
+      await sql.query`
+        INSERT INTO MovieView (UserID, IDmovie, ViewDate, WatchTime)
+        VALUES (${userId}, ${movieId}, GETDATE(), ${watchTime})
+      `;
+    }
+
+    res.json({ message: "Đã cập nhật lịch sử xem" });
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Lỗi server");
+  }
+};

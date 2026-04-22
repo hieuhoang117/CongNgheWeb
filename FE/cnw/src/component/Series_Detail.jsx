@@ -9,6 +9,29 @@ const SeriesDetail = () => {
 
     const [series, setSeries] = useState(null);
     const [episodes, setEpisodes] = useState([]);
+    const userId = localStorage.getItem("userId");
+
+    const addwatch = async (episodeId) => {
+        try {
+            const res = await fetch(`http://localhost:5000/api/series/views`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    userId: userId,
+                    episodeId: episodeId
+                })
+            });
+
+            if (!res.ok) {
+                console.error("Lỗi khi thêm lịch sử xem");
+            }
+
+        } catch (err) {
+            console.error(err);
+        }
+    };
 
     useEffect(() => {
         fetch(`http://localhost:5000/api/series/series/${id}`)
@@ -39,9 +62,10 @@ const SeriesDetail = () => {
                         <div className="btn-group">
                             <button
                                 className="play-btn"
-                                onClick={() =>
-                                    navigate(`/user/watch/${episodes[0]?.IDEpisode}`)
-                                }
+                                onClick={() => {
+                                    addwatch(episodes[0]?.IDEpisode);
+                                    navigate(`/user/watch/${episodes[0]?.IDEpisode}`);
+                                }}
                             >
                                 ▶ Phát
                             </button>

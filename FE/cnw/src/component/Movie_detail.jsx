@@ -6,6 +6,29 @@ const MovieDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [movie, setMovie] = useState(null);
+  const userId = localStorage.getItem("userId");
+
+  const addwatch = async () => {
+    try {
+      const res = await fetch(`http://localhost:5000/api/movies/${id}/view`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userId: userId,
+          movieId: id
+        })
+      });
+
+      if (!res.ok) {
+        console.error("Lỗi thêm view");
+      }
+
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   useEffect(() => {
     fetch(`http://localhost:5000/api/movies/id/${id}`)
@@ -15,7 +38,7 @@ const MovieDetail = () => {
       });
   }, [id]);
 
-  if (!movie) return <div style={{color:"white"}}>Loading...</div>;
+  if (!movie) return <div style={{ color: "white" }}>Loading...</div>;
 
   return (
     <div className="modal-overlay" onClick={() => navigate(-1)}>
@@ -31,7 +54,10 @@ const MovieDetail = () => {
             <h1>{movie.NameMovie}</h1>
 
             <div className="btn-group">
-              <button className="play-btn" onClick={() => navigate(`/user/movie/${movie.IDmovie}/play`)}>
+              <button className="play-btn" onClick={() => {
+                addwatch();
+                navigate(`/user/movie/${movie.IDmovie}/play`);
+              }}>
                 ▶ Phát
               </button>
             </div>

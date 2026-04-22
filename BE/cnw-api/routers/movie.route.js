@@ -1,6 +1,6 @@
 import express from "express";
 import { getMovies, addMovie,fixMovie,deleteMovie,getMovieByName,getTopMovie,
-    getMovieSeriesByCategory,getMovieById,getNewMovie,getCommingSoonMovie
+    getMovieSeriesByCategory,getMovieById,getNewMovie,getCommingSoonMovie,addMovieView
  } from "../controllers/movie.controller.js";
 
 const router = express.Router();
@@ -15,4 +15,5 @@ router.get("/id/:id", getMovieById);
 router.get("/top", getTopMovie);
 router.get("/new", getNewMovie);
 router.get("/commingsoon", getCommingSoonMovie);
+router.post("/:id/view", addMovieView);
 export default router;

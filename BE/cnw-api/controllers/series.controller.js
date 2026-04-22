@@ -357,3 +357,35 @@ export const getTopSeries = async (req, res) => {
     res.status(500).send("Lỗi server");
   }
 };
+export const addSeriesView = async (req, res) => {
+  try {
+    const { userId, episodeId } = req.body;
+
+    const check = await sql.query`
+      SELECT * FROM EpisodeView
+      WHERE UserID = ${userId} AND IDEpisode = ${episodeId}
+    `;
+
+    if (check.recordset.length > 0) {
+    
+      await sql.query`
+        UPDATE EpisodeView
+        SET ViewDate = GETDATE(),
+            WatchTime = 0
+        WHERE UserID = ${userId} AND IDEpisode = ${episodeId}
+      `;
+    } else {
+      
+      await sql.query`
+        INSERT INTO EpisodeView (UserID, IDEpisode, ViewDate, WatchTime)
+        VALUES (${userId}, ${episodeId}, GETDATE(), 0)
+      `;
+    }
+
+    res.json({ message: "Đã cập nhật lịch sử xem series" });
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Lỗi server");
+  }
+};
