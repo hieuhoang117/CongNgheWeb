@@ -31,6 +31,7 @@ const Banner = () => {
     }
 
     localStorage.setItem("token", data.token);
+    localStorage.setItem("userId", data.userId);
 
     if (data.role === "Admin") {
       navigate("/admin");

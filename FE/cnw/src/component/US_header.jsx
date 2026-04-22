@@ -62,7 +62,7 @@ const USHeader = () => {
                 <Link to="/user/menu_series" className="Link">Series</Link>
                 <Link to="/user/menu_movie" className="Link">Phim</Link>
                 <Link to="/user/new_and_hot" className="Link">Mới và phổ biến</Link>
-                <Link to="/user/slide" className="Link">Danh sách của tôi</Link>
+                <Link to="/user/watched" className="Link">Danh sách của tôi</Link>
                 <Link to="/user/slide" className="Link">Duyệt theo ngôn ngữ</Link>
             </div>
             <div className="account">
