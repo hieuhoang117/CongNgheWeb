@@ -224,3 +224,57 @@ export const getNewMovie = async (req, res) => {
     res.status(500).send("Lỗi server");
   }
 };
+export const getCommingSoonMovie = async (req, res) => {
+  try {
+    const result = await sql.query`
+      SELECT TOP 20 *
+FROM (
+
+  SELECT 
+    IDmovie,
+    NULL AS IDseries,
+    NameMovie,
+    NULL AS SeriesName,
+    Category,
+    ReleaseDate,
+    Director,
+    Duration,
+    Country,
+    Description,
+    Status,
+    Poster,
+    Film,
+    'Movie' AS Type
+  FROM Movie
+  WHERE ReleaseDate > GETDATE()
+
+  UNION ALL
+
+
+  SELECT 
+    NULL AS IDmovie,
+    IDseries,
+    NULL AS NameMovie,
+    SeriesName,
+    Category,
+    ReleaseYear AS ReleaseDate, 
+    NULL AS Director,
+    NULL AS Duration,
+    Country,
+    Description,
+    Status,
+    poster AS Poster,
+    NULL AS Film,
+    'Series' AS Type
+  FROM Series
+  WHERE ReleaseYear > GETDATE() 
+) AS CommingSoonContent
+ORDER BY ReleaseDate ASC
+    `;
+
+    res.json(result.recordset);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Lỗi server");
+  }
+};
