@@ -15,10 +15,17 @@ const items = [
     { key: "4", label: "Trợ giúp" },
     { key: "5", label: "Đăng xuất" },
 ];
+
 const USHeader = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [notifix, setNotifix] = useState([]);
     const navigate = useNavigate();
+    const [search, setSearch] = useState("");
+    const handleSearch = () => {
+        if (search.trim()) {
+            navigate(`/user/finding/${search}`);
+        }
+    };
     const fetchNotifix = async () => {
         try {
             const res = await fetch("http://localhost:5000/api/notifix/active");
@@ -56,7 +63,9 @@ const USHeader = () => {
     }, []);
     return (
         <div className={`header_user ${isScrolled ? "scrolled" : ""}`}>
-            <img src={logo} alt="logo" className="logo" />
+            <img src={logo} alt="logo" className="logo" 
+            onClick={() => navigate("/user/menu_main")} 
+            style={{ cursor: "pointer" }} />
             <div className="menu">
                 <Link to="/user/menu_main" className="Link">Trang chủ</Link>
                 <Link to="/user/menu_series" className="Link">Series</Link>
@@ -71,6 +80,9 @@ const USHeader = () => {
                     <Input
                         placeholder="Tìm kiếm..."
                         style={{ width: 200 }}
+                        value={search}
+                        onChange={(e) => setSearch(e.target.value)}
+                        onPressEnter={handleSearch}
                     />
 
                     <Badge count={notifix.length} offset={[0, 10]}>

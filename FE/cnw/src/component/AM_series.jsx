@@ -227,6 +227,7 @@ const AM_series = () => {
             const values = await formEpisode.validateFields();
 
             const payload = {
+                ...editingEpisode,
                 ...values,
                 IDseries: editingEpisode
                     ? editingEpisode.IDseries

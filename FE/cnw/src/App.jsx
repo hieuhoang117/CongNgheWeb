@@ -20,6 +20,7 @@ import MovieGenre from "./component/Movie_genre";
 import SeriesGenre from "./component/Series_genre";
 import NewAndHot from "./component/Menu_NewAndHot";
 import Watched from "./component/Menu_Watched";
+import Finding from "./component/Main_finding";
 
 
 function App() {
@@ -50,6 +51,7 @@ function App() {
           <Route path="series_genre/:Category" element={<SeriesGenre />} />
           <Route path="new_and_hot" element={<NewAndHot />} />
           <Route path="watched" element={<Watched />} />
+          <Route path="finding/:searchInput" element={<Finding />} />
         </Route>
 
 

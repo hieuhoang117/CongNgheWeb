@@ -310,3 +310,72 @@ export const addMovieView = async (req, res) => {
     res.status(500).send("Lỗi server");
   }
 };
+export const getMovieSeriesByName = async (req, res) => {
+  try {
+    const name = req.params.name;
+
+    const result = await sql.query`
+      SELECT 
+        IDmovie, IDseries,
+        COALESCE(NameMovie, SeriesName) AS Title,
+        Category,
+        ReleaseDate,
+        Director,
+        Duration,
+        Country,
+        Description,
+        Status,
+        Poster,
+        Film,
+        Type
+      FROM (
+        -- 🎬 MOVIE
+        SELECT 
+          IDmovie,
+          NULL AS IDseries,
+          NameMovie,
+          NULL AS SeriesName,
+          Category,
+          ReleaseDate,
+          Director,
+          Duration,
+          Country,
+          Description,
+          Status,
+          Poster,
+          Film,
+          'Movie' AS Type
+        FROM Movie
+        WHERE LOWER(NameMovie) LIKE LOWER('%' + ${name} + '%')
+
+        UNION ALL
+
+        -- 📺 SERIES
+        SELECT 
+          NULL AS IDmovie,
+          IDseries,
+          NULL AS NameMovie,
+          SeriesName,
+          Category,
+          ReleaseYear AS ReleaseDate,
+          NULL AS Director,
+          NULL AS Duration,
+          Country,
+          Description,
+          Status,
+          poster AS Poster,
+          NULL AS Film,
+          'Series' AS Type
+        FROM Series
+        WHERE LOWER(SeriesName) LIKE LOWER('%' + ${name} + '%')
+      ) AS Data
+      ORDER BY ReleaseDate DESC
+    `;
+
+    res.json(result.recordset);
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Lỗi server");
+  }
+};
