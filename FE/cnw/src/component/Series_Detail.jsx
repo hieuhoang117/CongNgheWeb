@@ -114,11 +114,8 @@ const SeriesDetail = () => {
                             >
                                 ▶ Phát
                             </button>
-                            <button
-                                className={`watchlist-btn ${iswatchlist ? "added" : ""}`}
-                                onClick={toggleWatchlist}
-                            >
-                                {iswatchlist ? "✓ Đã thêm" : "+ Thêm vào Watchlist"}
+                            <button className="watchlist-btn" onClick={toggleWatchlist}>
+                                {iswatchlist ? "Xóa khỏi danh sách" : "Thêm vào danh sách"}
                             </button>
                         </div>
                     </div>

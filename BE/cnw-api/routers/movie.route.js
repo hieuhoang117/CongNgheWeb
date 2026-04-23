@@ -1,5 +1,5 @@
 import express from "express";
-import { getMovies, addMovie,fixMovie,deleteMovie,getMovieByName,getTopMovie,
+import { getMovies, addMovie,fixMovie,deleteMovie,getMovieByName,getTopMovie,deleteMovieView,isAddedToWatchlist,
     getMovieSeriesByCategory,getMovieById,getNewMovie,getCommingSoonMovie,addMovieView,getMovieSeriesByName
  } from "../controllers/movie.controller.js";
 
@@ -17,4 +17,6 @@ router.get("/new", getNewMovie);
 router.get("/commingsoon", getCommingSoonMovie);
 router.post("/:id/view", addMovieView);
 router.get("/search/:name", getMovieSeriesByName);
+router.delete("/views/:userId/:movieId", deleteMovieView);
+router.get("/views/:userId/:movieId", isAddedToWatchlist);
 export default router;

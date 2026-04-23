@@ -6,6 +6,7 @@ const MovieDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [movie, setMovie] = useState(null);
+  const [isWatchlist, setIsWatchlist] = useState(false);
   const userId = localStorage.getItem("userId");
 
   const addwatch = async () => {
@@ -29,6 +30,18 @@ const MovieDetail = () => {
       console.error(err);
     }
   };
+  const deletewatch = async () => {
+    try {
+      const res = await fetch(`http://localhost:5000/api/movies/views/${userId}/${id}`, {
+        method: "DELETE",
+      });
+      if (!res.ok) {
+        console.error("Lỗi xóa view");
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   useEffect(() => {
     fetch(`http://localhost:5000/api/movies/id/${id}`)
@@ -37,8 +50,30 @@ const MovieDetail = () => {
         setMovie(data.movie || data[0] || data);
       });
   }, [id]);
-
+  useEffect(() => {
+      if (!movie) return;
+    const checkWatchlist = async () => {
+      try {
+        const res = await fetch(`http://localhost:5000/api/movies/views/${userId}/${id}`);
+        const data = await res.json();
+        setIsWatchlist(data.isAdded);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    checkWatchlist();
+  }, [id, userId, movie]);
   if (!movie) return <div style={{ color: "white" }}>Loading...</div>;
+
+  const toggleWatchlist = async () => {
+    if (isWatchlist) {
+      await deletewatch();
+      setIsWatchlist(false);
+    } else {
+      await addwatch();
+      setIsWatchlist(true);
+    }
+  };
 
   return (
     <div className="modal-overlay" onClick={() => navigate(-1)}>
@@ -59,6 +94,9 @@ const MovieDetail = () => {
                 navigate(`/user/movie/${movie.IDmovie}/play`);
               }}>
                 ▶ Phát
+              </button>
+              <button className="watchlist-btn" onClick={toggleWatchlist}>
+                {isWatchlist ? "Xóa khỏi danh sách" : "Thêm vào danh sách"}
               </button>
             </div>
           </div>

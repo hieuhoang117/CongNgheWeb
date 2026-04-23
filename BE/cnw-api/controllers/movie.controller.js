@@ -1,3 +1,4 @@
+import e from "cors";
 import { sql } from "../db.js";
 
 export const getMovies = async (req, res) => {
@@ -374,6 +375,32 @@ export const getMovieSeriesByName = async (req, res) => {
 
     res.json(result.recordset);
 
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Lỗi server");
+  }
+};
+export const deleteMovieView = async (req, res) => {
+  try {
+    const { userId, movieId } = req.params;
+    await sql.query`
+      DELETE FROM MovieView
+      WHERE UserID = ${userId} AND IDmovie = ${movieId}
+    `;
+    res.json({ message: "Đã xóa lịch sử xem" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Lỗi server");
+  }
+};
+export const isAddedToWatchlist = async (req, res) => {
+  try {
+    const { userId, movieId } = req.params;
+    const result = await sql.query`
+      SELECT * FROM MovieView
+      WHERE UserID = ${userId} AND IDmovie = ${movieId}
+    `;
+    res.json({ isAdded: result.recordset.length > 0 });
   } catch (err) {
     console.error(err);
     res.status(500).send("Lỗi server");
