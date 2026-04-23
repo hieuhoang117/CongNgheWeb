@@ -114,7 +114,6 @@ export const getMovieSeriesWatchedByUser = async (req, res) => {
     const result = await sql.query` 
       SELECT *
 FROM (
-  -- 🎬 MOVIE
   SELECT 
     m.IDmovie,
     NULL AS IDseries,
@@ -141,7 +140,6 @@ FROM (
 
   UNION ALL
 
-  -- 📺 SERIES
   SELECT 
     NULL AS IDmovie,
     s.IDseries,

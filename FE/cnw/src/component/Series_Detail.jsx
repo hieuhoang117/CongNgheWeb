@@ -10,6 +10,7 @@ const SeriesDetail = () => {
     const [series, setSeries] = useState(null);
     const [episodes, setEpisodes] = useState([]);
     const userId = localStorage.getItem("userId");
+    const [iswatchlist, setIsWatchlist] = useState(false);
 
     const addwatch = async (episodeId) => {
         try {
@@ -32,6 +33,19 @@ const SeriesDetail = () => {
             console.error(err);
         }
     };
+    const deletewatch = async (episodeId) => {
+        try {
+            const res = await fetch(`http://localhost:5000/api/series/views/${userId}/${episodeId}`, {
+                method: "DELETE",
+            });
+            if (!res.ok) {
+                console.error("Lỗi khi xóa lịch sử xem");
+            }
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
 
     useEffect(() => {
         fetch(`http://localhost:5000/api/series/series/${id}`)
@@ -42,6 +56,37 @@ const SeriesDetail = () => {
             })
             .catch(err => console.error(err));
     }, [id]);
+
+    useEffect(() => {
+        if (!episodes.length) return;
+
+        const checkWatchlist = async () => {
+            try {
+                const res = await fetch(
+                    `http://localhost:5000/api/series/views/${userId}/${episodes[0].IDEpisode}`
+                );
+                const data = await res.json();
+                setIsWatchlist(data.isAdded);
+            } catch (err) {
+                console.error(err);
+            }
+        };
+
+        checkWatchlist();
+    }, [episodes, userId]);
+
+    const toggleWatchlist = async () => {
+        if (!episodes[0]?.IDEpisode) return;
+
+        if (iswatchlist) {
+            await deletewatch(episodes[0].IDEpisode);
+            setIsWatchlist(false);
+        } else {
+            await addwatch(episodes[0].IDEpisode);
+            setIsWatchlist(true);
+        }
+    };
+
 
     if (!series) return <div style={{ color: "white" }}>Loading...</div>;
 
@@ -69,6 +114,12 @@ const SeriesDetail = () => {
                             >
                                 ▶ Phát
                             </button>
+                            <button
+                                className={`watchlist-btn ${iswatchlist ? "added" : ""}`}
+                                onClick={toggleWatchlist}
+                            >
+                                {iswatchlist ? "✓ Đã thêm" : "+ Thêm vào Watchlist"}
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -92,7 +143,10 @@ const SeriesDetail = () => {
                         <EpisodeItem
                             key={ep.IDEpisode}
                             ep={ep}
-                            onClick={() => navigate(`/user/watch/${ep.IDEpisode}`)}
+                            onClick={() => {
+                                addwatch(episodes[0].IDEpisode);
+                                navigate(`/user/watch/${ep.IDEpisode}`);
+                            }}
                         />
                     ))}
                 </div>

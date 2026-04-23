@@ -389,3 +389,33 @@ export const addSeriesView = async (req, res) => {
     res.status(500).send("Lỗi server");
   }
 };
+export const deleteSeriesView = async (req, res) => {
+  try {
+    const { userId, episodeId } = req.params;
+
+    await sql.query`
+      DELETE FROM EpisodeView
+      WHERE UserID = ${userId} AND IDEpisode = ${episodeId}
+    `;
+
+    res.json({ message: "Đã xóa lịch sử xem series" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Lỗi server");
+  }
+};
+export const isAddedToWatchlist = async (req, res) => {
+  try {
+    const { userId, episodeId } = req.params;
+
+    const result = await sql.query`
+      SELECT * FROM EpisodeView
+      WHERE UserID = ${userId} AND IDEpisode = ${episodeId}
+    `;
+
+    res.json({ isAdded: result.recordset.length > 0 });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Lỗi server");
+  }
+};
