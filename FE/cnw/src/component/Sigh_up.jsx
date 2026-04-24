@@ -15,13 +15,33 @@ const SignUp = () => {
     const [otp, setOtp] = useState("");
     const [error, setError] = useState("");
 
-    // gửi OTP và chuyển bước
+    const handlecheckEmail = async () => {
+        try {
+            const res = await fetch("http://localhost:5000/api/users/check-email-new", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email }),
+            });
+            const data = await res.json();
+            return data.exists;
+        } catch (err) {
+            console.error(err);
+            return true;
+        }
+    };
     const handleNext = async (e) => {
         e.preventDefault();
         setError("");
 
         if (password !== confirmPassword) {
             setError("Mật khẩu không khớp");
+            return;
+        }
+
+        // ✅ check email trước
+        const exists = await handlecheckEmail();
+        if (exists) {
+            setError("Email đã tồn tại");
             return;
         }
 
@@ -33,7 +53,7 @@ const SignUp = () => {
             });
 
             if (res.ok) {
-                setStep(2); // chuyển sang OTP
+                setStep(2);
             } else {
                 setError("Không gửi được OTP");
             }

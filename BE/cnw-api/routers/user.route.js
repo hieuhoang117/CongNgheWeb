@@ -1,6 +1,6 @@
 import express from "express";
 import { checkEmail,getUsers,addUser,deleteUser,fixUser,getUserByEmail,getMovieSeriesWatchedByUser,
-    sendOTP,verifyOTP
+    sendOTP,verifyOTP,checkEmailNew 
  } from "../controllers/user.controller.js";
 
 const router = express.Router();
@@ -14,5 +14,6 @@ router.put("/:id", fixUser);
 router.get("/:id/watched", getMovieSeriesWatchedByUser);
 router.post("/send-otp", sendOTP);
 router.post("/verify-otp", verifyOTP);
+router.post("/check-email-new", checkEmailNew);
 
 export default router;

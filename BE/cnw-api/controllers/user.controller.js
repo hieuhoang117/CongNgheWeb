@@ -236,3 +236,23 @@ export const verifyOTP = (req, res) => {
 
   return res.json({ success: true });
 };
+
+export const checkEmailNew = async (req, res) => {
+  try {
+    const { email } = req.body;
+
+    const result = await sql.query`
+      SELECT 1 FROM Users WHERE Email = ${email}
+    `;
+
+    if (result.recordset.length > 0) {
+      return res.json({ exists: true });
+    }
+
+    return res.json({ exists: false });
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Lỗi server" });
+  }
+};
