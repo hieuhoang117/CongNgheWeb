@@ -1,0 +1,103 @@
+/* Sigh_up.css */
+
+.signupbody {
+    margin: 0;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+
+    /* nền đỏ -> đen */
+    background:
+        radial-gradient(circle at 50% 0%, rgba(229,9,20,0.7), rgba(0,0,0,0.95) 60%),
+        linear-gradient(to bottom, #141414, #000);
+
+    height: 100vh;
+
+    /* căn giữa form */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* container form */
+.signup-container {
+    width: 360px;
+    padding: 50px 40px;
+    background: rgba(0, 0, 0, 0.85);
+    border-radius: 6px;
+    color: #fff;
+    box-shadow: 0 0 40px rgba(0,0,0,0.9);
+    position: relative;
+}
+
+/* nút quay lại */
+.signup-container > button {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: transparent;
+    border: none;
+    color: #b3b3b3;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.signup-container > button:hover {
+    color: #fff;
+}
+
+/* tiêu đề */
+.signup-container h2 {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 25px;
+}
+
+/* form */
+.signup-form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* input */
+.signup-form input {
+    padding: 16px;
+    margin-bottom: 16px;
+    border: none;
+    border-radius: 4px;
+    background: #333;
+    color: #fff;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+/* focus giống Netflix */
+.signup-form input:focus {
+    outline: none;
+    background: #454545;
+    box-shadow: 0 0 0 2px #e50914;
+}
+
+/* button đỏ Netflix */
+.signup-form button {
+    margin-top: 10px;
+    padding: 16px;
+    border: none;
+    border-radius: 4px;
+    background-color: #e50914;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.signup-form button:hover {
+    background-color: #f6121d;
+}
+
+/* error */
+.error {
+    color: #e87c03;
+    font-size: 13px;
+    margin-bottom: 10px;
+    text-align: center;
+}

@@ -1,5 +1,7 @@
 import e from "cors";
+import nodemailer from "nodemailer";
 import { sql } from "../db.js";
+
 
 export const checkEmail = async (req, res) => {
   try {
@@ -173,4 +175,64 @@ ORDER BY LastWatch DESC
     console.error(err);
     res.status(500).send("Lỗi server");
   }
+};
+
+
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: "hieuhoangminh2403@gmail.com",
+    pass: "ivnwnzecntiexcbi" 
+  }
+});
+
+const otpStore = {};
+
+export const sendOTP = async (req, res) => {
+  try {
+    const { email } = req.body;
+
+    const otp = Math.floor(100000 + Math.random() * 900000);
+
+    otpStore[email] = {
+      otp,
+      expire: Date.now() + 60 * 1000
+    };
+
+    await transporter.sendMail({
+      from: "hieuhoangminh2403@gmail.com",
+      to: email,
+      subject: "Mã xác nhận",
+      text: `OTP của bạn là: ${otp}`
+    });
+
+    res.json({ message: "Đã gửi OTP" });
+
+  } catch (err) {
+    console.error("Lỗi gửi mail:", err);
+    res.status(500).json({ message: "Không gửi được OTP" });
+  }
+};
+
+export const verifyOTP = (req, res) => {
+  const { email, otp } = req.body;
+
+  const data = otpStore[email];
+
+  if (!data) {
+    return res.status(400).json({ message: "Chưa gửi OTP" });
+  }
+
+  if (Date.now() > data.expire) {
+    delete otpStore[email];
+    return res.status(400).json({ message: "OTP hết hạn" });
+  }
+
+  if (data.otp != otp) {
+    return res.status(400).json({ message: "OTP sai" });
+  }
+
+  delete otpStore[email];
+
+  return res.json({ success: true });
 };

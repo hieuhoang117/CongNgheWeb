@@ -1,8 +1,13 @@
 import "./header.css";
 import logo from "../logo.png";
 import { Button,Select } from "antd";
+import {  useNavigate } from "react-router-dom";
 
 const Header = () => {
+  const navigate = useNavigate();
+  const handleSignUp = () => {
+    navigate("/signup");
+  };
   return (
     <div className="header_login">
       <img src={logo} alt="logo" className="logo" />
@@ -15,7 +20,9 @@ const Header = () => {
           { value: 'en', label: 'English' },
         ]} />
       </section>
-        <Button className="btn-login">Đăng nhập</Button>
+        <Button className="btn-login" onClick={handleSignUp}>
+          Đăng Ký
+        </Button>
       </div>
     </div>
   );

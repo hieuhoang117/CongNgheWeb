@@ -21,6 +21,7 @@ import SeriesGenre from "./component/Series_genre";
 import NewAndHot from "./component/Menu_NewAndHot";
 import Watched from "./component/Menu_Watched";
 import Finding from "./component/Main_finding";
+import SignUp from "./component/Sigh_up";
 
 
 function App() {
@@ -54,7 +55,7 @@ function App() {
           <Route path="finding/:searchInput" element={<Finding />} />
         </Route>
 
-
+        <Route path="/signup" element={<SignUp />} />
       </Routes>
     </BrowserRouter>
   );
