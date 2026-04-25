@@ -1,7 +1,7 @@
 import e from "cors";
 import nodemailer from "nodemailer";
 import { sql } from "../db.js";
-
+// LAM TOKEN SAU
 
 export const checkEmail = async (req, res) => {
   try {

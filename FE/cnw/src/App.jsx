@@ -12,7 +12,7 @@ import MovieDetail from "./component/Movie_detail";
 import Menumain from "./component/Menu_main";
 import MoviePlay from "./component/MoviePlay";
 import SeriesDetail from "./component/Series_Detail";
-import EpisodePlay from "./component/EpisodePlay";  
+import EpisodePlay from "./component/EpisodePlay";
 import Menuseries from "./component/Menu_series";
 import Menumocie from "./component/Menu_movie";
 import AMnotifix from "./component/AM_notifi";
@@ -24,6 +24,7 @@ import Finding from "./component/Main_finding";
 import SignUp from "./component/Sigh_up";
 import InfoUser from "./InfoUser";
 import USinfo from "./component/US_info";
+import PrivateRoute from "./component/PrivateRoute";
 
 
 function App() {
@@ -33,7 +34,11 @@ function App() {
 
         <Route path="/" element={<Banner />} />
 
-        <Route path="/admin" element={<AdminPage />}>
+        <Route path="/admin" element={
+          <PrivateRoute>
+            <AdminPage />
+          </PrivateRoute>
+        }>
           <Route path="users" element={<AMUser />} />
           <Route path="movies" element={<AMMmovie />} />
           <Route path="reports" element={<AMReport />} />
@@ -41,7 +46,11 @@ function App() {
           <Route path="notifix" element={<AMnotifix />} />
         </Route>
 
-        <Route path="/user" element={<UserPage />}>
+        <Route path="/user" element={
+          <PrivateRoute>
+            <UserPage />
+          </PrivateRoute>
+        }>
           <Route path="menu_main" element={<Menumain />} />
           <Route path="slide" element={<MovieSlide />} />
           <Route path="movie/:id" element={<MovieDetail />} />
@@ -57,7 +66,11 @@ function App() {
           <Route path="finding/:searchInput" element={<Finding />} />
         </Route>
 
-        <Route path="/info" element={<InfoUser />}>
+        <Route path="/info" element={
+          <PrivateRoute>
+            <InfoUser />
+          </PrivateRoute>
+        }>
           <Route path="info" element={<USinfo />} />
         </Route>
 
