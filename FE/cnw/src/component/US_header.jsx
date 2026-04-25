@@ -21,6 +21,19 @@ const USHeader = () => {
     const [notifix, setNotifix] = useState([]);
     const navigate = useNavigate();
     const [search, setSearch] = useState("");
+    const userid = JSON.parse(localStorage.getItem("userId"));
+
+    const handlegetUser = async () => {
+        try {
+            const res = await fetch(`http://localhost:5000/api/user/id/${userid}`);
+            const data = await res.json();
+            console.log(data);
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
+
     const handleSearch = () => {
         if (search.trim()) {
             navigate(`/user/finding/${search}`);
@@ -37,6 +50,7 @@ const USHeader = () => {
     };
     useEffect(() => {
         fetchNotifix();
+        handlegetUser();
     }, []);
 
     const handleClickNoti = async (n) => {
@@ -63,9 +77,9 @@ const USHeader = () => {
     }, []);
     return (
         <div className={`header_user ${isScrolled ? "scrolled" : ""}`}>
-            <img src={logo} alt="logo" className="logo" 
-            onClick={() => navigate("/user/menu_main")} 
-            style={{ cursor: "pointer" }} />
+            <img src={logo} alt="logo" className="logo"
+                onClick={() => navigate("/user/menu_main")}
+                style={{ cursor: "pointer" }} />
             <div className="menu">
                 <Link to="/user/menu_main" className="Link">Trang chủ</Link>
                 <Link to="/user/menu_series" className="Link">Series</Link>

@@ -256,3 +256,14 @@ export const checkEmailNew = async (req, res) => {
     res.status(500).json({ message: "Lỗi server" });
   }
 };
+
+export const getUserbyId = async (req, res) => {
+    try {
+        const id = req.body.id || req.params.id;
+        const result = await sql.query`SELECT * FROM Users WHERE UserID = ${id}`;
+        res.json(result.recordset[0]);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Lỗi server");
+    }
+};
