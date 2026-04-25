@@ -22,6 +22,8 @@ import NewAndHot from "./component/Menu_NewAndHot";
 import Watched from "./component/Menu_Watched";
 import Finding from "./component/Main_finding";
 import SignUp from "./component/Sigh_up";
+import InfoUser from "./InfoUser";
+import USinfo from "./component/US_info";
 
 
 function App() {
@@ -53,6 +55,10 @@ function App() {
           <Route path="new_and_hot" element={<NewAndHot />} />
           <Route path="watched" element={<Watched />} />
           <Route path="finding/:searchInput" element={<Finding />} />
+        </Route>
+
+        <Route path="/info" element={<InfoUser />}>
+          <Route path="info" element={<USinfo />} />
         </Route>
 
         <Route path="/signup" element={<SignUp />} />

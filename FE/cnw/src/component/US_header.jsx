@@ -85,6 +85,10 @@ const USHeader = () => {
         },
         {
             key: "2",
+            label: <span onClick={() => navigate("/info/info")}>Trang cá nhân</span>,
+        },
+        {
+            key: "2",
             label: <span onClick={() => logout()}>Đăng xuất</span>,
         },
     ];
