@@ -8,31 +8,19 @@ import { useEffect, useState } from "react";
 import "./US_header.css";
 
 
-const items = [
-    { key: "1", label: "Người dùng 1" },
-    { key: "2", label: "Người dùng 2" },
-    { key: "3", label: "Quản lý hồ sơ" },
-    { key: "4", label: "Trợ giúp" },
-    { key: "5", label: "Đăng xuất" },
-];
-
 const USHeader = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [notifix, setNotifix] = useState([]);
     const navigate = useNavigate();
     const [search, setSearch] = useState("");
-    const userid = JSON.parse(localStorage.getItem("userId"));
+    const userId = localStorage.getItem("userId");
+    const [userInfo, setUserInfo] = useState(null);
 
-    const handlegetUser = async () => {
-        try {
-            const res = await fetch(`http://localhost:5000/api/user/id/${userid}`);
-            const data = await res.json();
-            console.log(data);
-        } catch (err) {
-            console.error(err);
-        }
+    const logout = () => {
+        localStorage.removeItem("token");
+        localStorage.removeItem("userId");
+        navigate("/");
     };
-
 
     const handleSearch = () => {
         if (search.trim()) {
@@ -48,10 +36,24 @@ const USHeader = () => {
             console.error(err);
         }
     };
+
     useEffect(() => {
+        const fetchUser = async () => {
+            try {
+                if (!userId) return;
+
+                const res = await fetch(`http://localhost:5000/api/users/id/${userId}`);
+                const data = await res.json();
+                setUserInfo(data);
+                console.log(data);
+            } catch (err) {
+                console.error(err);
+            }
+        };
+
         fetchNotifix();
-        handlegetUser();
-    }, []);
+        fetchUser();
+    }, [userId]);
 
     const handleClickNoti = async (n) => {
         try {
@@ -75,6 +77,18 @@ const USHeader = () => {
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
+
+    const items = [
+        {
+            key: "1",
+            label: <span>{userInfo?.FullName || "User"}</span>,
+        },
+        {
+            key: "2",
+            label: <span onClick={() => logout()}>Đăng xuất</span>,
+        },
+    ];
+
     return (
         <div className={`header_user ${isScrolled ? "scrolled" : ""}`}>
             <img src={logo} alt="logo" className="logo"
@@ -125,7 +139,10 @@ const USHeader = () => {
                     </Badge>
 
                     <Dropdown menu={{ items }}>
-                        <Avatar icon={<UserOutlined />} style={{ cursor: "pointer" }} />
+                        <Avatar
+                            icon={<UserOutlined />}
+                            style={{ cursor: "pointer" }}
+                        />
                     </Dropdown>
 
                 </Space>

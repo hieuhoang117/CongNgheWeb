@@ -259,7 +259,7 @@ export const checkEmailNew = async (req, res) => {
 
 export const getUserbyId = async (req, res) => {
     try {
-        const id = req.body.id || req.params.id;
+        const id = req.params.id;
         const result = await sql.query`SELECT * FROM Users WHERE UserID = ${id}`;
         res.json(result.recordset[0]);
     } catch (err) {
