@@ -3,8 +3,7 @@ import { useNavigate } from "react-router-dom";
 import {  Dropdown, Avatar, Space } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import { useEffect, useState } from "react";
-
-import "./US_header.css";
+import "./Info_header.css";
 
 
 const InfoHeader = () => {
@@ -61,7 +60,7 @@ const InfoHeader = () => {
     ];
 
     return (
-        <div className={`header_user ${isScrolled ? "scrolled" : ""}`}>
+        <div className={`info-header_user ${isScrolled ? "scrolled" : ""}`}>
             <img src={logo} alt="logo" className="logo"
                 onClick={() => navigate("/user/menu_main")}
                 style={{ cursor: "pointer" }} />

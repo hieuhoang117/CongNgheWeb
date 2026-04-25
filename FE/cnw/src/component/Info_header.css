@@ -1,0 +1,43 @@
+.Link {
+  text-decoration: none;
+  color: white;
+  transition: color 0.3s ease;
+}
+
+.Link:hover {
+  color: #e50914;
+}
+
+.info-header_user {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px 40px;
+  display: flex;
+  align-items: center;
+  z-index: 1000;
+  background: linear-gradient(to bottom, rgba(240, 236, 236, 0.8), transparent);
+  transition: background-color 0.3s ease;
+}
+
+.header_user.scrolled {
+  background-color: #141414;
+}
+
+.menu {
+  display: flex;
+  gap: 25px;
+  margin-left: 30px;
+}
+
+.logo {
+  margin-right: 10px;
+}
+
+.account {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}

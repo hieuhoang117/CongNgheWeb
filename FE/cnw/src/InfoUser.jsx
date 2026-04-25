@@ -1,11 +1,11 @@
 import { Outlet } from "react-router-dom";
 import InfoHeader from "./component/Info_header";
 import USFooter from "./component/US_footer";
-import "./MainUser.css";
+import "./InfoUser.css";
 
 const InfoUser = () => {
     return (
-        <div className="page-container">
+        <div className="page-container-info">
 
             <InfoHeader />
 
