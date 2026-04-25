@@ -4,8 +4,8 @@ import { Input, Badge, Dropdown, Avatar, Space } from "antd";
 import { UserOutlined, BellOutlined } from "@ant-design/icons";
 import NotificationItem from "./NotificationIterm";
 import { useEffect, useState } from "react";
-
 import "./US_header.css";
+import userStore from "../store/useUserStore";
 
 
 const USHeader = () => {
@@ -13,12 +13,11 @@ const USHeader = () => {
     const [notifix, setNotifix] = useState([]);
     const navigate = useNavigate();
     const [search, setSearch] = useState("");
-    const userId = localStorage.getItem("userId");
+    const userId = userStore((state) => state.userId);
     const [userInfo, setUserInfo] = useState(null);
 
     const logout = () => {
-        localStorage.removeItem("token");
-        localStorage.removeItem("userId");
+        userStore((state) => state.logout);
         navigate("/");
     };
 

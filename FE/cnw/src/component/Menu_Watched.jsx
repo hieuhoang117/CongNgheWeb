@@ -1,10 +1,11 @@
 import {useState} from "react";
 import "./Menu_Watched.css";
 import MovieItem from "./Movie_Iterm";
+import userStore from "../store/useUserStore";
 
 const Menu_Watched = () => {
     const [watchedItems, setWatchedItems] = useState([]);
-    const userId = localStorage.getItem("userId");
+    const userId = userStore((state) => state.userId);
 
     const fetchWatchedItems = async () => {
         try {

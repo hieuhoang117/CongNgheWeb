@@ -2,6 +2,7 @@ import "./Series_Detail.css";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import EpisodeItem from "./EpisodeItem";
+import userStore from "../store/useUserStore";
 
 const SeriesDetail = () => {
     const { id } = useParams();
@@ -9,7 +10,7 @@ const SeriesDetail = () => {
 
     const [series, setSeries] = useState(null);
     const [episodes, setEpisodes] = useState([]);
-    const userId = localStorage.getItem("userId");
+    const userId = userStore((state) => state.userId);
     const [iswatchlist, setIsWatchlist] = useState(false);
 
     const addwatch = async (episodeId) => {

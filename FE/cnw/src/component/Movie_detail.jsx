@@ -1,13 +1,14 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import "./Movie_detail.css";
+import userStore from "../store/useUserStore";
 
 const MovieDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [movie, setMovie] = useState(null);
   const [isWatchlist, setIsWatchlist] = useState(false);
-  const userId = localStorage.getItem("userId");
+  const userId = userStore((state) => state.userId);
 
   const addwatch = async () => {
     try {

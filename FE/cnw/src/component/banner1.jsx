@@ -2,11 +2,12 @@ import "./banner.css";
 import { useState } from "react";
 import Header from "./header1";
 import { useNavigate } from "react-router-dom";
+import userStore from "../store/useUserStore";
 
 const Banner = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const login = userStore((state) => state.login);
   const navigate = useNavigate();
 
   const handleClick = async () => {
@@ -30,8 +31,7 @@ const Banner = () => {
       return;
     }
 
-    localStorage.setItem("token", data.token);
-    localStorage.setItem("userId", data.userId);
+    login(data.userId, data.token);
 
     if (data.role === "Admin") {
       navigate("/admin");
