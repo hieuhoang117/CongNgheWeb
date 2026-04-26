@@ -15,9 +15,10 @@ const USHeader = () => {
     const [search, setSearch] = useState("");
     const userId = userStore((state) => state.userId);
     const [userInfo, setUserInfo] = useState(null);
+    const logoutAction = userStore((state) => state.logout);
 
     const logout = () => {
-        userStore((state) => state.logout);
+        logoutAction();
         navigate("/");
     };
 

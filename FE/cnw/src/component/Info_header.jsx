@@ -4,17 +4,19 @@ import {  Dropdown, Avatar, Space } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import { useEffect, useState } from "react";
 import "./Info_header.css";
+import userStore from "../store/useUserStore";
 
 
 const InfoHeader = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     const navigate = useNavigate();
-    const userId = localStorage.getItem("userId");
+    const userId = userStore((state) => state.userId);
     const [userInfo, setUserInfo] = useState(null);
 
+    const logoutAction = userStore((state) => state.logout);
+
     const logout = () => {
-        localStorage.removeItem("token");
-        localStorage.removeItem("userId");
+        logoutAction();
         navigate("/");
     };
 
