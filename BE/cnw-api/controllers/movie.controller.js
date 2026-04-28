@@ -96,7 +96,8 @@ export const getMovieSeriesByCategory = async (req, res) => {
         NameMovie,
         Poster AS MoviePoster,
         Category,
-        Description as movieDescription
+        Description as movieDescription,
+        Film
       FROM Movie
       WHERE Category = ${category}
     `;
