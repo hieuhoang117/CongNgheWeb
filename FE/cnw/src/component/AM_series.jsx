@@ -258,6 +258,18 @@ const AM_series = () => {
             console.log(err);
         }
     };
+    const catalog = [
+        "Action",
+        "Adventure",
+        "Comedy",
+        "Drama",
+        "Sci-fi",
+        "Fantasy",
+        "Horror",
+        "Romance",
+        "Thriller",
+        "Western",
+    ];
     return (
         <div>
             <h2>Danh sách series</h2>
@@ -347,7 +359,7 @@ const AM_series = () => {
                         label="Thể loại"
                         rules={[{ required: true, message: "Vui lòng nhập thể loại" }]}
                     >
-                        <Input />
+                        <select>{catalog.map((item) => <option>{item}</option>)}</select>
                     </Form.Item>
 
 

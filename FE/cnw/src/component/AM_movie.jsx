@@ -130,6 +130,19 @@ const AM_movie = () => {
     },
   ];
 
+  const catalog = [
+    "Action",
+    "Adventure",
+    "Comedy",
+    "Drama",
+    "Sci-fi",
+    "Fantasy",
+    "Horror",
+    "Romance",
+    "Thriller",
+    "Western",
+  ];
+
   return (
     <div>
       <h2>Quản lý phim</h2>
@@ -167,7 +180,11 @@ const AM_movie = () => {
             label="Thể loại"
             rules={[{ required: true, message: "Vui lòng nhập thể loại" }]}
           >
-            <Input />
+            <select>
+              {catalog.map((item) => (
+                <option key={item}>{item}</option>
+              ))}
+            </select>
           </Form.Item>
 
           <Form.Item
