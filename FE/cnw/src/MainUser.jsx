@@ -1,6 +1,6 @@
-import { Outlet } from "react-router-dom";
 import USHeader from "./component/US_header";
 import USFooter from "./component/US_footer";
+import AnimatedOutlet from "./component/AnimatedOutlet";
 import "./MainUser.css";
 
 const UserPage = () => {
@@ -10,7 +10,7 @@ const UserPage = () => {
       <USHeader />
 
       <div className="content" style={{ margin: "16px" }}>
-        <Outlet />
+        <AnimatedOutlet />
       </div>
       
       <USFooter />

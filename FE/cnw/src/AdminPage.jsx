@@ -1,5 +1,6 @@
 import { Layout, Menu } from "antd";
-import { useNavigate, Outlet } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import AnimatedOutlet from "./component/AnimatedOutlet";
 import logo from"./logo.png";
 
 const { Header, Sider, Content } = Layout;
@@ -36,7 +37,7 @@ const AdminPage = () => {
         </Header>
 
         <Content style={{ margin: "16px" }}>
-          <Outlet /> 
+          <AnimatedOutlet />
         </Content>
       </Layout>
 
