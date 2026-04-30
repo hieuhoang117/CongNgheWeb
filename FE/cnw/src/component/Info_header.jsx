@@ -62,7 +62,7 @@ const InfoHeader = () => {
     ];
 
     return (
-        <div className={`info-header_user ${isScrolled ? "scrolled" : ""}`}>
+        <div style={{ display: "flex", justifyContent: "space-between" }} className={`info-header_user ${isScrolled ? "scrolled" : ""}`}>
             <img src={logo} alt="logo" className="logo"
                 onClick={() => navigate("/user/menu_main")}
                 style={{ cursor: "pointer" }} />

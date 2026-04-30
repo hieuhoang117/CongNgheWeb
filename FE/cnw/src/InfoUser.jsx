@@ -1,7 +1,8 @@
-import { Outlet, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Layout, Menu } from "antd";
 import InfoHeader from "./component/Info_header";
 import USFooter from "./component/US_footer";
+import AnimatedOutlet from "./component/AnimatedOutlet";
 import "./InfoUser.css";
 
 const { Sider, Content } = Layout;
@@ -12,7 +13,7 @@ const InfoUser = () => {
     return (
         <div>
             <InfoHeader />
-            <Layout style={{ minHeight: "100vh",marginTop:"70px" }}>
+            <Layout style={{ minHeight: "100vh",marginTop:"80px" }}>
 
                 <Sider width={250} style={{backgroundColor:"White"}}>
                     <Menu
@@ -23,8 +24,6 @@ const InfoUser = () => {
                         }}
                         items={[
                             { key: "/info/info", label: "Quản lý thông tin cá nhân" },
-                            { key: "/admin/movies", label: "Quản lý phim ngắn" },
-                            { key: "/admin/series", label: "Quản lý phim bộ" },
                         ]}
                     />
                 </Sider>
@@ -32,7 +31,7 @@ const InfoUser = () => {
 
                 <Layout>
                     <Content style={{ margin: "16px" }}>
-                        <Outlet />
+                        <AnimatedOutlet/>
                     </Content>
                 </Layout>
 
