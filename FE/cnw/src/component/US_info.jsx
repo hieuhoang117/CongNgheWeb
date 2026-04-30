@@ -1,46 +1,55 @@
 import "./US_info.css";
 import { useState, useEffect } from "react";
 import userStore from "../store/useUserStore";
-import { Form, Input, Card, Avatar, Button, Tag } from "antd";
+import { Form, Input, Card, Avatar, Button, Tag, Select } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 
 const USinfo = () => {
     const userID = userStore((state) => state.userId);
     const [form] = Form.useForm();
+
     const [userInfo, setUserInfo] = useState(null);
     const [isEditing, setIsEditing] = useState(false);
-
 
     useEffect(() => {
         const fetchUser = async () => {
             try {
                 const res = await fetch(`http://localhost:5000/api/users/id/${userID}`);
                 const data = await res.json();
-
                 setUserInfo(data);
-                form.setFieldsValue({
-                    fullName: data.FullName,
-                    email: data.Email,
-                    phone: data.Phone,
-                });
             } catch (err) {
                 console.error(err);
             }
         };
         fetchUser();
-    }, [userID, form]);
+    }, [userID]);
 
-    const onFinish = (values) => {
-        console.log("Update:", values);
-        setIsEditing(false);
-        // sau này gọi API update ở đây
+
+    const handleEdit = () => {
+        form.setFieldsValue(userInfo);
+        setIsEditing(true);
+    };
+
+    const onFinish = async (values) => {
+        try {
+            await fetch(`http://localhost:5000/api/users/${userID}`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(values),
+            });
+
+            setUserInfo({ ...userInfo, ...values }); // update UI
+            setIsEditing(false);
+        } catch (err) {
+            console.error(err);
+        }
     };
 
     return (
         <div className="usinfo-container">
             <Card title="Thông tin cá nhân">
 
-                {/* Avatar + Name */}
+                {/* Header */}
                 <div className="header-box">
                     <Avatar size={80} icon={<UserOutlined />} />
                     <h2>{userInfo?.FullName}</h2>
@@ -51,26 +60,31 @@ const USinfo = () => {
                 </div>
 
                 {/* Form */}
-                <Form
-                    form={form}
-                    layout="vertical"
-                    onFinish={onFinish}
-                >
-                    <Form.Item label="Họ tên" name="fullName">
+                <Form form={form} layout="vertical" onFinish={onFinish}>
+
+                    <Form.Item name="FullName" label="Họ tên">
                         <Input disabled={!isEditing} />
                     </Form.Item>
 
-                    <Form.Item label="Email" name="email">
+                    <Form.Item name="Email" label="Email">
+                        <Input disabled={!isEditing} />
+                    </Form.Item>
+
+                    <Form.Item name="Phone" label="Số điện thoại">
+                        <Input disabled={!isEditing} />
+                    </Form.Item>
+
+                    <Form.Item name="Role" label="Vai trò">
                         <Input disabled />
                     </Form.Item>
 
-                    <Form.Item label="Số điện thoại" name="phone">
-                        <Input disabled={!isEditing} />
+                    <Form.Item name="Status" label="Trạng thái">
+                        <Select disabled>
+                            <Select.Option value={true}>Hoạt động</Select.Option>
+                            <Select.Option value={false}>Bị khóa</Select.Option>
+                        </Select>
                     </Form.Item>
 
-                    <Form.Item label="User ID">
-                        <Input value={userInfo?.UserID} disabled />
-                    </Form.Item>
 
                     <Form.Item label="Ngày tạo">
                         <Input
@@ -85,7 +99,7 @@ const USinfo = () => {
 
                     {/* Buttons */}
                     {!isEditing ? (
-                        <Button type="primary" onClick={() => setIsEditing(true)}>
+                        <Button type="primary" onClick={handleEdit}>
                             Chỉnh sửa
                         </Button>
                     ) : (
@@ -98,6 +112,7 @@ const USinfo = () => {
                             </Button>
                         </div>
                     )}
+
                 </Form>
 
             </Card>
