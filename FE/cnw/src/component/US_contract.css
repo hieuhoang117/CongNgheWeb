@@ -1,0 +1,49 @@
+.terms-container {
+    display: flex;
+    height: 100vh;
+    background: #141414;
+    color: white;
+}
+
+/* LEFT */
+.terms-left {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    padding: 60px;
+}
+
+.terms-left h1 {
+    font-size: 48px;
+    font-weight: bold;
+}
+
+/* RIGHT */
+.terms-right {
+    flex: 1;
+    overflow-y: scroll;
+    padding: 40px;
+}
+
+/* CONTENT */
+.terms-content {
+    max-width: 700px;
+    line-height: 1.8;
+}
+
+/* ACTION */
+.terms-action {
+    margin-top: 30px;
+}
+
+.terms-action button {
+    background: #e50914;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    cursor: pointer;
+}
+
+.terms-action button:disabled {
+    background: gray;
+}

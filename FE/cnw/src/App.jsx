@@ -25,6 +25,7 @@ import SignUp from "./component/Sigh_up";
 import InfoUser from "./InfoUser";
 import USinfo from "./component/US_info";
 import PrivateRoute from "./component/PrivateRoute";
+import USContract from "./component/US_contract";
 
 
 function App() {
@@ -72,6 +73,7 @@ function App() {
           </PrivateRoute>
         }>
           <Route path="info" element={<USinfo />} />
+          <Route path="contract" element={<USContract />} />
         </Route>
 
         <Route path="/signup" element={<SignUp />} />
