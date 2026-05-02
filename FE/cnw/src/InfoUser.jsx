@@ -13,9 +13,9 @@ const InfoUser = () => {
     return (
         <div>
             <InfoHeader />
-            <Layout style={{ minHeight: "100vh",marginTop:"80px" }}>
+            <Layout style={{ minHeight: "100vh", marginTop: "80px" }}>
 
-                <Sider width={250} style={{backgroundColor:"White"}}>
+                <Sider width={250} style={{ backgroundColor: "White" }}>
                     <Menu
                         theme="light"
                         mode="inline"
@@ -23,7 +23,10 @@ const InfoUser = () => {
                             navigate(e.key);
                         }}
                         items={[
-                            { key: "/info/info", label: "Quản lý thông tin cá nhân" },
+                            { key: "/info/info", label: "Thông tin cá nhân" },
+                            { key: "/info/Security", label: "Bảo mật" },
+                            { key: "/info/report", label: "Báo cáo" },
+                            { key: "/info/contract", label: "Thỏa thuận và điều khoản" },
                         ]}
                     />
                 </Sider>
@@ -31,7 +34,7 @@ const InfoUser = () => {
 
                 <Layout>
                     <Content style={{ margin: "16px" }}>
-                        <AnimatedOutlet/>
+                        <AnimatedOutlet />
                     </Content>
                 </Layout>
 

@@ -24,10 +24,19 @@ const USinfo = () => {
         fetchUser();
     }, [userID]);
 
+    useEffect(() => {
+        if (userInfo) {
+            form.setFieldsValue(userInfo);
+        }
+    }, [userInfo, form]);
 
     const handleEdit = () => {
         form.setFieldsValue(userInfo);
         setIsEditing(true);
+    };
+    const handleCancel = () => {
+        form.setFieldsValue(userInfo);
+        setIsEditing(false);
     };
 
     const onFinish = async (values) => {
@@ -66,13 +75,10 @@ const USinfo = () => {
                         <Input disabled={!isEditing} />
                     </Form.Item>
 
-                    <Form.Item name="Email" label="Email">
-                        <Input disabled={!isEditing} />
-                    </Form.Item>
-
                     <Form.Item name="Phone" label="Số điện thoại">
                         <Input disabled={!isEditing} />
                     </Form.Item>
+
 
                     <Form.Item name="Role" label="Vai trò">
                         <Input disabled />
@@ -96,6 +102,12 @@ const USinfo = () => {
                             disabled
                         />
                     </Form.Item>
+                    <Form.Item name="PasswordHash" label="Mật khẩu" hidden>
+                        <Input.Password disabled={!isEditing} />
+                    </Form.Item>
+                    <Form.Item name="Email" label="email" hidden>
+                        <Input disabled={!isEditing} />
+                    </Form.Item>
 
                     {/* Buttons */}
                     {!isEditing ? (
@@ -107,11 +119,12 @@ const USinfo = () => {
                             <Button type="primary" htmlType="submit">
                                 Lưu
                             </Button>
-                            <Button onClick={() => setIsEditing(false)}>
+                            <Button onClick={handleCancel}>
                                 Hủy
                             </Button>
                         </div>
                     )}
+
 
                 </Form>
 
