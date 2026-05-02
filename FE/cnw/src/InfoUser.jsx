@@ -4,6 +4,7 @@ import InfoHeader from "./component/Info_header";
 import USFooter from "./component/US_footer";
 import AnimatedOutlet from "./component/AnimatedOutlet";
 import "./InfoUser.css";
+import ScrollButton from "./component/ScrollButton";
 
 const { Sider, Content } = Layout;
 
@@ -25,7 +26,6 @@ const InfoUser = () => {
                         items={[
                             { key: "/info/info", label: "Thông tin cá nhân" },
                             { key: "/info/Security", label: "Bảo mật" },
-                            { key: "/info/report", label: "Báo cáo" },
                             { key: "/info/contract", label: "Thỏa thuận và điều khoản" },
                         ]}
                     />
@@ -37,6 +37,7 @@ const InfoUser = () => {
                         <AnimatedOutlet />
                     </Content>
                 </Layout>
+                <ScrollButton />
             </Layout>
             <USFooter />
         </div>
