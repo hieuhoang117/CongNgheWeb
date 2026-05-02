@@ -26,6 +26,7 @@ import InfoUser from "./InfoUser";
 import USinfo from "./component/US_info";
 import PrivateRoute from "./component/PrivateRoute";
 import USContract from "./component/US_contract";
+import Security from "./component/US_security";
 
 
 function App() {
@@ -74,6 +75,7 @@ function App() {
         }>
           <Route path="info" element={<USinfo />} />
           <Route path="contract" element={<USContract />} />
+          <Route path="security" element={<Security />} />
         </Route>
 
         <Route path="/signup" element={<SignUp />} />
