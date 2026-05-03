@@ -27,6 +27,7 @@ import USinfo from "./component/US_info";
 import PrivateRoute from "./component/PrivateRoute";
 import USContract from "./component/US_contract";
 import Security from "./component/US_security";
+import ResetPass from "./component/ResetPass";
 
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
       <Routes>
 
         <Route path="/" element={<Banner />} />
+        <Route path="/Forgot" element={<ResetPass />} />
 
         <Route path="/admin" element={
           <PrivateRoute>

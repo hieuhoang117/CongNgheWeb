@@ -71,7 +71,7 @@ const Banner = () => {
             Bắt đầu &gt;
           </button>
           
-          <span className="bn-forgot" onClick={() => navigate("/forgot")}>
+          <span className="bn-forgot" onClick={() => navigate("/Forgot")}>
             Quên mật khẩu
           </span>
         </div>
