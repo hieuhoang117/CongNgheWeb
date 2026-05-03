@@ -105,8 +105,8 @@ const USinfo = () => {
                     <Form.Item name="PasswordHash" label="Mật khẩu" hidden>
                         <Input.Password disabled={!isEditing} />
                     </Form.Item>
-                    <Form.Item name="Email" label="email" hidden>
-                        <Input disabled={!isEditing} />
+                    <Form.Item name="Email" label="Email" >
+                        <Input disabled />
                     </Form.Item>
 
                     {/* Buttons */}

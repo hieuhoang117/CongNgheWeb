@@ -153,7 +153,7 @@ const USsecurity = () => {
             return message.error("Mật khẩu không khớp");
         }
 
-        const res = await fetch(`http://localhost:5000/api/users/reset-password/${userId}`, {
+        const res = await fetch(`http://localhost:5000/api/users/reset-password`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email, newPassword: password }),

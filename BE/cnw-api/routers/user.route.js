@@ -18,6 +18,6 @@ router.post("/check-email-new", checkEmailNew);
 router.get("/id/:id", getUserbyId);
 router.put("/change-email/:id", changeEmail);
 router.put("/change-password/:id", changePassword);
-router.put("/reset-password/:id", resetPassword);
+router.post("/reset-password", resetPassword);
 
 export default router;
