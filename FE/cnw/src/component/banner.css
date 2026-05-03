@@ -22,24 +22,42 @@
   z-index: 2;
   color: white;
   text-align: center;
-  top: 40%;
+  top: 20%;
 }
 
 .bn-form {
-  margin-top: 20px;
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+  gap: 10px;
 }
 
 .bn-input {
   padding: 10px;
   width: 300px;
   color: black;
+  margin-top: 10px;
+  border-radius: 5px;
+  border: none;
 }
 
 .bn-btn-start {
   background: red;
   color: white;
-  width: 150px;
+  width: 300px;
   height: 40px;
   padding: 10px 20px;
-  margin-left: 10px;
+  border-radius: 5px;
+  margin-top: 10px;
+  border: none;
+  cursor: pointer;
+}
+.bn-forgot {
+  cursor: pointer;
+  color: #aaa;
+}
+
+.bn-forgot:hover {
+  color: #fff;
+  text-decoration: underline;
 }
