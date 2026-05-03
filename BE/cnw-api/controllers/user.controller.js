@@ -182,7 +182,7 @@ const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
     user: "hieuhoangminh2403@gmail.com",
-    pass: "ivnwnzecntiexcbi" 
+    pass: "ivnwnzecntiexcbi"
   }
 });
 
@@ -258,12 +258,62 @@ export const checkEmailNew = async (req, res) => {
 };
 
 export const getUserbyId = async (req, res) => {
-    try {
-        const id = req.params.id;
-        const result = await sql.query`SELECT * FROM Users WHERE UserID = ${id}`;
-        res.json(result.recordset[0]);
-    } catch (err) {
-        console.error(err);
-        res.status(500).send("Lỗi server");
-    }
+  try {
+    const id = req.params.id;
+    const result = await sql.query`SELECT * FROM Users WHERE UserID = ${id}`;
+    res.json(result.recordset[0]);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Lỗi server");
+  }
+};
+export const changePassword = async (req, res) => {
+  try {
+    const userId = req.params.id; // lấy từ URL
+    const { oldPassword, newPassword } = req.body;
+
+    const result = await sql.query`
+      UPDATE Users
+      SET PasswordHash = ${newPassword}
+      WHERE UserID = ${userId} AND PasswordHash = ${oldPassword}
+    `;
+
+    res.json({ success: result.rowsAffected[0] > 0 });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Lỗi server");
+  }
+};
+export const changeEmail = async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const { newEmail } = req.body;
+
+    const result = await sql.query`
+          UPDATE Users
+          SET Email = ${newEmail}
+          WHERE UserID = ${userId}
+        `;
+
+    res.json({ success: result.rowsAffected[0] > 0 });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Lỗi server");
+  }
+};
+export const resetPassword = async (req, res) => {
+  try {
+    const { email, newPassword } = req.body;
+
+    const result = await sql.query`
+      UPDATE Users
+      SET PasswordHash = ${newPassword}
+      WHERE Email = ${email}
+    `;
+
+    res.json({ success: result.rowsAffected[0] > 0 });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Lỗi server");
+  }
 };
