@@ -1,17 +1,19 @@
 import "./US_WatchTogether.css";
 import CommentBox from "./Coment";
+import userStore from "../store/useUserStore";
 
 const US_WatchTogether = () => {
-    const contentId = "CT001";   
-    const sessionId = "SS123";   
+    const userId = userStore((state) => state.userId);
+    const contentId = "CT001";
+    const sessionId = "SS123";
     const user = {
-        UserID: "US001",
+        UserID: userId,
         FullName: "Hiếu"
     };
 
     return (
         <div className="US_WatchTogether">
-            <CommentBox 
+            <CommentBox
                 contentId={contentId}
                 sessionId={sessionId}
                 user={user}
