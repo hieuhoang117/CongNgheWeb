@@ -1,0 +1,43 @@
+.comment-box {
+  width: 100%;
+  max-width: 400px;
+  background: #111;
+  color: white;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  height: 400px;
+}
+
+.comment-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px;
+}
+
+.comment-item {
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.comment-input {
+  display: flex;
+  border-top: 1px solid #333;
+}
+
+.comment-input input {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  outline: none;
+  background: #222;
+  color: white;
+}
+
+.comment-input button {
+  padding: 10px 15px;
+  background: red;
+  border: none;
+  color: white;
+  cursor: pointer;
+}

@@ -1,5 +1,6 @@
 import { sql } from "../db.js";
 
+// 🔹 Lấy comment ban đầu
 export const getComentById = async (req, res) => {
     try {
         const { contentId, sessionId } = req.query;
@@ -19,6 +20,31 @@ export const getComentById = async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 };
+
+// 🔹 Lấy comment mới (polling)
+export const getNewComments = async (req, res) => {
+    try {
+        const { sessionId, lastTime } = req.params;
+
+        const time = new Date(lastTime);
+
+        const result = await sql.query`
+            SELECT c.*, u.FullName
+            FROM Comment c
+            JOIN Users u ON c.UserID = u.UserID
+            WHERE c.SessionID = ${sessionId}
+            AND c.CreatedAt > ${time}
+            AND c.IsActive = 1
+            ORDER BY c.CreatedAt ASC
+        `;
+
+        res.json(result.recordset);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+};
+
+// 🔹 Thêm comment
 export const addComent = async (req, res) => {
     try {
         const { contentId, userId, commentText, sessionId } = req.body;
@@ -37,6 +63,8 @@ export const addComent = async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 };
+
+// 🔹 Xóa (ẩn)
 export const deleteComent = async (req, res) => {
     try {
         const { id } = req.params;
@@ -52,28 +80,8 @@ export const deleteComent = async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 };
-export const endSession = async (req, res) => {
-    try {
-        const { sessionId } = req.body;
 
-        await sql.query`
-            UPDATE WatchSession
-            SET IsLive = 0, EndTime = GETDATE()
-            WHERE SessionID = ${sessionId}
-        `;
-
-        // Ẩn comment luôn
-        await sql.query`
-            UPDATE Comment
-            SET IsActive = 0
-            WHERE SessionID = ${sessionId}
-        `;
-
-        res.json({ message: "Session ended" });
-    } catch (err) {
-        res.status(500).json({ error: err.message });
-    }
-};
+// 🔹 Tạo session
 export const createSession = async (req, res) => {
     try {
         const { contentId } = req.body;
@@ -86,6 +94,29 @@ export const createSession = async (req, res) => {
         `;
 
         res.json({ sessionId });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+};
+
+// 🔹 Kết thúc session
+export const endSession = async (req, res) => {
+    try {
+        const { sessionId } = req.body;
+
+        await sql.query`
+            UPDATE WatchSession
+            SET IsLive = 0, EndTime = GETDATE()
+            WHERE SessionID = ${sessionId}
+        `;
+
+        await sql.query`
+            UPDATE Comment
+            SET IsActive = 0
+            WHERE SessionID = ${sessionId}
+        `;
+
+        res.json({ message: "Session ended" });
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
