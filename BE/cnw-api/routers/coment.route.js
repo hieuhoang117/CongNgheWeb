@@ -5,7 +5,8 @@ import {
     addComent,
     deleteComent,
     createSession,
-    endSession
+    endSession,
+    getAllSession
 } from "../controllers/coment.controller.js";
 
 const router = express.Router();
@@ -17,5 +18,6 @@ router.delete("/:id", deleteComent);
 
 router.post("/session", createSession);
 router.post("/session/end", endSession);
+router.get("/session", getAllSession);
 
 export default router;

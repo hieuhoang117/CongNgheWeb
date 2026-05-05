@@ -114,10 +114,17 @@ export const searchNotifix = async (req, res) => {
 export const getcontentNotifix = async (req, res) => {
     try {
         const result = await sql.query`
-            SELECT ContentID, ContentName, ContentType
-            FROM Content
-            WHERE ContentType IN ('Movie', 'Series')
+            SELECT 
+                c.ContentID,
+                c.ContentName,
+                c.ContentType,
+                m.Poster,
+                m.IDmovie
+            FROM Content c
+            LEFT JOIN Movie m ON c.ContentID = m.ContentID
+            WHERE c.ContentType = 'Movie'
         `;
+
         res.json(result.recordset);
     } catch (err) {
         console.error(err);

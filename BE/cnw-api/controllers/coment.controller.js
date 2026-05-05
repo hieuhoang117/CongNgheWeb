@@ -81,19 +81,50 @@ export const deleteComent = async (req, res) => {
     }
 };
 
-// 🔹 Tạo session
+// 🔹 Lấy tất cả session đang live
+export const getAllSession = async (req, res) => {
+    try {
+        const result = await sql.query`
+            SELECT 
+                ws.SessionID,
+                ws.StartTime,
+                ws.IsLive,
+                ws.ContentID,
+                c.ContentName,
+                m.Poster
+            FROM WatchSession ws
+            JOIN Content c ON ws.ContentID = c.ContentID
+            LEFT JOIN Movie m ON c.ContentID = m.ContentID
+            WHERE ws.IsLive = 1
+            ORDER BY ws.StartTime DESC
+        `;
+
+        res.json(result.recordset);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+};
+
+// 🔹 Tạo session mới
 export const createSession = async (req, res) => {
     try {
         const { contentId } = req.body;
 
+        if (!contentId) {
+            return res.status(400).json({ message: "ContentID is required" });
+        }
+
         const sessionId = "SS" + Date.now();
 
         await sql.query`
-            INSERT INTO WatchSession (SessionID, ContentID)
-            VALUES (${sessionId}, ${contentId})
+            INSERT INTO WatchSession (SessionID, ContentID, StartTime, IsLive)
+            VALUES (${sessionId}, ${contentId}, GETDATE(), 1)
         `;
 
-        res.json({ sessionId });
+        res.json({
+            sessionId,
+            message: "Session created successfully"
+        });
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
