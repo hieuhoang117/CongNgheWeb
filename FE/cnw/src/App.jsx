@@ -28,6 +28,7 @@ import PrivateRoute from "./component/PrivateRoute";
 import USContract from "./component/US_contract";
 import Security from "./component/US_security";
 import ResetPass from "./component/ResetPass";
+import WatchTogether from "./component/US_WatchTogether";
 
 
 function App() {
@@ -68,6 +69,7 @@ function App() {
           <Route path="new_and_hot" element={<NewAndHot />} />
           <Route path="watched" element={<Watched />} />
           <Route path="finding/:searchInput" element={<Finding />} />
+          <Route path="watch_together" element={<WatchTogether />} />
         </Route>
 
         <Route path="/info" element={

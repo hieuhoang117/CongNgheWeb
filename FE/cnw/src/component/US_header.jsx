@@ -104,7 +104,7 @@ const USHeader = () => {
                 <Link to="/user/menu_movie" className="Link">Phim</Link>
                 <Link to="/user/new_and_hot" className="Link">Mới và phổ biến</Link>
                 <Link to="/user/watched" className="Link">Danh sách của tôi</Link>
-                <Link to="/user/slide" className="Link">Xem chung</Link>
+                <Link to="/user/watch_together" className="Link">Xem chung</Link>
             </div>
             <div className="account">
                 <Space size="middle">
