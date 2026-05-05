@@ -5,6 +5,7 @@ import userRoutes from "./routers/user.route.js";
 import reportRoutes from "./routers/report.route.js";
 import series from "./routers/series.route.js";
 import notifix from "./routers/notifix.route.js";
+import coment from "./routers/coment.route.js";
 import { connectDB } from "./db.js";
 import multer from "multer";
 import path from "path";
@@ -43,6 +44,7 @@ app.use("/api/users", userRoutes);
 app.use("/api/reports", reportRoutes);
 app.use("/api/series", series);
 app.use("/api/notifix", notifix);
+app.use("/api/coment", coment);
 
 
 app.listen(5000, '0.0.0.0', () => {
