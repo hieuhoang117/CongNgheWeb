@@ -2,23 +2,61 @@ import "./US_WatchTogether.css";
 import USWatchIterm from "./US_WatchTogetherIterm";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import userStore from "../store/useUserStore";
 
 const US_WatchTogether = () => {
     const [contents, setContents] = useState([]);
     const [isopen, setIsopen] = useState(false);
     const [sessions, setSessions] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [movies, setMovies] = useState([]);
+
+    const userId = userStore((state) => state.userId);
+    const formatDate = (date) => date.replace("T", " ") + ":00";
 
     const [form, setForm] = useState({
         contentId: "",
+        StartTime: "",
+        EndTime: ""
     });
+
+    // 🔹 Lấy phim bang id
+    const fetchMovieById = async (id) => {
+        try {
+            const res = await fetch(`http://localhost:5000/api/movies/content/${id}`);
+            const data = await res.json();
+            return data;
+        } catch (err) {
+            console.error("Error fetching movie:", err);
+        }
+    };
 
     // 🔹 Lấy danh sách session đang live
     const fetchSessions = async () => {
         try {
-            const res = await fetch("http://localhost:5000/api/coment/session");
+            const res = await fetch(`http://localhost:5000/api/coment/session/${userId}`);
             const data = await res.json();
+            console.log("sessions data:", data);
             setSessions(data);
+            
+
+            if (data.length > 0) {
+                const movieList = await Promise.all(
+                    data.map(async (session) => {
+                        const movie = await fetchMovieById(session.ContentID);
+                        return {
+                            ...movie,
+                            SessionID: session.SessionID,
+                            StartTime: session.StartTime,
+                            EndTime: session.EndTime
+                        };
+                    })
+                );
+                setMovies(movieList);
+            } else {
+                setMovies([]);
+            }
+
         } catch (err) {
             console.error("Error fetching sessions:", err);
         }
@@ -64,6 +102,9 @@ const US_WatchTogether = () => {
                 "http://localhost:5000/api/coment/session",
                 {
                     contentId: form.contentId,
+                    UserID: userId,
+                    StartTime: formatDate(form.StartTime),
+                    EndTime: formatDate(form.EndTime)
                 }
             );
 
@@ -109,7 +150,7 @@ const US_WatchTogether = () => {
     return (
         <div className="US_WatchTogether">
             <div className="header-section">
-                <h2>🎬 Các buổi công chiếu đang diễn ra</h2>
+                <h2>🎬 Các buổi công chiếu của tôi</h2>
                 <button
                     className="btn-open"
                     onClick={() => setIsopen(true)}
@@ -121,8 +162,8 @@ const US_WatchTogether = () => {
             {/* 🔥 FORM TẠO SESSION */}
             {isopen && (
                 <div className="watch-form-wrapper" onClick={() => setIsopen(false)}>
-                    <form 
-                        className="watch-form" 
+                    <form
+                        className="watch-form"
                         onSubmit={handleSubmit}
                         onClick={(e) => e.stopPropagation()}
                     >
@@ -152,8 +193,17 @@ const US_WatchTogether = () => {
                                     </option>
                                 ))}
                             </select>
-                            <input type="date" ></input>
-                            <input type="time"></input>
+                            <input
+                                name="StartTime"
+                                type="datetime-local"
+                                onChange={handleChange}
+                            />
+
+                            <input
+                                name="EndTime"
+                                type="datetime-local"
+                                onChange={handleChange}
+                            />
 
                             <button type="submit" disabled={loading}>
                                 {loading ? "Đang tạo..." : "Tạo buổi công chiếu"}
@@ -168,8 +218,8 @@ const US_WatchTogether = () => {
                     <p>Chưa có buổi công chiếu nào đang diễn ra</p>
                 </div>
             ) : (
-                <USWatchIterm 
-                    movies={sessions} 
+                <USWatchIterm
+                    movies={movies}
                     onEndSession={handleEndSession}
                 />
             )}

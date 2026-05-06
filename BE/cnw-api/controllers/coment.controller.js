@@ -83,6 +83,7 @@ export const deleteComent = async (req, res) => {
 
 // 🔹 Lấy tất cả session đang live
 export const getAllSession = async (req, res) => {
+    const UserID = req.params.id;
     try {
         const result = await sql.query`
             SELECT 
@@ -90,12 +91,14 @@ export const getAllSession = async (req, res) => {
                 ws.StartTime,
                 ws.IsLive,
                 ws.ContentID,
+                ws.UserID,
+                ws.EndTime,
                 c.ContentName,
                 m.Poster
             FROM WatchSession ws
             JOIN Content c ON ws.ContentID = c.ContentID
             LEFT JOIN Movie m ON c.ContentID = m.ContentID
-            WHERE ws.IsLive = 1
+            WHERE ws.IsLive = 1 AND ws.UserID = ${UserID}
             ORDER BY ws.StartTime DESC
         `;
 
@@ -108,7 +111,7 @@ export const getAllSession = async (req, res) => {
 // 🔹 Tạo session mới
 export const createSession = async (req, res) => {
     try {
-        const { contentId } = req.body;
+        const { contentId, UserID,EndTime,StartTime } = req.body;
 
         if (!contentId) {
             return res.status(400).json({ message: "ContentID is required" });
@@ -117,8 +120,8 @@ export const createSession = async (req, res) => {
         const sessionId = "SS" + Date.now();
 
         await sql.query`
-            INSERT INTO WatchSession (SessionID, ContentID, StartTime, IsLive)
-            VALUES (${sessionId}, ${contentId}, GETDATE(), 1)
+            INSERT INTO WatchSession (SessionID, ContentID, StartTime,EndTime, IsLive,UserID)
+            VALUES (${sessionId}, ${contentId}, ${StartTime}, ${EndTime}, 1, ${UserID})
         `;
 
         res.json({

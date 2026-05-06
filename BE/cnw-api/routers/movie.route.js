@@ -1,6 +1,6 @@
 import express from "express";
 import { getMovies, addMovie,fixMovie,deleteMovie,getMovieByName,getTopMovie,deleteMovieView,isAddedToWatchlist,
-    getMovieSeriesByCategory,getMovieById,getNewMovie,getCommingSoonMovie,addMovieView,getMovieSeriesByName
+    getMovieSeriesByCategory,getMovieById,getNewMovie,getCommingSoonMovie,addMovieView,getMovieSeriesByName,getmoviebycontentid
  } from "../controllers/movie.controller.js";
 
 const router = express.Router();
@@ -19,4 +19,5 @@ router.post("/:id/view", addMovieView);
 router.get("/search/:name", getMovieSeriesByName);
 router.delete("/views/:userId/:movieId", deleteMovieView);
 router.get("/views/:userId/:movieId", isAddedToWatchlist);
+router.get("/content/:contentId", getmoviebycontentid);
 export default router;

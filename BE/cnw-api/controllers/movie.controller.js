@@ -290,7 +290,7 @@ export const addMovieView = async (req, res) => {
     `;
 
     if (check.recordset.length > 0) {
-      
+
       await sql.query`
         UPDATE MovieView
         SET ViewDate = GETDATE(),
@@ -298,7 +298,7 @@ export const addMovieView = async (req, res) => {
         WHERE UserID = ${userId} AND IDmovie = ${movieId}
       `;
     } else {
-    
+
       await sql.query`
         INSERT INTO MovieView (UserID, IDmovie, ViewDate, WatchTime)
         VALUES (${userId}, ${movieId}, GETDATE(), ${watchTime})
@@ -402,6 +402,19 @@ export const isAddedToWatchlist = async (req, res) => {
       WHERE UserID = ${userId} AND IDmovie = ${movieId}
     `;
     res.json({ isAdded: result.recordset.length > 0 });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Lỗi server");
+  }
+};
+export const getmoviebycontentid = async (req, res) => {
+  try {
+    const { contentId } = req.params;
+    const result = await sql.query`
+      SELECT * FROM Movie
+      WHERE ContentID = ${contentId}
+    `;
+    res.json(result.recordset[0]);
   } catch (err) {
     console.error(err);
     res.status(500).send("Lỗi server");

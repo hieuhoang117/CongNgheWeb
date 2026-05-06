@@ -18,6 +18,6 @@ router.delete("/:id", deleteComent);
 
 router.post("/session", createSession);
 router.post("/session/end", endSession);
-router.get("/session", getAllSession);
+router.get("/session/:id", getAllSession);
 
 export default router;
